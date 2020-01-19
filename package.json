@@ -1,0 +1,24 @@
+{
+  "name": "fancy-weather",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "author": "Reason ",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn webpack",
+    "start": "yarn webpack --watch"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "css-loader": "^3.4.2",
+    "mini-css-extract-plugin": "^0.9.0",
+    "sass": "^1.25.0",
+    "sass-loader": "^8.0.2",
+    "ts-loader": "^6.2.1",
+    "tslint": "^5.20.1",
+    "tslint-webpack-plugin": "^2.1.0",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  }
+}
