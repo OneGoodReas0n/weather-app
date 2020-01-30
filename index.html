@@ -12,60 +12,125 @@
     <title>Weather app</title>
   </head>
   <body>
-    <div class="top-content-wrapper">
-      <div class="button-block">
-        <div class="button button-update">
-          <img
-            src="./assets/update_icon.svg"
-            alt=""
-            class="button-update__icon"
-          />
-        </div>
-        <div class="button lang-switcher">
-          <span class="lang-switcher__title">EN</span>
-          <img
-            src="./assets/arrow-down_icon.svg"
-            alt=""
-            class="lang-switcher__icon"
-          />
-        </div>
-        <div class="temp-switcher">
-          <div
-            class="button temp-switcher__item temp-switcher__item_inactive switch-button__left"
-          >
-            °F
+    <div class="container">
+      <div class="top-content-wrapper">
+        <div class="button-block">
+          <div class="button button-update">
+            <img
+              src="./assets/update_icon.svg"
+              alt=""
+              class="button-update__icon"
+            />
           </div>
-          <div
-            class="button temp-switcher__item temp-switcher__item_active switch-button__right"
-          >
-            °C
+          <div class="button lang-switcher">
+            <span class="lang-switcher__title">EN</span>
+            <img
+              src="./assets/arrow-down_icon.svg"
+              alt=""
+              class="lang-switcher__icon"
+            />
+          </div>
+          <div class="temp-switcher">
+            <div
+              class="button temp-switcher__item temp-switcher__item_inactive switch-button__left"
+            >
+              °F
+            </div>
+            <div
+              class="button temp-switcher__item temp-switcher__item_active switch-button__right"
+            >
+              °C
+            </div>
+          </div>
+        </div>
+        <div class="search-block">
+          <div class="search-bar">
+            <input
+              type="text"
+              class="search-bar__input"
+              placeholder="Search city or ZIP"
+            />
+            <img
+              src="./assets/voice_svg.svg"
+              alt=""
+              class="search-bar__voice"
+            />
+          </div>
+          <div class="search-button">
+            <span class="search-button__text">Search</span>
           </div>
         </div>
       </div>
-      <div class="search-block">
-        <div class="search-bar">
-          <input
-            type="text"
-            class="search-bar__input"
-            placeholder="Search city or ZIP"
-          />
-          <img src="./assets/voice_svg.svg" alt="" class="search-bar__voice" />
+      <div class="main-content-wrapper">
+        <div class="location-date-block">
+          <div class="location-block">
+            <span class="location-block__text">Dnipro, Ukraine</span>
+          </div>
+          <div class="date-block">
+            <span class="date-block__text">Tue 30 January 22:33</span>
+          </div>
         </div>
-        <div class="search-button">
-          <span class="search-button__text">Search</span>
-        </div>
-      </div>
-    </div>
-    <div class="main-content_wrapper">
-      <div class="location-date-block"></div>
-      <div class="weather-block">
-        <div class="left-wrapper">
-          <div class="today-block"></div>
-          <div class="preview-block"></div>
-        </div>
-        <div class="right-wrapper">
-          <div class="gmap-block"></div>
-          <div class="coordinate-block"></div>
+        <div class="weather-block">
+          <div class="left-wrapper">
+            <div class="today-block">
+              <div class="temperature-bar">
+                <span class="temperature-bar__value">10</span>
+              </div>
+              <div class="forecast-bar">
+                <img
+                  src="./assets/weather_icon.svg"
+                  alt=""
+                  class="forecast-bar__icon"
+                />
+                <div class="forecast-info">
+                  <p class="forecast-info__item forecast-info__title">
+                    overcast
+                  </p>
+                  <p class="forecast-info__item forecast-info__feel">
+                    Feels like: 7°
+                  </p>
+                  <p class="forecast-info__item forecast-info__wind">
+                    Wind: 2 m/s
+                  </p>
+                  <p class="forecast-info__item forecast-info__humidity">
+                    Humidity: 83%
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="preview-block">
+              <div class="preview-block__item">
+                <span class="day-title">Tuesday</span>
+                <div class="day-forecast">
+                  <span class="day-forecast__value">9°</span>
+                  <img class="day-forecast__icon" src="./assets/sunny_weather_icon.svg" alt=""></img>
+                </div> 
+              </div>
+              <div class="preview-block__item">
+                <span class="day-title">Wednesday</span>
+                <div class="day-forecast">
+                  <span class="day-forecast__value">7°</span>
+                  <img class="day-forecast__icon" src="./assets/cloudy_weather_icon.svg" alt=""></img>
+                </div> 
+              </div>
+              <div class="preview-block__item">
+                <span class="day-title">Thursday</span>
+                <div class="day-forecast">
+                  <span class="day-forecast__value">10°</span>
+                  <img class="day-forecast__icon" src="./assets/sunny_weather_icon.svg" alt=""></img>
+                </div> 
+              </div>
+            </div>
+          </div>
+          <div class="right-wrapper">
+            <div class="gmap-block">
+              <img src="./assets/gmap_icon.svg" alt="" />
+            </div>
+            <div class="coordinate-block">
+              <p class="coordinate-block__item">Latitude: 53°54'</p>
+              <p class="coordinate-block__item">Longitude: 26°27'</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
