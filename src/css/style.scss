@@ -3,6 +3,9 @@ $button-color-active: rgba(#aeb5b9, 0.5);
 $button-color-inactive: rgba(#4c5255, 0.4);
 $button-title-color: #fff;
 
+$input-background-color: rgba(#4c5255, 0.4);
+$input-border-color: rgba(#e4e3e3, 0.2);
+
 html,
 body {
   margin: 0;
@@ -27,6 +30,9 @@ body {
   justify-content: space-between;
   width: 90%;
   margin: 50px auto;
+  font-family: "Montserrat";
+  font-size: 14px;
+  font-weight: 600;
   .button-block {
     display: flex;
     width: 25%;
@@ -41,9 +47,6 @@ body {
       border-radius: 5px;
       background-color: $button-color-active;
       .lang-switcher__title {
-        font-family: "Montserrat";
-        font-size: 14px;
-        font-weight: 600;
         color: $button-title-color;
       }
       .lang-switcher__icon {
@@ -55,9 +58,6 @@ body {
       justify-content: space-between;
       margin-left: 15px;
       .temp-switcher__item {
-        font-family: "Montserrat";
-        font-size: 14px;
-        font-weight: 600;
         color: $button-title-color;
       }
 
@@ -80,10 +80,48 @@ body {
     }
   }
 
-  .search_block {
-    .search-input {
+  .search-block {
+    display: flex;
+    align-items: center;
+    .search-bar {
+      position: relative;
+      display: flex;
+      height: 100%;
+      .search-bar__input {
+        width: 240px;
+        padding: 0 15px;
+        background-color: $input-background-color;
+        border: 1px solid $input-border-color;
+        color: $button-title-color;
+
+        &::placeholder {
+          font-family: "Montserrat";
+          font-size: 14px;
+          color: $button-title-color;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+      .search-bar__voice {
+        position: absolute;
+        left: 240px;
+        top: 15px;
+        cursor: pointer;
+      }
     }
     .search-button {
+      cursor: pointer;
+      .search-button__text {
+        padding: 14px 16.5px;
+        background-color: $button-color-active;
+        text-transform: uppercase;
+        color: $button-title-color;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        letter-spacing: 0.7px;
+      }
     }
   }
 }
