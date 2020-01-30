@@ -12,37 +12,45 @@
     <title>Weather app</title>
   </head>
   <body>
-    <div class="topContent_wrapper">
-      <div class="button_block">
+    <div class="top-content-wrapper">
+      <div class="button-block">
         <div class="button button-update">
           <img
             src="./assets/update_icon.svg"
             alt=""
-            class="button-update_icon"
+            class="button-update__icon"
           />
         </div>
         <div class="button lang-switcher">
-          <span class="lang-switcher_title">EN</span>
+          <span class="lang-switcher__title">EN</span>
           <img
             src="./assets/arrow-down_icon.svg"
             alt=""
-            class="lang-switcher_icon"
+            class="lang-switcher__icon"
           />
         </div>
         <div class="temp-switcher">
           <div
-            class="button temp-switcher_item temp-switcher_item_inactive switch-button-left"
+            class="button temp-switcher__item temp-switcher__item_inactive switch-button__left"
           >
             °F
           </div>
           <div
-            class="button temp-switcher_item temp-switcher_item_active switch-button-right"
+            class="button temp-switcher__item temp-switcher__item_active switch-button__right"
           >
             °C
           </div>
         </div>
       </div>
-      <div class="search_block"></div>
+      <div class="search-block">
+        <div class="search-input-bar">
+          <input type="text" class="search-input" />
+          <img src="./assets/voice_svg.svg" alt="" />
+        </div>
+        <div class="search-button">
+          <span class="search-button_text">Search</span>
+        </div>
+      </div>
     </div>
     <div class="mainContent_wrapper">
       <div class="location-date_block"></div>

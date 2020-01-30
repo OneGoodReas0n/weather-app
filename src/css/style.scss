@@ -22,29 +22,31 @@ body {
 
 // TOP CONTENT WRAPPER
 
-.topContent_wrapper {
+.top-content-wrapper {
+  display: flex;
+  justify-content: space-between;
   width: 90%;
   margin: 50px auto;
-  .button_block {
+  .button-block {
     display: flex;
     width: 25%;
     .button-update {
       border-radius: 5px;
       background-color: $button-color-active;
-      .button-update_icon {
+      .button-update__icon {
       }
     }
     .lang-switcher {
       margin-left: 15px;
       border-radius: 5px;
       background-color: $button-color-active;
-      .lang-switcher_title {
+      .lang-switcher__title {
         font-family: "Montserrat";
         font-size: 14px;
         font-weight: 600;
         color: $button-title-color;
       }
-      .lang-switcher_icon {
+      .lang-switcher__icon {
         margin-left: 8px;
       }
     }
@@ -52,33 +54,37 @@ body {
       display: flex;
       justify-content: space-between;
       margin-left: 15px;
-      .temp-switcher_item {
+      .temp-switcher__item {
         font-family: "Montserrat";
         font-size: 14px;
         font-weight: 600;
         color: $button-title-color;
       }
 
-      .switch-button-left {
+      .switch-button__left {
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
       }
-      .switch-button-right {
+      .switch-button__right {
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
       }
 
-      .temp-switcher_item_active {
+      .temp-switcher__item_active {
         background-color: $button-color-active;
       }
 
-      .temp-switcher_item_inactive {
+      .temp-switcher__item_inactive {
         background-color: $button-color-inactive;
       }
     }
   }
 
   .search_block {
+    .search-input {
+    }
+    .search-button {
+    }
   }
 }
 
