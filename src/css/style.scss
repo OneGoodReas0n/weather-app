@@ -1,3 +1,8 @@
+$main-theme-color: rgba(#445566, 0.8);
+$button-color-active: rgba(#aeb5b9, 0.5);
+$button-color-inactive: rgba(#4c5255, 0.4);
+$button-title-color: #fff;
+
 html,
 body {
   margin: 0;
@@ -5,5 +10,76 @@ body {
 }
 
 body {
-  background: #445566;
+  background-color: $main-theme-color;
 }
+
+.button {
+  display: flex;
+  align-items: center;
+  padding: 14px 16.5px;
+  cursor: pointer;
+}
+
+// TOP CONTENT WRAPPER
+
+.topContent_wrapper {
+  width: 90%;
+  margin: 50px auto;
+  .button_block {
+    display: flex;
+    width: 25%;
+    .button-update {
+      border-radius: 5px;
+      background-color: $button-color-active;
+      .button-update_icon {
+      }
+    }
+    .lang-switcher {
+      margin-left: 15px;
+      border-radius: 5px;
+      background-color: $button-color-active;
+      .lang-switcher_title {
+        font-family: "Montserrat";
+        font-size: 14px;
+        font-weight: 600;
+        color: $button-title-color;
+      }
+      .lang-switcher_icon {
+        margin-left: 8px;
+      }
+    }
+    .temp-switcher {
+      display: flex;
+      justify-content: space-between;
+      margin-left: 15px;
+      .temp-switcher_item {
+        font-family: "Montserrat";
+        font-size: 14px;
+        font-weight: 600;
+        color: $button-title-color;
+      }
+
+      .switch-button-left {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+      .switch-button-right {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+
+      .temp-switcher_item_active {
+        background-color: $button-color-active;
+      }
+
+      .temp-switcher_item_inactive {
+        background-color: $button-color-inactive;
+      }
+    }
+  }
+
+  .search_block {
+  }
+}
+
+// END TOP CONTENT WRAPPER

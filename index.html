@@ -4,10 +4,59 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./dist/style.css" />
     <title>Weather app</title>
   </head>
   <body>
+    <div class="topContent_wrapper">
+      <div class="button_block">
+        <div class="button button-update">
+          <img
+            src="./assets/update_icon.svg"
+            alt=""
+            class="button-update_icon"
+          />
+        </div>
+        <div class="button lang-switcher">
+          <span class="lang-switcher_title">EN</span>
+          <img
+            src="./assets/arrow-down_icon.svg"
+            alt=""
+            class="lang-switcher_icon"
+          />
+        </div>
+        <div class="temp-switcher">
+          <div
+            class="button temp-switcher_item temp-switcher_item_inactive switch-button-left"
+          >
+            °F
+          </div>
+          <div
+            class="button temp-switcher_item temp-switcher_item_active switch-button-right"
+          >
+            °C
+          </div>
+        </div>
+      </div>
+      <div class="search_block"></div>
+    </div>
+    <div class="mainContent_wrapper">
+      <div class="location-date_block"></div>
+      <div class="weather_block">
+        <div class="left_wrapper">
+          <div class="today_block"></div>
+          <div class="preview_block"></div>
+        </div>
+        <div class="right_wrapper">
+          <div class="gmap_block"></div>
+          <div class="coordinate_block"></div>
+        </div>
+      </div>
+    </div>
     <script src="./dist/build.js"></script>
   </body>
 </html>
