@@ -15,4 +15,26 @@ const createImg = (url, ...className) => {
    return component;
 };
 
-export { createDiv, createImg };
+const createSpan = (defaultValue, ...className) => {
+   const component = document.createElement('span');
+   component.append(defaultValue);
+   for (let i = 0; i < className.length; i += 1) {
+      component.classList.add(className[i]);
+   }
+   return component;
+};
+
+const createInput = (defaultValue, placeholder, ...className) => {
+   const component = document.createElement('input');
+   component.setAttribute('type', 'text');
+   if (placeholder !== null || placeholder !== '') {
+      component.setAttribute('placeholder', placeholder);
+   }
+
+   for (let i = 0; i < className.length; i += 1) {
+      component.classList.add(className[i]);
+   }
+   return component;
+};
+
+export { createDiv, createImg, createSpan, createInput };

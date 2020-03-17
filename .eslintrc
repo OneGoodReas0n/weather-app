@@ -12,7 +12,8 @@
             "exports": "never",
             "functions": "never"
          }
-      ]
+      ],
+      "object-curly-newline": ["error", "never"]
    },
    "env": {
       "browser": true
