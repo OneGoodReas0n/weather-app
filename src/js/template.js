@@ -24,6 +24,15 @@ const createSpan = (defaultValue, ...className) => {
    return component;
 };
 
+const createP = (defaultValue, ...className) => {
+   const component = document.createElement('p');
+   component.append(defaultValue);
+   for (let i = 0; i < className.length; i += 1) {
+      component.classList.add(className[i]);
+   }
+   return component;
+};
+
 const createInput = (defaultValue, placeholder, ...className) => {
    const component = document.createElement('input');
    component.setAttribute('type', 'text');
@@ -37,4 +46,4 @@ const createInput = (defaultValue, placeholder, ...className) => {
    return component;
 };
 
-export { createDiv, createImg, createSpan, createInput };
+export { createDiv, createImg, createSpan, createInput, createP };

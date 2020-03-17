@@ -8,205 +8,207 @@ $input-border-color: rgba(#e4e3e3, 0.2);
 
 html,
 body {
-  margin: 0;
-  padding: 0;
+   margin: 0;
+   padding: 0;
 }
 
 body {
-  background-color: $main-theme-color;
-  font-family: "Montserrat";
-  color: $button-title-color;
-  user-select: none;
+   background-color: $main-theme-color;
+   font-family: 'Montserrat';
+   color: $button-title-color;
+   user-select: none;
 }
 
 .button {
-  display: flex;
-  align-items: center;
-  padding: 14px 16.5px;
-  cursor: pointer;
+   display: flex;
+   align-items: center;
+   padding: 14px 16.5px;
+   cursor: pointer;
 }
 
 .container {
-  width: 90%;
-  margin: 0 auto;
-  // TOP CONTENT WRAPPER
+   width: 90%;
+   margin: 0 auto;
+   // TOP CONTENT WRAPPER
 
-  .top-content-wrapper {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 50px;
-    font-size: 14px;
-    font-weight: 600;
-    .button-block {
-      display: flex;
-      width: 25%;
-      .button-update {
-        border-radius: 5px;
-        background-color: $button-color-active;
-      }
-      .lang-switcher {
-        margin-left: 15px;
-        border-radius: 5px;
-        background-color: $button-color-active;
-        .lang-switcher__icon {
-          margin-left: 8px;
-        }
-      }
-      .temp-switcher {
-        display: flex;
-        justify-content: space-between;
-        margin-left: 15px;
-
-        .switch-button__left {
-          border-top-left-radius: 5px;
-          border-bottom-left-radius: 5px;
-        }
-        .switch-button__right {
-          border-top-right-radius: 5px;
-          border-bottom-right-radius: 5px;
-        }
-
-        .temp-switcher__item_active {
-          background-color: $button-color-active;
-        }
-
-        .temp-switcher__item_inactive {
-          background-color: $button-color-inactive;
-        }
-      }
-    }
-
-    .search-block {
-      display: flex;
-      align-items: center;
-      .search-bar {
-        position: relative;
-        display: flex;
-        height: 100%;
-        .search-bar__input {
-          width: 240px;
-          padding: 0 15px;
-          background-color: $input-background-color;
-          border: 1px solid $input-border-color;
-
-          &::placeholder {
-            font-family: "Montserrat";
-            font-size: 14px;
-            color: $button-title-color;
-          }
-
-          &:focus {
-            outline: none;
-            color: $button-title-color;
-          }
-        }
-        .search-bar__voice {
-          position: absolute;
-          left: 240px;
-          top: 15px;
-          cursor: pointer;
-        }
-      }
-      .search-button {
-        cursor: pointer;
-        .search-button__text {
-          padding: 14px 16.5px;
-          background-color: $button-color-active;
-          text-transform: uppercase;
-          border-top-right-radius: 5px;
-          border-bottom-right-radius: 5px;
-          letter-spacing: 0.7px;
-        }
-      }
-    }
-  }
-
-  // END TOP CONTENT WRAPPER
-
-  // MAIN CONTENT WRAPPER
-
-  .main-content-wrapper {
-    margin-top: 50px;
-    .location-date-block {
-      .location-block {
-        .location-block__text {
-          font-size: 44px;
-          font-weight: 800;
-        }
-      }
-
-      .date-block {
-        .date-block__text {
-          font-size: 24px;
-          font-weight: 500;
-          letter-spacing: 0.5px;
-        }
-      }
-    }
-
-    .weather-block {
+   .top-content-wrapper {
       display: flex;
       justify-content: space-between;
-      .left-wrapper {
-        .today-block {
-          display: flex;
-          .temperature-bar {
-            .temperature-bar__value {
-              font-size: 290px;
-              font-weight: 600;
+      width: 100%;
+      margin-top: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      .button-block {
+         display: flex;
+         width: 25%;
+         .button-update {
+            border-radius: 5px;
+            background-color: $button-color-active;
+         }
+         .lang-switcher {
+            margin-left: 15px;
+            border-radius: 5px;
+            background-color: $button-color-active;
+            .lang-switcher__icon {
+               margin-left: 8px;
             }
-          }
-          .forecast-bar {
-            margin-left: 20px;
+         }
+         .temp-switcher {
+            display: flex;
+            justify-content: space-between;
+            margin-left: 15px;
 
-            .forecast-info {
-              .forecast-info__item {
-                font-size: 22px;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-              }
+            .switch-button__left {
+               border-top-left-radius: 5px;
+               border-bottom-left-radius: 5px;
             }
-          }
-        }
-        .preview-block {
-          display: flex;
-          margin-top: 30px;
-          .preview-block__item {
-            .day-title {
-              font-size: 22px;
-              font-weight: 600;
-              text-transform: uppercase;
-              letter-spacing: 0.5px;
+            .switch-button__right {
+               border-top-right-radius: 5px;
+               border-bottom-right-radius: 5px;
             }
 
-            &:not(:first-child) {
-              margin-left: 30px;
+            .temp-switcher__item_active {
+               background-color: $button-color-active;
             }
-            .day-forecast {
-              .day-forecast__value {
-                font-size: 70px;
-                font-weight: 600;
-              }
+
+            .temp-switcher__item_inactive {
+               background-color: $button-color-inactive;
             }
-          }
-        }
+         }
       }
 
-      .right-wrapper {
-        .coordinate-block {
-          width: 100%;
-          .coordinate-block__item {
-            width: fit-content;
-            margin-left: auto;
-            font-size: 20px;
-            font-weight: 500;
-          }
-        }
-      }
-    }
-  }
+      .search-block {
+         display: flex;
+         align-items: center;
+         .search-bar {
+            position: relative;
+            display: flex;
+            height: 100%;
+            .search-bar__input {
+               width: 240px;
+               padding: 0 15px;
+               background-color: $input-background-color;
+               border: 1px solid $input-border-color;
 
-  // MAIN TOP CONTENT WRAPPER
+               &::placeholder {
+                  font-family: 'Montserrat';
+                  font-size: 14px;
+                  color: $button-title-color;
+               }
+
+               &:focus {
+                  outline: none;
+                  color: $button-title-color;
+               }
+            }
+            .search-bar__voice {
+               position: absolute;
+               left: 240px;
+               top: 15px;
+               cursor: pointer;
+            }
+         }
+         .search-button {
+            cursor: pointer;
+            .search-button__text {
+               padding: 14px 16.5px;
+               background-color: $button-color-active;
+               text-transform: uppercase;
+               border-top-right-radius: 5px;
+               border-bottom-right-radius: 5px;
+               letter-spacing: 0.7px;
+            }
+         }
+      }
+   }
+
+   // END TOP CONTENT WRAPPER
+
+   // MAIN CONTENT WRAPPER
+
+   .main-content-wrapper {
+      margin-top: 50px;
+      .location-date-block {
+         .location-block {
+            .location-block__text {
+               font-size: 44px;
+               font-weight: 800;
+            }
+         }
+
+         .date-block {
+            .date-block__text {
+               font-size: 24px;
+               font-weight: 500;
+               letter-spacing: 0.5px;
+            }
+         }
+      }
+
+      .content {
+         display: flex;
+         justify-content: space-between;
+         .left-wrapper {
+            .today-block {
+               display: flex;
+               .temperature-bar {
+                  .temperature-bar__value {
+                     font-size: 290px;
+                     font-weight: 600;
+                  }
+               }
+               .forecast-bar {
+                  margin-left: 20px;
+
+                  .forecast-info {
+                     .forecast-info__item {
+                        font-size: 22px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                     }
+                  }
+               }
+            }
+            .preview-block {
+               display: flex;
+               margin-top: 30px;
+               .preview-block__item {
+                  .day-title {
+                     font-size: 22px;
+                     font-weight: 600;
+                     text-transform: uppercase;
+                     letter-spacing: 0.5px;
+                  }
+
+                  &:not(:first-child) {
+                     margin-left: 30px;
+                  }
+                  .day-forecast {
+                     .day-forecast__value {
+                        font-size: 70px;
+                        font-weight: 600;
+                     }
+                  }
+               }
+            }
+         }
+
+         .right-wrapper {
+            .gmap-block {
+               .map-details-block {
+                  width: 100%;
+                  .map-details-block__item {
+                     width: fit-content;
+                     margin-left: auto;
+                     font-size: 20px;
+                     font-weight: 500;
+                  }
+               }
+            }
+         }
+      }
+   }
+
+   // MAIN TOP CONTENT WRAPPER
 }

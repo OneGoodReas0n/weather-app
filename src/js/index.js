@@ -9,5 +9,4 @@ window.onload = () => {
    container.appendChild(TopWrapper());
    container.appendChild(MainWrapper());
    body.appendChild(container);
-   //    const mainContentWrapper = createDiv('main-content-wrapper');
 };
