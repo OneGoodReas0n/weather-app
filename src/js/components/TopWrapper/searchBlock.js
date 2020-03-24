@@ -3,10 +3,8 @@ import { createDiv, createImg, createSpan, createInput } from '../../template';
 const makeSearchBar = () => {
    const searchBar = createDiv('search-bar');
    const input = createInput('', 'Search city or ZIP', 'search-bar__input');
-   const voiceImg = createImg(
-      '../../../../assets/voice_svg.svg',
-      'search-bar__voice'
-   );
+
+   const voiceImg = createImg('../../../../assets/voice_svg.svg', 'search-bar__voice');
    searchBar.appendChild(input);
    searchBar.appendChild(voiceImg);
    return searchBar;

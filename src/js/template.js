@@ -1,7 +1,11 @@
 const createDiv = (...className) => {
    const component = document.createElement('div');
    for (let i = 0; i < className.length; i += 1) {
-      component.classList.add(className[i]);
+      if (String(className[i]).includes('#')) {
+         component.setAttribute('id', className[i].slice(1));
+      } else {
+         component.classList.add(className[i]);
+      }
    }
    return component;
 };
