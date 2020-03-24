@@ -2,8 +2,10 @@ import { createDiv, createImg, createSpan, createP } from '../../../../template'
 
 const makeTemperatureBar = () => {
    const temperatureBar = createDiv('temperature-bar');
-   const span = createSpan('10°', 'temperature-bar__value');
+   const degreeSpan = createSpan('°', 'temperature-bar__degree');
+   const span = createSpan('10', 'temperature-bar__value');
    temperatureBar.appendChild(span);
+   temperatureBar.appendChild(degreeSpan);
    return temperatureBar;
 };
 

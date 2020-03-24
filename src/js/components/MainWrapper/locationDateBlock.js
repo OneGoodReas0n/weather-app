@@ -9,7 +9,7 @@ const makeLocationBlock = () => {
 
 const makeDateBlock = () => {
    const dateBlock = createDiv('date-block');
-   const spanInfo = createSpan('Dnipro, Ukraine', 'date-block__text');
+   const spanInfo = createSpan('Mon 28 January 17:20', 'date-block__text');
    dateBlock.appendChild(spanInfo);
    return dateBlock;
 };

@@ -1,11 +1,9 @@
-import { createDiv, createImg, createP } from '../../../../template';
+import { createDiv, createP } from '../../../../template';
 
-const makeMap = () => createImg('../../../../../../assets/gmap_icon.svg');
-
-const makeMapDetails = () => {
+const makeMapDetails = (lat, lon) => {
    const mapDetails = createDiv('map-details-block');
-   const latitudeSpan = createP('Latitude: 53°54', 'map-details-block__item');
-   const longitudeSpan = createP('Longitude: 26°27', 'map-details-block__item');
+   const latitudeSpan = createP(`Latitude: ${lat}`, 'map-details-block__item');
+   const longitudeSpan = createP(`Longitude: ${lon}`, 'map-details-block__item');
    mapDetails.appendChild(latitudeSpan);
    mapDetails.appendChild(longitudeSpan);
    return mapDetails;
@@ -13,8 +11,8 @@ const makeMapDetails = () => {
 
 const GmapBlock = () => {
    const gmapBlock = createDiv('gmap-block');
-   gmapBlock.appendChild(makeMap());
-   gmapBlock.appendChild(makeMapDetails());
+   gmapBlock.appendChild(createDiv('#map-canvas'));
+   gmapBlock.appendChild(makeMapDetails(1, 1));
    return gmapBlock;
 };
 

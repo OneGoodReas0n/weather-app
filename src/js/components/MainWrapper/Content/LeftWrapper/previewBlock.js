@@ -22,7 +22,7 @@ const makePreviewBlockItem = (day, temp, weather) => {
    return previewBlockItem;
 };
 
-const makePreviewBlock = () => {
+const renderPreviewBlock = () => {
    const previewBlock = createDiv('preview-block');
    const mon = makePreviewBlockItem('Monday', 14, 'none');
    const thue = makePreviewBlockItem('Thuesday', 12, '');
@@ -35,7 +35,7 @@ const makePreviewBlock = () => {
 
 const PreviewBlock = () => {
    const previewBlock = createDiv('today-block');
-   previewBlock.appendChild(makePreviewBlock());
+   previewBlock.appendChild(renderPreviewBlock());
    return previewBlock;
 };
 
