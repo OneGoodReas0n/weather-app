@@ -7,7 +7,7 @@ module.exports = {
 
    output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'build.js',
+      filename: 'build.js'
    },
 
    module: {
@@ -19,13 +19,13 @@ module.exports = {
                {
                   loader: 'babel-loader',
                   options: {
-                     presets: ['@babel/preset-env'],
-                  },
+                     presets: ['@babel/preset-env']
+                  }
                },
                {
-                  loader: 'eslint-loader',
-               },
-            ],
+                  loader: 'eslint-loader'
+               }
+            ]
          },
 
          {
@@ -34,15 +34,15 @@ module.exports = {
                { loader: MiniCssExtractPlugin.loader },
 
                {
-                  loader: 'css-loader',
+                  loader: 'css-loader'
                },
                {
                   loader: 'sass-loader',
                   options: {
-                     implementation: sass,
-                  },
-               },
-            ],
+                     implementation: sass
+                  }
+               }
+            ]
          },
 
          {
@@ -51,10 +51,10 @@ module.exports = {
                {
                   loader: 'file-loader',
                   options: {
-                     outputPath: 'images',
-                  },
-               },
-            ],
+                     outputPath: 'images'
+                  }
+               }
+            ]
          },
 
          {
@@ -63,19 +63,19 @@ module.exports = {
                {
                   loader: 'file-loader',
                   options: {
-                     outputPath: 'fonts',
-                  },
-               },
-            ],
-         },
-      ],
+                     outputPath: 'fonts'
+                  }
+               }
+            ]
+         }
+      ]
    },
 
    plugins: [
       new MiniCssExtractPlugin({
-         filename: 'style.css',
-      }),
+         filename: 'style.css'
+      })
    ],
 
-   mode: 'development',
+   mode: 'development'
 };

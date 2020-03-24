@@ -152,9 +152,17 @@ body {
             .today-block {
                display: flex;
                .temperature-bar {
+                  position: relative;
                   .temperature-bar__value {
                      font-size: 290px;
                      font-weight: 600;
+                  }
+                  .temperature-bar__degree {
+                     position: relative;
+                     top: -100px;
+                     font-size: 160px;
+                     font-weight: 600;
+                     line-height: 290px;
                   }
                }
                .forecast-bar {
@@ -196,6 +204,16 @@ body {
 
          .right-wrapper {
             .gmap-block {
+               #map-canvas {
+                  width: 400px;
+                  height: 400px;
+                  border-radius: 10px;
+
+                  .mapboxgl-canvas{
+                     left: 0;
+                  }
+               }
+
                .map-details-block {
                   width: 100%;
                   .map-details-block__item {

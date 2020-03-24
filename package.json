@@ -10,18 +10,24 @@
     "eslint": "eslint",
     "eslint:fix": "eslint --fix"
   },
-  "dependencies": {},
+  "dependencies": {
+    "mapbox-gl": "^1.8.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.8.7",
+    "@babel/runtime": "^7.9.2",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
+    "data.js": "^0.12.11",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-import": "^2.20.1",
+    "iso3166-2-db": "^2.3.6",
     "mini-css-extract-plugin": "^0.9.0",
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
