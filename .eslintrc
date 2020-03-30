@@ -1,24 +1,7 @@
 {
    "parser": "babel-eslint",
-   "extends": ["airbnb-base"],
-   "rules": {
-      "indent": ["error", 3],
-      "comma-dangle": [
-         "error",
-         {
-            "arrays": "never",
-            "objects": "never",
-            "imports": "never",
-            "exports": "never",
-            "functions": "never"
-         }
-      ],
-      "object-curly-newline": ["error", {
-         "ObjectExpression": "always"
-      }],
-      "no-plusplus":"off",
-      "arrow-body-style": ["error", "as-needed"]
-   },
+   "extends": ["airbnb-base", "eslint-config-prettier"],
+   "rules": {},
    "env": {
       "browser": true
    }
