@@ -167,8 +167,13 @@ body {
                }
                .forecast-bar {
                   margin-left: 20px;
-
+                  .forecast-bar__icon{
+                     width: 200px;
+                  }
                   .forecast-info {
+                     .forecast-info__item:first-of-type {
+                        margin-top: 0;
+                     }
                      .forecast-info__item {
                         font-size: 22px;
                         font-weight: 600;

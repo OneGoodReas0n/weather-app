@@ -1,9 +1,9 @@
 import { createDiv } from '../../../../template';
 import GmapBlock from './gmapBlock';
 
-const RightWrapper = () => {
+const RightWrapper = (location) => {
    const rightWrapper = createDiv('right-wrapper');
-   rightWrapper.appendChild(GmapBlock());
+   rightWrapper.appendChild(GmapBlock(location));
    return rightWrapper;
 };
 

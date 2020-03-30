@@ -1,41 +1,33 @@
 import { createDiv, createImg, createSpan } from '../../../../template';
+import { getIconByWeather } from '../../../../../utils/functions';
 
-const makeDayForecast = (temp, weather) => {
+const makeDayForecast = (temp, path) => {
    const dayForcast = createDiv('day-forecast');
    const forecastSpan = createSpan(`${temp}°`, 'day-forecast__value');
-   const forecastImg = createImg(
-      weather === '' || weather === undefined
-         ? '../../../../assets/cloudy_weather_icon.svg'
-         : '../../../../assets/cloudy_weather_icon.svg',
-      'day-forecast__icon'
-   );
+   const forecastImg = createImg(path, 'day-forecast__icon');
    dayForcast.appendChild(forecastSpan);
    dayForcast.appendChild(forecastImg);
    return dayForcast;
 };
 
-const makePreviewBlockItem = (day, temp, weather) => {
+const makePreviewBlockItem = (day, temp, path) => {
    const previewBlockItem = createDiv('preview-block__item');
    const daySpan = createSpan(day, 'day-title');
    previewBlockItem.appendChild(daySpan);
-   previewBlockItem.appendChild(makeDayForecast(temp, weather));
+   previewBlockItem.appendChild(makeDayForecast(temp, path));
    return previewBlockItem;
 };
 
-const renderPreviewBlock = () => {
-   const previewBlock = createDiv('preview-block');
-   const mon = makePreviewBlockItem('Monday', 14, 'none');
-   const thue = makePreviewBlockItem('Thuesday', 12, '');
-   const wed = makePreviewBlockItem('Wednesday', 10, '');
-   previewBlock.appendChild(mon);
-   previewBlock.appendChild(thue);
-   previewBlock.appendChild(wed);
-   return previewBlock;
-};
-
-const PreviewBlock = () => {
-   const previewBlock = createDiv('today-block');
-   previewBlock.appendChild(renderPreviewBlock());
+const PreviewBlock = (weatherData) => {
+   const previewBlock = createDiv('#preview-block', 'preview-block');
+   for (let i = 0; i < weatherData.length; i += 1) {
+      const day = makePreviewBlockItem(
+         weatherData[i].day,
+         weatherData[i].weather.temp,
+         getIconByWeather(weatherData[i].weather.description)
+      );
+      previewBlock.appendChild(day);
+   }
    return previewBlock;
 };
 

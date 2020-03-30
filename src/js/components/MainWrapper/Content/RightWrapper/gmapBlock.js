@@ -9,10 +9,11 @@ const makeMapDetails = (lat, lon) => {
    return mapDetails;
 };
 
-const GmapBlock = () => {
+const GmapBlock = (location) => {
+   const [lat, long] = location.loc.split(',');
    const gmapBlock = createDiv('gmap-block');
    gmapBlock.appendChild(createDiv('#map-canvas'));
-   gmapBlock.appendChild(makeMapDetails(1, 1));
+   gmapBlock.appendChild(makeMapDetails(lat, long));
    return gmapBlock;
 };
 
