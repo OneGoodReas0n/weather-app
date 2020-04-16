@@ -1,10 +1,12 @@
 import {
    getFormattedDateForDateBlock,
    getIconByWeather,
-   getCurrentWeatherFromCache,
    getWeatherForNow,
-   getWeatherForNextDays
+   getWeatherForNextDays,
+   areObjectsEqual
 } from './functions';
+
+import { getWeatherFromCache, getCurrentWeatherFromCache, saveCurrentUserSettings } from './cache';
 
 /**
  * * Function for updating time
@@ -23,11 +25,23 @@ const updateTime = () => {
  */
 const getElemFromListByClassName = (list, name) => {
    for (let i = 0; i < list.length; i += 1) {
-      if (String(list[i].className).indexOf(name) !== -1) {
+      if (String(list[i].className).includes(name)) {
          return list[i];
       }
    }
    return null;
+};
+
+const updateLocation = (location) => {
+   const { city, country, coordinates } = location;
+   const locationDiv = document.getElementById('location');
+   const coordinatesDiv = document.getElementById('coordinates');
+   const locationSpan = getElemFromListByClassName(locationDiv.childNodes, 'location-date__text');
+   const latitudeSpan = getElemFromListByClassName(coordinatesDiv.childNodes, 'map__latitude');
+   const longitudeSpan = getElemFromListByClassName(coordinatesDiv.childNodes, 'map__longitude');
+   locationSpan.textContent = `${city}, ${country}`;
+   latitudeSpan.textContent = `Latitude: ${coordinates.lat}`;
+   longitudeSpan.textContent = `Longitude: ${coordinates.long}`;
 };
 
 /**
@@ -35,21 +49,40 @@ const getElemFromListByClassName = (list, name) => {
  * @param  {Array} weatherList
  */
 const updateTodayWeather = (weather) => {
-   const TodayBlock = document.getElementById('today-block');
-   const tempBlock = getElemFromListByClassName(TodayBlock.childNodes, 'temperature-bar');
-   const tempSpan = getElemFromListByClassName(tempBlock.childNodes, 'temperature-bar__value');
+   const TodayBlock = document.getElementById('today-forecast');
+   const tempBlock = getElemFromListByClassName(
+      TodayBlock.childNodes,
+      'today-forecast__temperature'
+   );
+   const tempSpan = getElemFromListByClassName(tempBlock.childNodes, 'today-forecast__value');
+   const degreeSpan = getElemFromListByClassName(tempBlock.childNodes, 'today-forecast__degree');
+   degreeSpan.textContent = `°${weather.units}`;
    tempSpan.textContent = weather.temp;
 
-   const forecastBlock = getElemFromListByClassName(TodayBlock.childNodes, 'forecast-bar');
-   const forecastIcon = getElemFromListByClassName(forecastBlock.childNodes, 'forecast-bar__icon');
+   const forecastBlock = getElemFromListByClassName(
+      TodayBlock.childNodes,
+      'today-forecast__weather'
+   );
+   const forecastIcon = getElemFromListByClassName(
+      forecastBlock.childNodes,
+      'today-forecast__image'
+   );
    forecastIcon.src = getIconByWeather(weather.description);
 
-   const forecastInfo = getElemFromListByClassName(forecastBlock.childNodes, 'forecast-info');
-   const infoFeel = getElemFromListByClassName(forecastInfo.childNodes, 'forecast-info__feel');
-   infoFeel.textContent = `Feels like: ${weather.feels_like}°`;
-   const infoWind = getElemFromListByClassName(forecastInfo.childNodes, 'forecast-info__wind');
+   const forecastInfo = getElemFromListByClassName(
+      forecastBlock.childNodes,
+      'today-forecast__details'
+   );
+   const infoTitle = getElemFromListByClassName(forecastInfo.childNodes, 'today-forecast__desc');
+   infoTitle.textContent = `${weather.description}`;
+   const infoFeel = getElemFromListByClassName(forecastInfo.childNodes, 'today-forecast__feel');
+   infoFeel.textContent = `Feels like: ${weather.feelsLike}°${weather.units}`;
+   const infoWind = getElemFromListByClassName(forecastInfo.childNodes, 'today-forecast__wind');
    infoWind.textContent = `Wind: ${weather.wind} m/s`;
-   const infoHumid = getElemFromListByClassName(forecastInfo.childNodes, 'forecast-info__humidity');
+   const infoHumid = getElemFromListByClassName(
+      forecastInfo.childNodes,
+      'today-forecast__humidity'
+   );
    infoHumid.textContent = `Humidity: ${weather.humidity} %`;
 };
 
@@ -58,39 +91,68 @@ const updateTodayWeather = (weather) => {
  * @param  {Array} list
  */
 const updateNextDaysWeather = (list) => {
-   console.log(list);
-   const PreviewBlock = document.getElementById('preview-block');
+   const NextForecast = document.getElementById('next-forecast');
    let index = 0;
-   PreviewBlock.childNodes.forEach((e) => {
-      const dayTitle = getElemFromListByClassName(e.childNodes, 'day-title');
+   const forecastList = getElemFromListByClassName(NextForecast.childNodes, 'next-forecast__list');
+   forecastList.childNodes.forEach((e) => {
+      const dayTitle = getElemFromListByClassName(e.childNodes, 'next-forecast__title');
       dayTitle.textContent = list[index].day;
 
-      const dayForecastBlock = getElemFromListByClassName(e.childNodes, 'day-forecast');
-      const forecastValue = getElemFromListByClassName(
+      const dayForecastBlock = getElemFromListByClassName(e.childNodes, 'next-forecast__body');
+      const forecastBlock = getElemFromListByClassName(
          dayForecastBlock.childNodes,
-         'day-forecast__value'
+         'next-forecast__bar'
       );
-      forecastValue.textContent = `${list[index].weather.temp}°`;
+      const forecastValue = getElemFromListByClassName(
+         forecastBlock.childNodes,
+         'next-forecast__value'
+      );
+      forecastValue.textContent = `${list[index].weather.temp}`;
+      const forecastUnit = getElemFromListByClassName(
+         forecastBlock.childNodes,
+         'next-forecast__units'
+      );
+      forecastUnit.textContent = `°${list[index].weather.units}`;
       const forecastIcon = getElemFromListByClassName(
          dayForecastBlock.childNodes,
-         'day-forecast__icon'
+         'next-forecast__icon'
       );
       forecastIcon.src = getIconByWeather(list[index].weather.description);
       index += 1;
    });
 };
 
-const checkUpdatesInWeather = (weatherArray) => {
-   const date = new Date();
-   const weatherNow = getWeatherForNow(date, weatherArray);
-   const previousWeather = getCurrentWeatherFromCache();
-   if (weatherNow.id !== previousWeather.id) {
+/**
+ * * Function for checking if weather has been updated
+ * @param  {Array} weatherArray
+ * @param  {Object} location
+ * @param  {String} units
+ */
+const checkUpdatesInWeather = (weatherArray, location, units) => {
+   const previousWeather = getCurrentWeatherFromCache(location, units);
+   const weatherNow = getWeatherForNow(weatherArray, location);
+   if (!areObjectsEqual(weatherNow, previousWeather)) {
       updateTodayWeather(weatherNow);
+      console.log(
+         `${new Date()
+            .toString()
+            .slice(0, new Date().toString().indexOf('GMT'))} - Weather has been changed! `
+      );
    }
 
    if (new Date(weatherNow.date).getHours() === 0) {
-      updateNextDaysWeather(getWeatherForNextDays(date, weatherArray, 3));
+      updateNextDaysWeather(getWeatherForNextDays(weatherArray));
    }
 };
 
-export { updateTime, updateTodayWeather, updateNextDaysWeather, checkUpdatesInWeather };
+const updateAll = (locationInfo, weatherList) => {
+   const { location } = locationInfo;
+   updateLocation(location);
+   const weatherNow = getWeatherForNow(weatherList, location);
+   updateTodayWeather(weatherNow);
+   const weatherForNextDays = getWeatherForNextDays(weatherList);
+   updateNextDaysWeather(weatherForNextDays);
+   saveCurrentUserSettings(locationInfo);
+};
+
+export { updateTime, updateTodayWeather, updateNextDaysWeather, checkUpdatesInWeather, updateAll };

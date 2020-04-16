@@ -1,6 +1,29 @@
+import { saveCurrentWeatherToCache } from './cache';
+import cloudyDay1SVG from '../../assets/weather/cloudy-day-1.svg';
+import cloudyDay2SVG from '../../assets/weather/cloudy-day-2.svg';
+import cloudyDay3SVG from '../../assets/weather/cloudy-day-3.svg';
+import cloudyNight1SVG from '../../assets/weather/cloudy-night-1.svg';
+import cloudyNight2SVG from '../../assets/weather/cloudy-night-2.svg';
+import cloudyNight3SVG from '../../assets/weather/cloudy-night-3.svg';
+import rainy1SVG from '../../assets/weather/rainy-1.svg';
+import rainy2SVG from '../../assets/weather/rainy-2.svg';
+import rainy3SVG from '../../assets/weather/rainy-3.svg';
+import rainy4SVG from '../../assets/weather/rainy-4.svg';
+import rainy5SVG from '../../assets/weather/rainy-5.svg';
+import rainy6SVG from '../../assets/weather/rainy-6.svg';
+import snowy2SVG from '../../assets/weather/snowy-2.svg';
+import snowy3SVG from '../../assets/weather/snowy-3.svg';
+import snowy4SVG from '../../assets/weather/snowy-4.svg';
+import snowy6SVG from '../../assets/weather/snowy-6.svg';
+import daySVG from '../../assets/weather/day.svg';
+import nightSVG from '../../assets/weather/night.svg';
+import thunderstormSVG from '../../assets/weather/thunder.svg';
+import cloudySVG from '../../assets/weather/cloudy.svg';
+import countries from '../localization/countries';
+
 /**
  * * Create a formatted string for viewing date in div element with class 'date-block'
- * @returns {string}
+ * @returns {String}
  */
 const getFormattedDateForDateBlock = () => {
    const date = new Date();
@@ -12,8 +35,8 @@ const getFormattedDateForDateBlock = () => {
 /**
  * * Formatting date for searching weather
  * @param  {Date} date
- * @param  {boolean} isToday
- * @returns {string}
+ * @param  {Boolean} isToday
+ * @returns {String}
  */
 const formatDateForSearch = (date, isToday) => {
    const defaultTime = '12:00:00';
@@ -21,42 +44,26 @@ const formatDateForSearch = (date, isToday) => {
       date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
    }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()} ${
       isToday
-         ? `${date.getHours() < 9 ? `0${date.getHours()}` : date.getHours()}:00:00`
+         ? `${date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()}:00:00`
          : defaultTime
    }`;
 };
 
 /**
- * * Function for saving previous weather (check for updates in weather)
- * @param  {Object} weather
- */
-const saveCurrentWeatherToCache = (weather) => {
-   localStorage.setItem('currentWeather', JSON.stringify(weather));
-};
-
-/**
- * * Funtcion for getting previous weather to compare
- * @returns  {Object} weather
- */
-const getCurrentWeatherFromCache = () => {
-   return localStorage.getItem('currentWeather');
-};
-
-/**
  * * Formatting date for searching weather in certain periods of time
  * @param  {Date} date
- * @returns {string}
+ * @returns {String}
  */
-const formatDateForTodaySearch = (date) => {
-   const hourAndHalf = 60 * 90 * 1000;
+const getNearestTimeDateForTodaySearch = (date) => {
+   const HOUR_AND_HALF = 60 * 90 * 1000;
    const startOfDay = new Date(date);
    startOfDay.setHours(0, 0, 0);
    let index = 0;
    for (let i = 1; i <= 23; i += 2) {
       index += 1;
       if (
-         date.getTime() >= startOfDay.getTime() + hourAndHalf * i &&
-         date.getTime() < startOfDay.getTime() + hourAndHalf * (i + 2)
+         date.getTime() >= startOfDay.getTime() + HOUR_AND_HALF * i &&
+         date.getTime() < startOfDay.getTime() + HOUR_AND_HALF * (i + 2)
       ) {
          date.setHours(3 * index, 0, 0);
       }
@@ -66,8 +73,8 @@ const formatDateForTodaySearch = (date) => {
 
 /**
  * * Function for getting a path to icon depend on weather parameter
- * @param  {string} weather
- * @returns {string}
+ * @param  {String} weather
+ * @returns {String}
  */
 const getIconByWeather = (weather) => {
    let path = '';
@@ -75,95 +82,95 @@ const getIconByWeather = (weather) => {
    if (time > 6 && time < 21) {
       switch (weather) {
          case 'clear sky':
-            path = `day.svg`;
+            path = daySVG;
             break;
          case 'few clouds':
-            path = `cloudy-day-1.svg`;
+            path = cloudyDay1SVG;
             break;
          case 'scattered clouds':
-            path = `cloudy-day-2.svg`;
+            path = cloudyDay2SVG;
             break;
          case 'broken clouds':
-            path = `cloudy-day-3.svg`;
+            path = cloudyDay3SVG;
             break;
          case 'overcast clouds':
-            path = `cloudy.svg`;
+            path = cloudySVG;
             break;
          case 'shower rain':
-            path = `rainy-3.svg`;
+            path = rainy3SVG;
             break;
          case 'rain':
-            path = `rainy-2.svg`;
+            path = rainy2SVG;
             break;
          case 'light rain':
-            path = `rainy-1.svg`;
+            path = rainy1SVG;
             break;
          case 'thunderstorm':
-            path = `thunder.svg`;
+            path = thunderstormSVG;
             break;
          case 'light snow':
-            path = `snowy-2.svg`;
+            path = snowy2SVG;
             break;
          case 'snow':
-            path = `snowy-3.svg`;
+            path = snowy3SVG;
             break;
          case 'mist':
-            path = `cloudy.svg`;
+            path = cloudySVG;
             break;
          default:
-            console.log('No such value for icon!');
+            // console.log('No such value for icon!');
             break;
       }
    } else {
       switch (weather) {
          case 'clear sky':
-            path = `night.svg`;
+            path = nightSVG;
             break;
          case 'few clouds':
-            path = `cloudy-night-1.svg`;
+            path = cloudyNight1SVG;
             break;
          case 'scattered clouds':
-            path = `cloudy-night-2.svg`;
+            path = cloudyNight2SVG;
             break;
          case 'broken clouds':
-            path = `cloudy-night-3.svg`;
+            path = cloudyNight3SVG;
             break;
          case 'overcast clouds':
-            path = `cloudy.svg`;
+            path = cloudySVG;
             break;
          case 'shower rain':
-            path = `rainy-6.svg`;
+            path = rainy6SVG;
             break;
          case 'rain':
-            path = `rainy-5.svg`;
+            path = rainy5SVG;
             break;
          case 'light rain':
-            path = `rainy-4.svg`;
+            path = rainy4SVG;
             break;
          case 'thunderstorm':
-            path = `thunder.svg`;
+            path = thunderstormSVG;
             break;
          case 'light snow':
-            path = `snowy-4.svg`;
+            path = snowy4SVG;
             break;
          case 'snow':
-            path = `snowy-6.svg`;
+            path = snowy6SVG;
             break;
          case 'mist':
-            path = `cloudy.svg`;
+            path = cloudySVG;
             break;
          default:
-            console.log('No such value for icon!');
+            // console.log('No such value for icon!');
             break;
       }
    }
-   return `../../assets/weather/${path}`;
+   return `${path}`;
 };
 
 /**
  * * Function for getting a day of the week
- * @param  {number} numOfDay
- * @returns {string}
+ * @param  {Number} numOfDay
+ * @returns {String}
  */
 const getDayByNum = (numOfDay) => {
    switch (numOfDay) {
@@ -188,48 +195,52 @@ const getDayByNum = (numOfDay) => {
 
 /**
  * * Function for preparing data for TodayBlock
- * @param  {Date} date
  * @param  {Array} weatherList
- * @returns {Object} Weather object
+ * @param  {Object} location
+ * @returns {Object}
  */
-const getWeatherForNow = (date, weatherList) => {
-   const weather = weatherList.find((e) => e.date === formatDateForTodaySearch(date));
-   if (weather !== undefined || weather !== null) {
-      saveCurrentWeatherToCache(weather);
-      return weather;
+const getWeatherForNow = (weatherList, location) => {
+   const weatherForNow = weatherList.find(
+      (e) => e.date === getNearestTimeDateForTodaySearch(new Date())
+   );
+   if (weatherForNow !== undefined && weatherForNow !== null) {
+      saveCurrentWeatherToCache(weatherForNow, location);
+      return weatherForNow;
    }
    return null;
 };
 
 /**
- * * Function to check if there is an information for next number of {days} in {weatherList}
- * @param  {Date} date
+ * * Function to check if there is an information for next 3 days
  * @param  {Array} weatherList
- * @param  {number} days
- * @returns {boolean}
+ * @returns {Boolean}
  */
-const hasWeatherForNextDays = (date, weatherList, days) => {
-   const lastDate = new Date(date);
-   lastDate.setDate(lastDate.getDate() + days);
+const hasWeatherForNextDays = (weatherData) => {
+   const weatherList = weatherData.list;
+   const lastDate = new Date();
+   lastDate.setDate(lastDate.getDate() + 3);
    const lastDateText = formatDateForSearch(lastDate, false);
-   if (weatherList.find((e) => e.date === lastDateText) !== undefined) {
+   if (
+      weatherList !== null &&
+      weatherList !== undefined &&
+      weatherList.find((e) => e.date === lastDateText) !== undefined
+   ) {
       return true;
    }
    return false;
 };
 
 /**
- * * Funtion for preparing data for next {days} from {weatherList}
- * @param  {Date} date
+ * * Funtion for preparing data for next 3 days
  * @param  {Array} weatherList
- * @param  {number} numOfDays
+ * @param  {Number} numOfDays
  * @returns {Array}
  */
-const getWeatherForNextDays = (date, weatherList, numOfDays) => {
+const getWeatherForNextDays = (weatherList) => {
    const preparedList = [];
-   const now = new Date(date);
-   for (let i = 1; i <= numOfDays; i += 1) {
-      const nextDay = new Date(date);
+   const now = new Date();
+   for (let i = 1; i <= 3; i += 1) {
+      const nextDay = new Date(now);
       nextDay.setDate(now.getDate() + i);
       const day = getDayByNum(nextDay.getDay());
       const nextDayTxt = formatDateForSearch(nextDay, false);
@@ -240,66 +251,78 @@ const getWeatherForNextDays = (date, weatherList, numOfDays) => {
 };
 
 /**
- * * Function for serializing data after api call
+ * * Function for serializing data
  * @param  {Object} weatherData
- * @returns {Array}
+ * @param  {String} units
+ * @returns {Object}
  */
-const weatherSerialize = (weatherData) => {
+const weatherSerialize = (weatherData, units) => {
    const { list } = weatherData;
+   const now = new Date();
    const weatherArr = [];
    for (let i = 0; i < list.length; i += 1) {
       const item = list[i];
       const weatherItem = {
          id: item.dt,
          temp: Math.round(item.main.temp),
-         feels_like: Math.round(item.main.feels_like),
+         feelsLike: Math.round(item.main.feels_like),
          humidity: item.main.humidity,
          weatherIcon: item.weather[0].main,
          wind: Math.round(item.wind.speed),
          date: item.dt_txt,
          weather: item.weather[item.weather.length - 1].main,
-         description: item.weather[item.weather.length - 1].description
+         description: item.weather[item.weather.length - 1].description,
+         units
       };
       weatherArr.push(weatherItem);
    }
-   return weatherArr;
-};
-
-/**
- * * Function for saving data in Local Storage
- * @param  {Array} weatherData
- * @param {string} units To define in what units data must be saved
- */
-const safeWeatherToCache = (weatherArr, units) => {
-   const now = new Date();
-   const cachedData = {
-      date: now.toString().slice(0, now.toString().indexOf('GMT')),
+   return {
+      city: weatherData.city.name,
+      country: weatherData.city.country,
       list: weatherArr
    };
-   localStorage.setItem(`weatherCache(${units === 'F' ? 'F' : 'C'})`, JSON.stringify(cachedData));
+};
+/**
+ * * Assert two objects
+ * @param  {Object} obj1
+ * @param  {Object} obj2
+ * @returns {Boolean}
+ */
+const areObjectsEqual = (obj1, obj2) => {
+   const keysObj1 = Object.keys(obj1);
+   const keysObj2 = Object.keys(obj2);
+
+   if (keysObj1.length !== keysObj2.length) {
+      return false;
+   }
+
+   for (let key of keysObj1) {
+      if (obj1[key] !== obj2[key]) {
+         console.log(obj1[key]);
+         return false;
+      }
+   }
+   return true;
 };
 
-/**
- * * Function for getting data from Local Storage
- * @param  {sting} units To definde what kind of cache data user needs
- */
-const getWeatherFromCache = (units) => {
-   const weatherData = localStorage.getItem(`weatherCache(${units === 'F' ? 'F' : 'C'})`);
-   if (weatherData !== undefined || weatherData !== null) {
-      return JSON.parse(weatherData);
-   }
-   return null;
+const getCountryByISO = (iso) => {
+   return countries.find((e) => e.alpha === iso).country;
+};
+
+const createLocationInfoObj = (city, country, coordinates, units) => {
+   const result = { location: { city, country, coordinates }, units };
+   return result;
 };
 
 export {
    getFormattedDateForDateBlock,
-   safeWeatherToCache,
-   getWeatherFromCache,
    hasWeatherForNextDays,
    getWeatherForNextDays,
-   formatDateForTodaySearch,
+   getNearestTimeDateForTodaySearch,
    getWeatherForNow,
    getIconByWeather,
-   getCurrentWeatherFromCache,
-   weatherSerialize
+   weatherSerialize,
+   areObjectsEqual,
+   getCountryByISO,
+   createLocationInfoObj
 };
