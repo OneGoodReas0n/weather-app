@@ -3,7 +3,7 @@ import ButtonBlock from './buttonBlock';
 import SearchBlock from './searchBlock';
 
 const makeTopWrapperContent = () => {
-   const topContentWrapper = createDiv('top-content-wrapper');
+   const topContentWrapper = createDiv('header');
    topContentWrapper.appendChild(ButtonBlock());
    topContentWrapper.appendChild(SearchBlock());
    return topContentWrapper;
