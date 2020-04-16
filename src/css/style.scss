@@ -1,10 +1,4 @@
-$main-theme-color: rgba(#445566, 0.8);
-$button-color-active: rgba(#aeb5b9, 0.5);
-$button-color-inactive: rgba(#4c5255, 0.4);
-$button-title-color: #fff;
-
-$input-background-color: rgba(#4c5255, 0.4);
-$input-border-color: rgba(#e4e3e3, 0.2);
+@import './colors.scss', './mixins.scss', './font-sizes.scss';
 
 html,
 body {
@@ -15,6 +9,7 @@ body {
 body {
    background-color: $main-theme-color;
    font-family: 'Montserrat';
+   font-size: 16px;
    color: $button-title-color;
    user-select: none;
 }
@@ -22,77 +17,121 @@ body {
 .button {
    display: flex;
    align-items: center;
-   padding: 14px 16.5px;
    cursor: pointer;
+
+   @include for-small-screen {
+      padding: 10px 12.5px;
+   }
+
+   @include for-tablet {
+      padding: 10px 12.5px;
+   }
+
+   @include for-desktop {
+      padding: 10px 12.5px;
+   }
+
+   @include for-large-screen {
+      padding: 14px 16.5px;
+   }
 }
 
 .container {
-   width: 90%;
    margin: 0 auto;
-   // TOP CONTENT WRAPPER
 
-   .top-content-wrapper {
+   @include for-small-screen {
+      max-width:#{$sm-device-width} -1px;
+   }
+
+   @include for-tablet {
+      max-width: #{$md-device-width};
+      padding: 10px 20px 0 20px;
+   }
+
+   @include for-desktop {
+      max-width: #{$lg-device-width};
+      padding: 10px 20px 0 20px;
+   }
+
+   @include for-large-screen {
+      max-width: #{$xl-device-width};
+      padding: 10px 30px 0 30px;
+   }
+
+   // Header
+
+   .header {
       display: flex;
       justify-content: space-between;
       width: 100%;
-      margin-top: 50px;
       font-size: 14px;
       font-weight: 600;
-      .button-block {
+      .header__actions {
          display: flex;
-         width: 25%;
-         .button-update {
+         align-items: center;
+         justify-content: space-between;
+         max-width: 25%;
+         .button {
+            margin-right: 15px;
             border-radius: 5px;
             background-color: $button-color-active;
-         }
-         .lang-switcher {
-            margin-left: 15px;
-            border-radius: 5px;
-            background-color: $button-color-active;
-            .lang-switcher__icon {
+            .button__append {
                margin-left: 8px;
             }
          }
-         .temp-switcher {
-            display: flex;
-            justify-content: space-between;
-            margin-left: 15px;
 
-            .switch-button__left {
+         .switcher {
+            display: flex;
+            .button{
+               margin-right: 0;
+            }
+
+            .switcher__item{
+               .switcher__title{
+                  pointer-events: none;
+               }  
+            }
+
+            .switcher__item_left {
                border-top-left-radius: 5px;
                border-bottom-left-radius: 5px;
+               border-top-right-radius: 0;
+               border-bottom-right-radius: 0;
             }
-            .switch-button__right {
+            .switcher__item_right {
                border-top-right-radius: 5px;
                border-bottom-right-radius: 5px;
+               border-top-left-radius:0;
+               border-bottom-left-radius:0;
             }
 
-            .temp-switcher__item_active {
+            .switcher__item_active {
                background-color: $button-color-active;
             }
 
-            .temp-switcher__item_inactive {
+            .switcher__item_inactive {
                background-color: $button-color-inactive;
             }
          }
       }
 
-      .search-block {
+      .search {
          display: flex;
          align-items: center;
-         .search-bar {
+         max-width: 40%;
+         .search__body {
             position: relative;
             display: flex;
-            height: 100%;
-            .search-bar__input {
+            .search__input {
                width: 240px;
-               padding: 0 15px;
+               padding: 15.5px 15px;
                background-color: $input-background-color;
-               border: 1px solid $input-border-color;
+               color: $button-title-color;
+               border:none;
 
                &::placeholder {
                   font-family: 'Montserrat';
-                  font-size: 14px;
+                  font-size: 15px;
                   color: $button-title-color;
                }
 
@@ -101,16 +140,16 @@ body {
                   color: $button-title-color;
                }
             }
-            .search-bar__voice {
+            .search__voice {
                position: absolute;
                left: 240px;
                top: 15px;
                cursor: pointer;
             }
          }
-         .search-button {
+         .search__button {
             cursor: pointer;
-            .search-button__text {
+            .search__title {
                padding: 14px 16.5px;
                background-color: $button-color-active;
                text-transform: uppercase;
@@ -122,60 +161,179 @@ body {
       }
    }
 
-   // END TOP CONTENT WRAPPER
+   // END Header
 
-   // MAIN CONTENT WRAPPER
+   // CONTENT
 
-   .main-content-wrapper {
-      margin-top: 50px;
-      .location-date-block {
-         .location-block {
-            .location-block__text {
-               font-size: 44px;
+   .content {
+      
+      @include for-small-screen {
+         
+      }
+   
+      @include for-tablet {
+      }
+   
+      @include for-desktop {
+         margin-top: 10px;
+      }
+   
+      @include for-large-screen {
+         margin-top: 0;
+      }
+      
+      .location-date {
+         .location-date__item {
+            .location-date__text {
+               @include for-small-screen {
+               }
+            
+               @include for-tablet {
+                  font-size: 28px;
+               }
+            
+               @include for-desktop {
+                  font-size: 38px;
+               }
+            
+               @include for-large-screen {
+                  font-size: 44px;
+               }
                font-weight: 800;
             }
-         }
 
-         .date-block {
-            .date-block__text {
-               font-size: 24px;
+            .location-date__subtext {
+               @include for-small-screen {
+         
+               }
+            
+               @include for-tablet {
+                  font-size: 18px;
+               }
+            
+               @include for-desktop {
+                  font-size: 22px;
+               }
+            
+               @include for-large-screen {
+                  font-size: 24px;
+               }
+               
                font-weight: 500;
                letter-spacing: 0.5px;
             }
          }
       }
 
-      .content {
+      .wrapper {
          display: flex;
          justify-content: space-between;
+         align-items: center;
          .left-wrapper {
-            .today-block {
+            @include for-small-screen {
+         
+            }
+         
+            @include for-tablet {
+               width: 50%;
+            }
+         
+            @include for-desktop {
+               width: 50%;
+            }
+         
+            @include for-large-screen {
+               width: 50%;
+            }
+            
+            overflow: hidden;
+            .today-forecast {
                display: flex;
-               .temperature-bar {
+               justify-content: center;
+               .today-forecast__temperature {
+                  max-width: 62%;
                   position: relative;
-                  .temperature-bar__value {
-                     font-size: 290px;
+                  .today-forecast__value {
+                     @include for-small-screen {
+                        font-size: #{$xs-screen-font-size};
+                     }
+                  
+                     @include for-tablet {
+                        font-size: #{$sm-screen-font-size};
+                     }
+                  
+                     @include for-desktop {
+                        font-size: #{$md-screen-font-size};
+                     }
+                  
+                     @include for-large-screen {
+                        font-size: #{$xl-screen-font-size};
+                     }
                      font-weight: 600;
                   }
-                  .temperature-bar__degree {
+                  .today-forecast__degree {
                      position: relative;
-                     top: -100px;
-                     font-size: 160px;
                      font-weight: 600;
-                     line-height: 290px;
+                     
+                     @include for-small-screen {
+                        top: -80px;
+                        font-size: 30px;
+                        line-height: #{$sm-screen-font-size};
+                     }
+                  
+                     @include for-tablet {
+                        top: -120px;
+                        font-size: 40px;
+                        line-height: #{$md-screen-font-size};
+                     }
+                  
+                     @include for-desktop {
+                        top: -90px;
+                        font-size: 50px;
+                        line-height: #{$lg-screen-font-size};
+                     }
+                  
+                     @include for-large-screen {
+                        top: -160px;
+                        font-size: 80px;
+                        line-height: #{$xl-screen-font-size};
+                     }
+                  }
+
+                  .F-unit__value{ 
+                     font-size: 200px !important;
+                  }
+                  .F-unit__units {
+                     top: -100px !important;
+                     font-size: 70px !important;
+                     line-height: 200px !important;
                   }
                }
-               .forecast-bar {
+               .today-forecast__weather {
                   margin-left: 20px;
-                  .forecast-bar__icon{
-                     width: 200px;
+                  .today-forecast__image{
+                     width: 100%;
                   }
-                  .forecast-info {
-                     .forecast-info__item:first-of-type {
-                        margin-top: 0;
-                     }
-                     .forecast-info__item {
-                        font-size: 22px;
+                  .today-forecast__details {
+                     position: relative;
+                     top: -50px;
+                     .today-forecast__item {
+                        @include for-small-screen {
+                           font-size: 16px;
+                        }
+                     
+                        @include for-tablet {
+                           font-size: 18px;
+                        }
+                     
+                        @include for-desktop {
+                           font-size: 16px;
+                        }
+                     
+                        @include for-large-screen {
+                           font-size: 22px;
+                        }
+
                         font-weight: 600;
                         text-transform: uppercase;
                         letter-spacing: 0.5px;
@@ -183,24 +341,85 @@ body {
                   }
                }
             }
-            .preview-block {
-               display: flex;
-               margin-top: 30px;
-               .preview-block__item {
-                  .day-title {
-                     font-size: 22px;
-                     font-weight: 600;
-                     text-transform: uppercase;
-                     letter-spacing: 0.5px;
-                  }
+            .next-forecast {
+               .next-forecast__list{
+                  display: flex;
 
-                  &:not(:first-child) {
-                     margin-left: 30px;
-                  }
-                  .day-forecast {
-                     .day-forecast__value {
-                        font-size: 70px;
+                  .next-forecast__item {
+                     width: 33.333%;
+                     .next-forecast__title {
+                        @include for-small-screen {
+                           font-size: 16px;
+                        }
+                     
+                        @include for-tablet {
+                           font-size: 16px;
+                        }
+                     
+                        @include for-desktop {
+                           font-size: 18px;
+                        }
+                     
+                        @include for-large-screen {
+                           font-size: 24px;
+                        }
+   
                         font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                     }
+                     .next-forecast__body {
+                        display: flex;
+                        align-items: center;
+                        .next-forecast__bar{
+                           display: flex;
+                           .next-forecast__value {
+                              @include for-small-screen {
+                                 font-size: 48px;
+                              }
+                           
+                              @include for-tablet {
+                                 font-size: 56px;
+                              }
+                           
+                              @include for-desktop {
+                                 font-size: 60px;
+                              }
+                           
+                              @include for-large-screen {
+                                 font-size: 70px;
+                              }
+                              font-weight: 600;
+                           }
+                           .next-forecast__units {
+                              position: relative;
+                              left: 5px;
+                              
+                              @include for-small-screen {
+                                 font-size: 48px;
+                              }
+                           
+                              @include for-tablet {
+                                 top:5px;
+                                 font-size: 20px;
+                              }
+                           
+                              @include for-desktop {
+                                 top:8px;
+                                 font-size: 18px;
+                              }
+                           
+                              @include for-large-screen {
+                                 top:10px;
+                                 font-size: 24px;
+                              }
+                           }
+                        }
+   
+                        .next-forecast__icon{
+                           width: 45%;
+                        }
+                        
                      }
                   }
                }
@@ -208,10 +427,27 @@ body {
          }
 
          .right-wrapper {
-            .gmap-block {
+            @include for-small-screen {
+               
+            }
+         
+            @include for-tablet {
+               width: 45%;
+            }
+         
+            @include for-desktop {
+               
+               width: 45%;
+            }
+         
+            @include for-large-screen {
+               width: 35%;
+            }
+            .map {
                #map-canvas {
-                  width: 400px;
-                  height: 400px;
+                  height: 0;
+                  margin-left: auto;
+                  padding-bottom:90%;
                   border-radius: 10px;
 
                   .mapboxgl-canvas{
@@ -219,13 +455,28 @@ body {
                   }
                }
 
-               .map-details-block {
+               .map__details {
                   width: 100%;
-                  .map-details-block__item {
+                  .map__item {
                      width: fit-content;
                      margin-left: auto;
-                     font-size: 20px;
                      font-weight: 500;
+
+                     @include for-small-screen {
+               
+                     }
+                  
+                     @include for-tablet {
+                        font-size: 16px;
+                     }
+                  
+                     @include for-desktop {
+                        font-size: 18px;
+                     }
+                  
+                     @include for-large-screen {
+                        font-size: 20px;
+                     }
                   }
                }
             }
@@ -233,5 +484,5 @@ body {
       }
    }
 
-   // MAIN TOP CONTENT WRAPPER
+   // WRAPPER
 }
