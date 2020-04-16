@@ -1,13 +1,13 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const sass = require('sass');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
    entry: './src/js/index.js',
 
    output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'build.js'
+      filename: 'build.js',
+      publicPath: '/'
    },
 
    module: {
@@ -30,19 +30,7 @@ module.exports = {
 
          {
             test: /\.(sa|sc|c)ss$/,
-            use: [
-               { loader: MiniCssExtractPlugin.loader },
-
-               {
-                  loader: 'css-loader'
-               },
-               {
-                  loader: 'sass-loader',
-                  options: {
-                     implementation: sass
-                  }
-               }
-            ]
+            use: ['style-loader', 'css-loader', 'sass-loader']
          },
 
          {
@@ -51,7 +39,8 @@ module.exports = {
                {
                   loader: 'file-loader',
                   options: {
-                     outputPath: 'images'
+                     outputPath: 'assets',
+                     publicPath: 'dist/assets'
                   }
                }
             ]
@@ -71,11 +60,7 @@ module.exports = {
       ]
    },
 
-   plugins: [
-      new MiniCssExtractPlugin({
-         filename: 'style.css'
-      })
-   ],
+   plugins: [new CleanWebpackPlugin()],
 
    mode: 'development'
 };
