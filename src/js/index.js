@@ -1,51 +1,96 @@
-import { getWeatherFromCache, hasWeatherForNextDays, weatherSerialize } from '../utils/functions';
-import { updateTime, checkUpdatesInWeather } from '../utils/updateData';
 import '../css/style.scss';
+import {
+   getCurrentUserSettings,
+   saveCurrentUserSettings,
+   removeCurrentWeatherFromCache
+} from '../utils/cache';
+import { createLocationInfoObj } from '../utils/functions';
+import { updateTime, checkUpdatesInWeather, updateAll } from '../utils/updateData';
+import { setUnitsListeners } from '../utils/handlers';
 import getLocation from '../api/geoAPI';
-import getForecast from '../api/weatherAPI';
+import { getForecast } from '../api/weatherAPI';
 import createMap from '../api/mapAPI';
 import { createDiv } from './template';
-import TopWrapper from './components/TopWrapper';
-import MainWrapper from './components/MainWrapper';
+import Header from './components/Header';
+import Content from './components/Content';
+import getMyLocation from '../api/geocodingAPI';
 
-const makeTemplate = (container, location, weather) => {
-   container.appendChild(TopWrapper());
-   container.appendChild(MainWrapper(location, weather));
-   const map = createMap(document.getElementById('map-canvas'));
-   map.setCenter(
-      String(location.loc)
-         .split(',')
-         .reverse()
-   );
-};
+const { body } = document;
+const container = createDiv('container');
 
-window.onload = () => {
-   const { body } = document;
-   const container = createDiv('container');
-   getLocation().then((location) => {
-      const { loc, city, region } = location;
-      const locationInfo = { city, region, loc };
-      if (
-         getWeatherFromCache() !== null &&
-         hasWeatherForNextDays(new Date(), getWeatherFromCache().list, 3)
-      ) {
-         const weatherCache = getWeatherFromCache();
-         makeTemplate(container, locationInfo, weatherCache.list);
-      } else {
-         getForecast(city, region, 'C').then((weather) => {
-            const weatherArray = weatherSerialize(weather);
-            makeTemplate(container, location, weatherArray);
+container.appendChild(Header());
+container.appendChild(Content());
+body.appendChild(container);
+
+getLocation().then((locationData) => {
+   const { loc } = locationData;
+   const [lat, long] = loc.split(',');
+   const coordinates = { lat, long };
+   let units = 'C';
+   if (
+      getCurrentUserSettings() !== undefined &&
+      getCurrentUserSettings() !== null &&
+      getCurrentUserSettings().units !== undefined
+   ) {
+      units = getCurrentUserSettings().units;
+   }
+
+   getForecast(coordinates, units).then((weatherObj) => {
+      const map = createMap(document.getElementById('map-canvas'), coordinates);
+      setUnitsListeners();
+
+      getMyLocation(coordinates)
+         .then((data) => data.results)
+         .then((result) => {
+            const [city, country] = result[0].address_components.filter(
+               (e) => e.types.includes('locality') || e.types.includes('country')
+            );
+            const locationInfo = createLocationInfoObj(
+               city.long_name,
+               country.long_name,
+               coordinates,
+               units
+            );
+            saveCurrentUserSettings(locationInfo);
+            updateAll(locationInfo, weatherObj.list);
          });
-      }
+
+      const autocomplete = new google.maps.places.Autocomplete(
+         document.getElementById('search_input'),
+         { types: ['(regions)'] }
+      );
+      autocomplete.setFields(['geometry', 'address_components']);
+
+      autocomplete.addListener('place_changed', () => {
+         const { geometry, address_components } = autocomplete.getPlace();
+         const placeLat = geometry.location.lat();
+         const placeLong = geometry.location.lng();
+         const [city, country] = address_components.filter(
+            (e) => e.types.includes('locality') || e.types.includes('country')
+         );
+         const currentUnits = getCurrentUserSettings().units;
+         const newCoordinates = { lat: placeLat, long: placeLong };
+         const locationInfo = createLocationInfoObj(
+            city.long_name,
+            country.long_name,
+            newCoordinates,
+            units
+         );
+         getForecast(newCoordinates, currentUnits).then((weather) => {
+            updateAll(locationInfo, weather.list);
+            map.setCenter([placeLong, placeLat]);
+         });
+      });
    });
+});
 
-   setInterval(() => {
-      updateTime();
-   }, 1000 * 10);
+setInterval(() => {
+   updateTime();
+}, 1000 * 10);
 
-   setInterval(() => {
-      checkUpdatesInWeather(getWeatherFromCache().list);
-   }, 1000 * 120);
-
-   body.appendChild(container);
-};
+setInterval(() => {
+   const { units, location } = getCurrentUserSettings();
+   getForecast(location.coordinates, units).then((weatherObj) => {
+      checkUpdatesInWeather(weatherObj.list, location, units);
+   });
+}, 1000 * 120);
