@@ -2,14 +2,15 @@ import '../css/style.scss';
 import {
    getCurrentUserSettings,
    saveCurrentUserSettings,
-   removeCurrentWeatherFromCache
+   removeCurrentWeatherFromCache,
+   saveHomeLocationToCache
 } from '../utils/cache';
 import { createLocationInfoObj } from '../utils/functions';
 import { updateTime, checkUpdatesInWeather, updateAll } from '../utils/updateData';
-import { setUnitsListeners } from '../utils/handlers';
+import { setHandlers } from '../utils/handlers';
 import getLocation from '../api/geoAPI';
 import { getForecast } from '../api/weatherAPI';
-import createMap from '../api/mapAPI';
+import MapApi from '../api/mapAPI';
 import { createDiv } from './template';
 import Header from './components/Header';
 import Content from './components/Content';
@@ -21,11 +22,13 @@ const container = createDiv('container');
 container.appendChild(Header());
 container.appendChild(Content());
 body.appendChild(container);
+setHandlers();
 
 getLocation().then((locationData) => {
    const { loc } = locationData;
    const [lat, long] = loc.split(',');
    const coordinates = { lat, long };
+   removeCurrentWeatherFromCache({ coordinates });
    let units = 'C';
    if (
       getCurrentUserSettings() !== undefined &&
@@ -36,8 +39,8 @@ getLocation().then((locationData) => {
    }
 
    getForecast(coordinates, units).then((weatherObj) => {
-      const map = createMap(document.getElementById('map-canvas'), coordinates);
-      setUnitsListeners();
+      const map = new MapApi(document.getElementById('map-canvas'), coordinates);
+      console.log(MapApi.getInstance());
 
       getMyLocation(coordinates)
          .then((data) => data.results)
@@ -51,6 +54,7 @@ getLocation().then((locationData) => {
                coordinates,
                units
             );
+            saveHomeLocationToCache(locationInfo);
             saveCurrentUserSettings(locationInfo);
             updateAll(locationInfo, weatherObj.list);
          });
@@ -62,24 +66,29 @@ getLocation().then((locationData) => {
       autocomplete.setFields(['geometry', 'address_components']);
 
       autocomplete.addListener('place_changed', () => {
-         const { geometry, address_components } = autocomplete.getPlace();
-         const placeLat = geometry.location.lat();
-         const placeLong = geometry.location.lng();
-         const [city, country] = address_components.filter(
-            (e) => e.types.includes('locality') || e.types.includes('country')
-         );
-         const currentUnits = getCurrentUserSettings().units;
-         const newCoordinates = { lat: placeLat, long: placeLong };
-         const locationInfo = createLocationInfoObj(
-            city.long_name,
-            country.long_name,
-            newCoordinates,
-            units
-         );
-         getForecast(newCoordinates, currentUnits).then((weather) => {
-            updateAll(locationInfo, weather.list);
-            map.setCenter([placeLong, placeLat]);
-         });
+         if (
+            autocomplete.getPlace().geometry !== null &&
+            autocomplete.getPlace().geometry !== undefined
+         ) {
+            const { geometry, address_components } = autocomplete.getPlace();
+            const placeLat = geometry.location.lat();
+            const placeLong = geometry.location.lng();
+            const [city, country] = address_components.filter(
+               (e) => e.types.includes('locality') || e.types.includes('country')
+            );
+            const currentUnits = getCurrentUserSettings().units;
+            const newCoordinates = { lat: placeLat, long: placeLong };
+            const locationInfo = createLocationInfoObj(
+               city.long_name,
+               country.long_name,
+               newCoordinates,
+               units
+            );
+            getForecast(newCoordinates, currentUnits).then((weather) => {
+               updateAll(locationInfo, weather.list);
+               map.setCenter([placeLong, placeLat]);
+            });
+         }
       });
    });
 });

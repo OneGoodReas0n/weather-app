@@ -5,7 +5,7 @@ import { getCurrentUserSettings } from '../../../utils/cache';
 
 const makeButtonUpdate = () => {
    const buttonUpdate = createDiv('button');
-   const updateIcon = createImg(updateIconSVG, 'button__body');
+   const updateIcon = createImg(updateIconSVG, 'button__body', 'button__update');
    buttonUpdate.appendChild(updateIcon);
    return buttonUpdate;
 };
@@ -26,7 +26,7 @@ const tempItem = (value, active) => {
       active !== true ? 'switcher__item_inactive' : 'switcher__item_active',
       value === '°C' ? 'switcher__item_left' : 'switcher__item_right'
    );
-   tempButton.appendChild(createSpan(value, 'switcher__span'));
+   tempButton.appendChild(createSpan(value, 'switcher__title'));
    return tempButton;
 };
 
