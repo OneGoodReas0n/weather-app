@@ -1,11 +1,11 @@
 const createComponent = (component, className) => {
-   for (let i = 0; i < className.length; i += 1) {
-      if (String(className[i]).includes('#')) {
-         component.setAttribute('id', className[i].slice(1));
-      } else if (className[i].length > 0) {
-         component.classList.add(className[i]);
+   className.forEach((e) => {
+      if (String(e).includes('#')) {
+         component.setAttribute('id', e.slice(1));
+      } else if (String(e).length > 0) {
+         component.classList.add(e);
       }
-   }
+   });
    return component;
 };
 
