@@ -1,18 +1,28 @@
 import { Map } from 'mapbox-gl';
 import tockens from '../keys/tockens';
 
-const createMap = (container, coordinates) => {
-   const { lat, long } = coordinates;
-   const map = new Map({
-      style: 'mapbox://styles/mapbox/streets-v11',
-      attributionControl: false,
-      zoom: 14,
-      accessToken: tockens.MAPBOX_TOKEN,
-      container
-   });
+const MapApi = (() => {
+   let map;
+   const createMap = () => {
+      console.log('Create map is called!');
+      map = new Map({
+         style: 'mapbox://styles/mapbox/streets-v11',
+         attributionControl: false,
+         zoom: 14,
+         accessToken: tockens.MAPBOX_TOKEN,
+         container: document.getElementById('map-canvas')
+      });
+      return map;
+   };
 
-   map.setCenter([long, lat]);
-   return map;
-};
+   return {
+      getInstance: () => {
+         if (map === undefined) {
+            map = createMap();
+         }
+         return map;
+      }
+   };
+})();
 
-export default createMap;
+export default MapApi;
