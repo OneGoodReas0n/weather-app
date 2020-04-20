@@ -17,6 +17,7 @@ body {
 .button {
    display: flex;
    align-items: center;
+   background-color: $button-color-active;
    cursor: pointer;
 
    @include for-small-screen {
@@ -50,12 +51,12 @@ body {
 
    @include for-desktop {
       max-width: #{$lg-device-width};
-      padding: 10px 20px 0 20px;
+      padding: 15px 20px 0 20px;
    }
 
    @include for-large-screen {
       max-width: #{$xl-device-width};
-      padding: 10px 30px 0 30px;
+      padding: 20px 30px 0 30px;
    }
 
    // Header
@@ -74,7 +75,10 @@ body {
          .button {
             margin-right: 15px;
             border-radius: 5px;
-            background-color: $button-color-active;
+            .button__update{
+               width: 14px;
+               height: 18px;
+            }
             .button__append {
                margin-left: 8px;
             }
@@ -123,16 +127,46 @@ body {
             position: relative;
             display: flex;
             .search__input {
-               width: 240px;
-               padding: 15.5px 15px;
                background-color: $input-background-color;
                color: $button-title-color;
                border:none;
 
+               @include for-small-screen {
+               }
+            
+               @include for-tablet {
+                  width: 180px;
+                  padding: 11.5px 60px 11.5px 10px;
+               }
+            
+               @include for-desktop {
+                  width: 200px;
+                  padding: 12px 60px 12px 13px;
+               }
+            
+               @include for-large-screen {
+                  width: 240px;
+                  padding: 15.5px 60px 15.5px 15px;
+               }
+
                &::placeholder {
                   font-family: 'Montserrat';
-                  font-size: 15px;
                   color: $button-title-color;
+
+                  @include for-small-screen {
+                  }
+               
+                  @include for-tablet {
+                     font-size: 13px;
+                  }
+               
+                  @include for-desktop {
+                     font-size: 14px;
+                  }
+               
+                  @include for-large-screen {
+                     font-size: 15px;
+                  }
                }
 
                &:focus {
@@ -142,20 +176,46 @@ body {
             }
             .search__voice {
                position: absolute;
-               left: 240px;
-               top: 15px;
+               right: 10px;
                cursor: pointer;
+
+               @include for-small-screen {
+               }
+            
+               @include for-tablet {
+                  top: 11px;
+               }
+            
+               @include for-desktop {
+                  top: 11px;
+               }
+            
+               @include for-large-screen {
+                  top: 15px;
+               }
+               
             }
-         }
-         .search__button {
-            cursor: pointer;
-            .search__title {
-               padding: 14px 16.5px;
-               background-color: $button-color-active;
-               text-transform: uppercase;
-               border-top-right-radius: 5px;
-               border-bottom-right-radius: 5px;
-               letter-spacing: 0.7px;
+
+            .search__home {
+               position: absolute;
+               right: 35px;
+               cursor: pointer;
+
+               @include for-small-screen {
+               }
+            
+               @include for-tablet {
+                  top: 11px;
+               }
+            
+               @include for-desktop {
+                  top: 11px;
+               }
+            
+               @include for-large-screen {
+                  top: 15px;
+               }
+               
             }
          }
       }
@@ -316,7 +376,7 @@ body {
                   }
                   .today-forecast__details {
                      position: relative;
-                     top: -50px;
+                     top: -30px;
                      .today-forecast__item {
                         @include for-small-screen {
                            font-size: 16px;
