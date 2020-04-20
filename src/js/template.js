@@ -32,6 +32,18 @@ const createP = (defaultValue, ...className) => {
    return createComponent(component, className);
 };
 
+const createSelect = (options, ...className) => {
+   const component = document.createElement('select');
+   const optionsArr = String(options).split(',');
+   optionsArr.forEach((e) => {
+      const option = document.createElement('option');
+      option.appendChild(document.createTextNode(e));
+      option.value = String(e).toLowerCase();
+      component.appendChild(option);
+   });
+   return createComponent(component, className);
+};
+
 const createInput = (placeholder, ...className) => {
    const component = document.createElement('input');
    component.setAttribute('type', 'text');
@@ -42,4 +54,47 @@ const createInput = (placeholder, ...className) => {
    return createComponent(component, className);
 };
 
-export { createDiv, createImg, createSpan, createInput, createP };
+const createAndSetOptions = (container, list) => {
+   list.forEach((e) => {
+      const item = document.createElement('div');
+      item.textContent = e;
+      item.classList.add('dropdown__item');
+      container.appendChild(item);
+   });
+};
+
+const createAndSetOptionsWithHandler = (container, list, handler) => {
+   list.forEach((e) => {
+      const item = document.createElement('div');
+      item.textContent = e;
+      item.classList.add('dropdown__item');
+      item.addEventListener('click', handler);
+      container.appendChild(item);
+   });
+};
+
+const createCustomDropdown = (options, ...className) => {
+   const div = document.createElement('div');
+   const optionsArr = String(options).split(',');
+   createAndSetOptions(div, optionsArr);
+   className.forEach((e) => {
+      if (String(e).includes('#')) {
+         div.id = String(e).slice(1);
+      } else {
+         div.classList.add(e);
+      }
+   });
+   return div;
+};
+
+export {
+   createDiv,
+   createImg,
+   createSpan,
+   createInput,
+   createP,
+   createSelect,
+   createCustomDropdown,
+   createAndSetOptions,
+   createAndSetOptionsWithHandler
+};

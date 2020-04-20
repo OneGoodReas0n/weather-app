@@ -3,10 +3,17 @@ import {
    getCurrentUserSettings,
    saveCurrentUserSettings,
    removeCurrentWeatherFromCache,
-   saveHomeLocationToCache
+   saveHomeLocationToCache,
+   getCurrentUserLocation,
+   saveCurrentUserLocation
 } from '../utils/cache';
 import { createLocationInfoObj } from '../utils/functions';
-import { updateTime, checkUpdatesInWeather, updateAll } from '../utils/updateData';
+import {
+   updateTime,
+   checkUpdatesInWeather,
+   updateAll,
+   initLangSwitcher
+} from '../utils/updateData';
 import { setHandlers } from '../utils/handlers';
 import getLocation from '../api/geoAPI';
 import { getForecast } from '../api/weatherAPI';
@@ -22,21 +29,25 @@ const container = createDiv('container');
 container.appendChild(Header());
 container.appendChild(Content());
 body.appendChild(container);
+initLangSwitcher();
 setHandlers();
 const map = MapApi.getInstance();
 
 getLocation().then((locationData) => {
    const { city, region } = locationData;
    let units = 'C';
-   if (
-      getCurrentUserSettings() !== undefined &&
-      getCurrentUserSettings() !== null &&
-      getCurrentUserSettings().units !== undefined
-   ) {
-      units = getCurrentUserSettings().units;
+   let lang = 'EN';
+   const userSettings = getCurrentUserSettings();
+   if (userSettings !== undefined && userSettings !== null) {
+      if (userSettings.units !== undefined) {
+         units = userSettings.units;
+      }
+      if (userSettings.lang !== undefined) {
+         lang = userSettings.lang;
+      }
    }
 
-   getMyLocationByPlace({ city, region }, 'ru')
+   getMyLocationByPlace({ city, region }, lang)
       .then((data) => data.results)
       .then((result) => {
          const { lat, lng } = result[0].geometry.location;
@@ -53,9 +64,10 @@ getLocation().then((locationData) => {
          map.setCenter([lng, lat]);
          removeCurrentWeatherFromCache({ coordinates });
          saveHomeLocationToCache(locationInfo);
-         saveCurrentUserSettings(locationInfo);
-         getForecast(coordinates, units).then((weatherObj) => {
-            updateAll(locationInfo, weatherObj.list);
+         saveCurrentUserSettings(units, lang);
+         saveCurrentUserLocation(locationInfo);
+         getForecast(coordinates, units, lang).then((weatherObj) => {
+            updateAll(locationInfo, weatherObj.list, lang);
          });
       });
 
@@ -77,7 +89,7 @@ getLocation().then((locationData) => {
          const [curCity, curCountry] = address_components.filter(
             (e) => e.types.includes('locality') || e.types.includes('country')
          );
-         const currentUnits = getCurrentUserSettings().units;
+         const currentUnits = userSettings.units;
          const newCoordinates = { lat: placeLat, lng: placeLong };
          const locationInfo = createLocationInfoObj(
             curCity.long_name,
@@ -85,8 +97,8 @@ getLocation().then((locationData) => {
             newCoordinates,
             units
          );
-         getForecast(newCoordinates, currentUnits).then((weather) => {
-            updateAll(locationInfo, weather.list);
+         getForecast(newCoordinates, currentUnits, lang).then((weather) => {
+            updateAll(locationInfo, weather.list, lang);
             map.setCenter([placeLong, placeLat]);
          });
       }
@@ -98,7 +110,8 @@ setInterval(() => {
 }, 1000 * 10);
 
 setInterval(() => {
-   const { units, location } = getCurrentUserSettings();
+   const { units, lang } = getCurrentUserSettings();
+   const { location } = getCurrentUserLocation();
    getForecast(location.coordinates, units).then((weatherObj) => {
       checkUpdatesInWeather(weatherObj.list, location, units);
    });

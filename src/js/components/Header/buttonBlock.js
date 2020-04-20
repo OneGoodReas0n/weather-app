@@ -1,6 +1,5 @@
 import { createDiv, createImg, createSpan } from '../../template';
 import updateIconSVG from '../../../../assets/update_icon.svg';
-import arrowDownSVG from '../../../../assets/arrow-down_icon.svg';
 import { getCurrentUserSettings } from '../../../utils/cache';
 
 const makeButtonUpdate = () => {
@@ -11,12 +10,8 @@ const makeButtonUpdate = () => {
 };
 
 const makeLangSwitcher = () => {
-   const buttonBlock = createDiv('button');
-   const langValue = createSpan('EN', 'button__body');
-   const icon = createImg(arrowDownSVG, 'button__append');
-   buttonBlock.appendChild(langValue);
-   buttonBlock.appendChild(icon);
-   return buttonBlock;
+   const div = createDiv('#dropdown', 'dropdown');
+   return div;
 };
 
 const tempItem = (value, active) => {
@@ -32,10 +27,9 @@ const tempItem = (value, active) => {
 
 const makeTempSwitcher = () => {
    const buttonBlock = createDiv('#temp-switcher', 'switcher');
+   const userSettings = getCurrentUserSettings();
    const units =
-      getCurrentUserSettings() !== null && getCurrentUserSettings().units !== undefined
-         ? getCurrentUserSettings().units
-         : 'C';
+      userSettings !== null && userSettings.units !== undefined ? userSettings.units : 'C';
    const leftButton = tempItem('°C', units === 'C');
    const rightButton = tempItem('°F', units === 'F');
    buttonBlock.appendChild(leftButton);

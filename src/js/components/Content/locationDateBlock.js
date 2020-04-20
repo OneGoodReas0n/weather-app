@@ -1,5 +1,4 @@
 import { createDiv, createSpan } from '../../template';
-import { getFormattedDateForDateBlock } from '../../../utils/functions';
 
 const makeLocationBlock = () => {
    const locationBlock = createDiv('#location', 'location-date__item');
@@ -10,7 +9,7 @@ const makeLocationBlock = () => {
 
 const makeDateBlock = () => {
    const dateBlock = createDiv('#date', 'location-date__item');
-   const spanInfo = createSpan(`${getFormattedDateForDateBlock()}`, 'location-date__subtext');
+   const spanInfo = createSpan(``, 'location-date__subtext');
    dateBlock.appendChild(spanInfo);
    return dateBlock;
 };
