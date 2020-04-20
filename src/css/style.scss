@@ -18,6 +18,7 @@ body {
    display: flex;
    align-items: center;
    background-color: $button-color-active;
+   color: $button-title-color;
    cursor: pointer;
 
    @include for-small-screen {
@@ -71,7 +72,19 @@ body {
          display: flex;
          align-items: center;
          justify-content: space-between;
-         max-width: 25%;
+
+         @include for-tablet {
+            max-width: 40%;
+         }
+      
+         @include for-desktop {
+            max-width: 30%;
+         }
+      
+         @include for-large-screen {
+            max-width: 25%;   
+         }
+         
          .button {
             margin-right: 15px;
             border-radius: 5px;
@@ -79,8 +92,31 @@ body {
                width: 14px;
                height: 18px;
             }
-            .button__append {
-               margin-left: 8px;
+         }
+         
+         .dropdown{
+            height: 38px;
+            max-height: fit-content;
+            .dropdown__list{
+               position: relative;
+               height: 38px;
+               overflow: hidden;
+               margin-right: 15px;
+               background-color: $button-color-active;
+               border-radius: 5px;
+
+               .dropdown__item{
+                  z-index: 99;
+                  padding:11px 16px;
+                  cursor: pointer;
+                  border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
+                  background-color: $button-color-active;
+               }
+
+               &:hover{
+                  background-color: $dropdown-list-color;
+                  height: fit-content;;
+               }
             }
          }
 
