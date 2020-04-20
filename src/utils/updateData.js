@@ -6,15 +6,38 @@ import {
    areObjectsEqual
 } from './functions';
 
-import { getWeatherFromCache, getCurrentWeatherFromCache, saveCurrentUserSettings } from './cache';
+import {
+   getWeatherFromCache,
+   getCurrentWeatherFromCache,
+   saveCurrentUserSettings,
+   getCurrentUserSettings,
+   saveCurrentUserLocation
+} from './cache';
+
+import ruPhrases from '../localization/ru';
+import enPhrases from '../localization/en';
+import { createCustomDropdown } from '../js/template';
+import { toggleDropdown } from './handlers';
+
+const createVocabular = (lang) => {
+   switch (lang) {
+      case 'RU':
+         return ruPhrases;
+      case 'EN':
+         return enPhrases;
+      default:
+         return null;
+   }
+};
 
 /**
  * * Function for updating time
  */
 const updateTime = () => {
+   const { lang } = getCurrentUserSettings();
    const dateBlock = document.getElementById('date');
    const span = dateBlock.childNodes.item(0);
-   span.textContent = getFormattedDateForDateBlock();
+   span.textContent = getFormattedDateForDateBlock(createVocabular(lang));
 };
 
 /**
@@ -33,7 +56,7 @@ const getElemFromListByClassName = (list, name) => {
    return result;
 };
 
-const updateLocation = (location) => {
+const updateLocation = (location, vocabular) => {
    const { city, country, coordinates } = location;
    const locationDiv = document.getElementById('location');
    const coordinatesDiv = document.getElementById('coordinates');
@@ -41,15 +64,19 @@ const updateLocation = (location) => {
    const latitudeSpan = getElemFromListByClassName(coordinatesDiv.childNodes, 'map__latitude');
    const longitudeSpan = getElemFromListByClassName(coordinatesDiv.childNodes, 'map__longitude');
    locationSpan.textContent = `${city}, ${country}`;
-   latitudeSpan.textContent = `Latitude: ${Number(coordinates.lat).toFixed(4)}`;
-   longitudeSpan.textContent = `Longitude: ${Number(coordinates.lng).toFixed(4)}`;
+   latitudeSpan.textContent = `${vocabular.location.latitude}: ${Number(coordinates.lat).toFixed(
+      4
+   )}`;
+   longitudeSpan.textContent = `${vocabular.location.longitude}: ${Number(coordinates.lng).toFixed(
+      4
+   )}`;
 };
 
 /**
  * * Funtion for updating today weather's fields
  * @param  {Array} weatherList
  */
-const updateTodayWeather = (weather) => {
+const updateTodayWeather = (weather, vocabular) => {
    const TodayBlock = document.getElementById('today-forecast');
    const tempBlock = getElemFromListByClassName(
       TodayBlock.childNodes,
@@ -77,27 +104,27 @@ const updateTodayWeather = (weather) => {
    const infoTitle = getElemFromListByClassName(forecastInfo.childNodes, 'today-forecast__desc');
    infoTitle.textContent = `${weather.description}`;
    const infoFeel = getElemFromListByClassName(forecastInfo.childNodes, 'today-forecast__feel');
-   infoFeel.textContent = `Feels like: ${weather.feelsLike}°${weather.units}`;
+   infoFeel.textContent = `${vocabular.forecast.feelsLike}: ${weather.feelsLike}°${weather.units}`;
    const infoWind = getElemFromListByClassName(forecastInfo.childNodes, 'today-forecast__wind');
-   infoWind.textContent = `Wind: ${weather.wind} m/s`;
+   infoWind.textContent = `${vocabular.forecast.wind}: ${weather.wind} m/s`;
    const infoHumid = getElemFromListByClassName(
       forecastInfo.childNodes,
       'today-forecast__humidity'
    );
-   infoHumid.textContent = `Humidity: ${weather.humidity} %`;
+   infoHumid.textContent = `${vocabular.forecast.humidity}: ${weather.humidity} %`;
 };
 
 /**
  * * Funtion for updating future days weather's fields
  * @param  {Array} list
  */
-const updateNextDaysWeather = (list) => {
+const updateNextDaysWeather = (list, vocabular) => {
    const NextForecast = document.getElementById('next-forecast');
    let index = 0;
    const forecastList = getElemFromListByClassName(NextForecast.childNodes, 'next-forecast__list');
    forecastList.childNodes.forEach((e) => {
       const dayTitle = getElemFromListByClassName(e.childNodes, 'next-forecast__title');
-      dayTitle.textContent = list[index].day;
+      dayTitle.textContent = vocabular.dayOfWeek[String(list[index].day).toLowerCase()];
 
       const dayForecastBlock = getElemFromListByClassName(e.childNodes, 'next-forecast__body');
       const forecastBlock = getElemFromListByClassName(
@@ -146,14 +173,52 @@ const checkUpdatesInWeather = (weatherArray, location, units) => {
    }
 };
 
-const updateAll = (locationInfo, weatherList) => {
+const updateAll = (locationInfo, weatherList, lang) => {
+   updateTime();
+   const vocabular = createVocabular(lang);
    const { location } = locationInfo;
-   updateLocation(location);
+   updateLocation(location, vocabular);
    const weatherNow = getWeatherForNow(weatherList, location);
-   updateTodayWeather(weatherNow);
+   updateTodayWeather(weatherNow, vocabular);
    const weatherForNextDays = getWeatherForNextDays(weatherList);
-   updateNextDaysWeather(weatherForNextDays);
-   saveCurrentUserSettings(locationInfo);
+   updateNextDaysWeather(weatherForNextDays, vocabular);
+   saveCurrentUserLocation(locationInfo);
 };
 
-export { updateTime, updateTodayWeather, updateNextDaysWeather, checkUpdatesInWeather, updateAll };
+const swapOptions = (val, options) => {
+   const arr = options;
+   const position = arr.indexOf(val);
+   if (arr[0] !== val) {
+      const temp = arr[0];
+      arr[0] = val;
+      for (let i = position; i > 1; i -= 1) {
+         arr[i] = arr[i - 1];
+      }
+      arr[1] = temp;
+   }
+   return arr;
+};
+
+const initLangSwitcher = () => {
+   const dropdown = document.getElementById('dropdown');
+   const languages = ['EN', 'RU', 'DE'];
+   const currentSettings = getCurrentUserSettings();
+   const { lang } = currentSettings;
+   const langArray = swapOptions(lang, languages);
+   const langDropdown = createCustomDropdown(langArray, '#dropdown-list', 'dropdown__list');
+   langDropdown.childNodes.forEach((e) => {
+      e.addEventListener('click', toggleDropdown);
+   });
+   dropdown.appendChild(langDropdown);
+};
+
+export {
+   updateTime,
+   updateTodayWeather,
+   updateNextDaysWeather,
+   checkUpdatesInWeather,
+   updateAll,
+   initLangSwitcher,
+   swapOptions,
+   createVocabular
+};

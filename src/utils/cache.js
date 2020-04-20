@@ -3,8 +3,11 @@
  * @param  {Object} weather
  */
 const saveCurrentWeatherToCache = (weather, location) => {
-   const { lat, long } = location.coordinates;
-   localStorage.setItem(`currentWeather(lat:${lat}, long:${long})`, JSON.stringify(weather));
+   const { lat, lng } = location.coordinates;
+   localStorage.setItem(
+      `currentWeather(lat:${lat.toFixed(4)}, long:${lng.toFixed(4)})`,
+      JSON.stringify(weather)
+   );
 };
 
 /**
@@ -27,9 +30,8 @@ const removeCurrentWeatherFromCache = (location) => {
  * @param  {Object} location
  * @param  {string} units
  */
-const saveCurrentUserSettings = (locationInfo, lang) => {
-   const { location, units } = locationInfo;
-   localStorage.setItem('currentUserSettings', JSON.stringify({ location, units, lang }));
+const saveCurrentUserSettings = (units, lang) => {
+   localStorage.setItem('currentUserSettings', JSON.stringify({ units, lang }));
 };
 
 /**
@@ -38,6 +40,23 @@ const saveCurrentUserSettings = (locationInfo, lang) => {
  */
 const getCurrentUserSettings = () => {
    return JSON.parse(localStorage.getItem('currentUserSettings'));
+};
+
+/**
+ * * Function for saving settings of user
+ * @param  {Object} location
+ * @param  {string} units
+ */
+const saveCurrentUserLocation = (location) => {
+   localStorage.setItem('currentUserLocation', JSON.stringify({ location }));
+};
+
+/**
+ * * Funtcion for getting previous weather to compare
+ * @returns  {Object} weather
+ */
+const getCurrentUserLocation = () => {
+   return JSON.parse(localStorage.getItem('currentUserLocation'));
 };
 
 /**
@@ -86,5 +105,7 @@ export {
    getCurrentWeatherFromCache,
    removeCurrentWeatherFromCache,
    saveHomeLocationToCache,
-   getHomeLocationFromCache
+   getHomeLocationFromCache,
+   saveCurrentUserLocation,
+   getCurrentUserLocation
 };

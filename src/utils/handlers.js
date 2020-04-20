@@ -1,19 +1,26 @@
 import { getForecast } from '../api/weatherAPI';
-import { updateTodayWeather, updateNextDaysWeather, updateAll } from './updateData';
-import { getCurrentUserSettings, saveCurrentUserSettings, getHomeLocationFromCache } from './cache';
+import { updateTodayWeather, updateNextDaysWeather, updateAll, swapOptions } from './updateData';
+import {
+   getCurrentUserSettings,
+   saveCurrentUserSettings,
+   getHomeLocationFromCache,
+   getCurrentUserLocation
+} from './cache';
 import {
    getWeatherForNow,
    getWeatherForNextDays,
    createLocationInfoObj,
    areObjectsEqual
 } from './functions';
+import { createAndSetOptions, createAndSetOptionsWithHandler } from '../js/template';
 import { getMyLocationByCoordinates } from '../api/geocodingAPI';
 import MapApi from '../api/mapAPI';
 
 const unitsHandler = (event) => {
    const { target } = event;
-   const locationInfo = getCurrentUserSettings();
-   const { location, units } = locationInfo;
+   const locationInfo = getCurrentUserLocation();
+   const { units, lang } = getCurrentUserSettings();
+   const { location } = locationInfo;
    if (String(target.className).includes('switcher__item_inactive')) {
       const { parentNode } = target;
       let newUnits = '';
@@ -36,15 +43,14 @@ const unitsHandler = (event) => {
          updateTodayWeather(getWeatherForNow(weatherList.list, location));
          updateNextDaysWeather(getWeatherForNextDays(weatherList.list));
       });
-      saveCurrentUserSettings(locationInfo);
+      saveCurrentUserSettings(units, lang);
    }
 };
 
 const homeHandler = () => {
    const { location, units } = JSON.parse(getHomeLocationFromCache());
    const { coordinates } = location;
-   const userSettings = getCurrentUserSettings();
-   const currentLocation = userSettings.location;
+   const currentLocation = getCurrentUserLocation().location;
    if (!areObjectsEqual(currentLocation.coordinates, coordinates)) {
       const map = MapApi.getInstance();
       map.setCenter([coordinates.lng, coordinates.lat]);
@@ -60,6 +66,28 @@ const homeHandler = () => {
                updateAll(locationInfo, weatherObj.list);
             });
          });
+   }
+};
+
+const changeLangState = (val) => {
+   const userSettings = getCurrentUserSettings();
+   const dropdownBlock = document.getElementById('dropdown-list');
+   const options = [];
+   dropdownBlock.childNodes.forEach((e) => {
+      options.push(e.textContent);
+   });
+   dropdownBlock.innerHTML = '';
+   const newList = swapOptions(val, options);
+   createAndSetOptionsWithHandler(dropdownBlock, newList, toggleDropdown);
+   saveCurrentUserSettings(userSettings.units, val);
+};
+
+const toggleDropdown = (event) => {
+   const { target } = event;
+   const value = target.textContent;
+   const dropdownBlock = document.getElementById('dropdown');
+   if (dropdownBlock.childNodes[0].textContent !== value) {
+      changeLangState(value);
    }
 };
 
@@ -83,6 +111,11 @@ const setHandlers = () => {
 
    const searchInput = document.getElementById('search_input');
    searchInput.addEventListener('focusout', clearField);
+
+   const dropdown = document.getElementById('dropdown');
+   dropdown.childNodes.forEach((e) => {
+      e.addEventListener('click', toggleDropdown);
+   });
 };
 
-export { setHandlers };
+export { setHandlers, toggleDropdown };

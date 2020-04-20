@@ -28,13 +28,100 @@ import mistSVG from '../../assets/weather/mist.svg';
  * * Create a formatted string for viewing date in div element with class 'date-block'
  * @returns {String}
  */
-const getFormattedDateForDateBlock = () => {
+const getFormattedDateForDateBlock = (vocabular) => {
    const date = new Date();
-   return date
+   const preparedDate = date
       .toString()
       .slice(0, date.toString().indexOf('GMT'))
       .slice(0, date.toString().lastIndexOf(':'));
+   const [day, month, numDay, year, time] = preparedDate.split(' ');
+   const dayMonth = getDayMonthFromFormatDate(preparedDate);
+   const formattedDate = `${vocabular.dayOfWeek[dayMonth.day]}, ${numDay} ${
+      vocabular.month[dayMonth.month]
+   }  ${year} ${time}`;
+   return formattedDate;
 };
+
+const getDayFromFormatDay = (formatDay) => {
+   let day;
+   switch (formatDay) {
+      case 'Mon':
+         day = 'monday';
+         break;
+      case 'Tue':
+         day = 'tuesday';
+         break;
+      case 'Wed':
+         day = 'wednesday';
+         break;
+      case 'Thu':
+         day = 'thursday';
+         break;
+      case 'Fri':
+         day = 'friday';
+         break;
+      case 'Sat':
+         day = 'saturday';
+         break;
+      case 'Sun':
+         day = 'sunday';
+         break;
+      default:
+         break;
+   }
+   return day;
+};
+
+const getMonthFromFormatMonth = (formatMonth) => {
+   let month;
+   switch (formatMonth) {
+      case 'Jan':
+         month = 'january';
+         break;
+      case 'Feb':
+         month = 'february';
+         break;
+      case 'Mar':
+         month = 'march';
+         break;
+      case 'Apr':
+         month = 'april';
+         break;
+      case 'May':
+         month = 'may';
+         break;
+      case 'Jun':
+         month = 'june';
+         break;
+      case 'Jul':
+         month = 'july';
+         break;
+      case 'Aug':
+         month = 'august';
+         break;
+      case 'Sep':
+         month = 'september';
+         break;
+      case 'Oct':
+         month = 'october';
+         break;
+      case 'Nov':
+         month = 'november';
+         break;
+      case 'Dec':
+         month = 'december';
+         break;
+      default:
+         break;
+   }
+   return month;
+};
+
+const getDayMonthFromFormatDate = (date) => {
+   const [formatDay, formatMonth] = String(date).split(' ');
+   return { day: getDayFromFormatDay(formatDay), month: getMonthFromFormatMonth(formatMonth) };
+};
+
 /**
  * * Formatting date for searching weather
  * @param  {Date} date
@@ -366,5 +453,6 @@ export {
    getIconByWeather,
    weatherSerialize,
    areObjectsEqual,
-   createLocationInfoObj
+   createLocationInfoObj,
+   getDayMonthFromFormatDate
 };
