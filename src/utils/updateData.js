@@ -24,12 +24,13 @@ const updateTime = () => {
  * @returns {Node}
  */
 const getElemFromListByClassName = (list, name) => {
-   for (let i = 0; i < list.length; i += 1) {
-      if (String(list[i].className).includes(name)) {
-         return list[i];
+   let result = null;
+   list.forEach((e) => {
+      if (String(e.className).includes(name)) {
+         result = e;
       }
-   }
-   return null;
+   });
+   return result;
 };
 
 const updateLocation = (location) => {
@@ -40,8 +41,8 @@ const updateLocation = (location) => {
    const latitudeSpan = getElemFromListByClassName(coordinatesDiv.childNodes, 'map__latitude');
    const longitudeSpan = getElemFromListByClassName(coordinatesDiv.childNodes, 'map__longitude');
    locationSpan.textContent = `${city}, ${country}`;
-   latitudeSpan.textContent = `Latitude: ${coordinates.lat}`;
-   longitudeSpan.textContent = `Longitude: ${coordinates.long}`;
+   latitudeSpan.textContent = `Latitude: ${Number(coordinates.lat).toFixed(4)}`;
+   longitudeSpan.textContent = `Longitude: ${Number(coordinates.lng).toFixed(4)}`;
 };
 
 /**
@@ -67,7 +68,7 @@ const updateTodayWeather = (weather) => {
       forecastBlock.childNodes,
       'today-forecast__image'
    );
-   forecastIcon.src = getIconByWeather(weather.description);
+   forecastIcon.src = getIconByWeather(weather.weatherIconId);
 
    const forecastInfo = getElemFromListByClassName(
       forecastBlock.childNodes,
@@ -117,7 +118,7 @@ const updateNextDaysWeather = (list) => {
          dayForecastBlock.childNodes,
          'next-forecast__icon'
       );
-      forecastIcon.src = getIconByWeather(list[index].weather.description);
+      forecastIcon.src = getIconByWeather(list[index].weather.weatherIconId);
       index += 1;
    });
 };

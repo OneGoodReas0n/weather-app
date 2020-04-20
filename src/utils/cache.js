@@ -27,9 +27,9 @@ const removeCurrentWeatherFromCache = (location) => {
  * @param  {Object} location
  * @param  {string} units
  */
-const saveCurrentUserSettings = (locationInfo) => {
+const saveCurrentUserSettings = (locationInfo, lang) => {
    const { location, units } = locationInfo;
-   localStorage.setItem('currentUserSettings', JSON.stringify({ location, units }));
+   localStorage.setItem('currentUserSettings', JSON.stringify({ location, units, lang }));
 };
 
 /**
@@ -69,6 +69,14 @@ const getWeatherFromCache = (location, units) => {
    return null;
 };
 
+const saveHomeLocationToCache = (location) => {
+   localStorage.setItem('HOME_LOCATION', JSON.stringify(location));
+};
+
+const getHomeLocationFromCache = () => {
+   return localStorage.getItem('HOME_LOCATION');
+};
+
 export {
    getCurrentUserSettings,
    getWeatherFromCache,
@@ -76,5 +84,7 @@ export {
    saveWeatherToCache,
    saveCurrentWeatherToCache,
    getCurrentWeatherFromCache,
-   removeCurrentWeatherFromCache
+   removeCurrentWeatherFromCache,
+   saveHomeLocationToCache,
+   getHomeLocationFromCache
 };

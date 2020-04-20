@@ -11,15 +11,18 @@ import rainy3SVG from '../../assets/weather/rainy-3.svg';
 import rainy4SVG from '../../assets/weather/rainy-4.svg';
 import rainy5SVG from '../../assets/weather/rainy-5.svg';
 import rainy6SVG from '../../assets/weather/rainy-6.svg';
+import snowy1SVG from '../../assets/weather/snowy-1.svg';
 import snowy2SVG from '../../assets/weather/snowy-2.svg';
 import snowy3SVG from '../../assets/weather/snowy-3.svg';
 import snowy4SVG from '../../assets/weather/snowy-4.svg';
+import snowy5SVG from '../../assets/weather/snowy-5.svg';
 import snowy6SVG from '../../assets/weather/snowy-6.svg';
 import daySVG from '../../assets/weather/day.svg';
 import nightSVG from '../../assets/weather/night.svg';
 import thunderstormSVG from '../../assets/weather/thunder.svg';
 import cloudySVG from '../../assets/weather/cloudy.svg';
-import countries from '../localization/countries';
+import tornadoSVG from '../../assets/weather/tornado.svg';
+import mistSVG from '../../assets/weather/mist.svg';
 
 /**
  * * Create a formatted string for viewing date in div element with class 'date-block'
@@ -71,100 +74,144 @@ const getNearestTimeDateForTodaySearch = (date) => {
    return formatDateForSearch(date, true);
 };
 
+const defineWeatherFromDescription = (iconId) => {
+   let weatherId = iconId;
+   const types = [800, 801, 802, 803, 804, 521, 501, 500, 200, 600, 601, 602];
+   if (!types.includes(iconId)) {
+      if (Number(iconId).toString()[0] === 2) {
+         weatherId = 200;
+      }
+      if (Number(iconId).toString()[0] === 3) {
+         weatherId = 300;
+      }
+      if (Number(iconId).toString()[0] === 5) {
+         weatherId = 501;
+      }
+      if (Number(iconId).toString()[0] === 6) {
+         weatherId = 601;
+      }
+      if (Number(iconId).toString()[0] === 7) {
+         weatherId = 701;
+      }
+   }
+   return weatherId;
+};
+
+const getWeatherIconForDay = (desc) => {
+   const weatherId = defineWeatherFromDescription(desc);
+   let path = null;
+   switch (weatherId) {
+      case 800:
+         path = daySVG;
+         break;
+      case 801:
+         path = cloudyDay1SVG;
+         break;
+      case 802:
+         path = cloudyDay2SVG;
+         break;
+      case 803:
+         path = cloudyDay3SVG;
+         break;
+      case 804:
+         path = cloudySVG;
+         break;
+      case 521:
+         path = rainy3SVG;
+         break;
+      case 501:
+         path = rainy2SVG;
+         break;
+      case 500:
+         path = rainy1SVG;
+         break;
+      case 200:
+         path = thunderstormSVG;
+         break;
+      case 600:
+         path = snowy2SVG;
+         break;
+      case 601:
+         path = snowy1SVG;
+         break;
+      case 602:
+         path = snowy3SVG;
+         break;
+      case 701:
+         path = mistSVG;
+         break;
+      case 781:
+         path = tornadoSVG;
+         break;
+      default:
+         break;
+   }
+   return path;
+};
+
+const getWeatherIconForNight = (desc) => {
+   const weatherId = defineWeatherFromDescription(desc);
+   let path;
+   switch (weatherId) {
+      case 800:
+         path = nightSVG;
+         break;
+      case 801:
+         path = cloudyNight1SVG;
+         break;
+      case 802:
+         path = cloudyNight2SVG;
+         break;
+      case 803:
+         path = cloudyNight3SVG;
+         break;
+      case 804:
+         path = cloudySVG;
+         break;
+      case 521:
+         path = rainy6SVG;
+         break;
+      case 501:
+         path = rainy5SVG;
+         break;
+      case 500:
+         path = rainy4SVG;
+         break;
+      case 200:
+         path = thunderstormSVG;
+         break;
+      case 600:
+         path = snowy4SVG;
+         break;
+      case 601:
+         path = snowy5SVG;
+         break;
+      case 602:
+         path = snowy6SVG;
+         break;
+      case 701:
+         path = mistSVG;
+         break;
+      case 781:
+         path = tornadoSVG;
+         break;
+      default:
+         break;
+   }
+   return path;
+};
+
 /**
  * * Function for getting a path to icon depend on weather parameter
  * @param  {String} weather
  * @returns {String}
  */
 const getIconByWeather = (weather) => {
-   let path = '';
    const time = new Date().getHours();
-   if (time > 6 && time < 21) {
-      switch (weather) {
-         case 'clear sky':
-            path = daySVG;
-            break;
-         case 'few clouds':
-            path = cloudyDay1SVG;
-            break;
-         case 'scattered clouds':
-            path = cloudyDay2SVG;
-            break;
-         case 'broken clouds':
-            path = cloudyDay3SVG;
-            break;
-         case 'overcast clouds':
-            path = cloudySVG;
-            break;
-         case 'shower rain':
-            path = rainy3SVG;
-            break;
-         case 'rain':
-            path = rainy2SVG;
-            break;
-         case 'light rain':
-            path = rainy1SVG;
-            break;
-         case 'thunderstorm':
-            path = thunderstormSVG;
-            break;
-         case 'light snow':
-            path = snowy2SVG;
-            break;
-         case 'snow':
-            path = snowy3SVG;
-            break;
-         case 'mist':
-            path = cloudySVG;
-            break;
-         default:
-            // console.log('No such value for icon!');
-            break;
-      }
-   } else {
-      switch (weather) {
-         case 'clear sky':
-            path = nightSVG;
-            break;
-         case 'few clouds':
-            path = cloudyNight1SVG;
-            break;
-         case 'scattered clouds':
-            path = cloudyNight2SVG;
-            break;
-         case 'broken clouds':
-            path = cloudyNight3SVG;
-            break;
-         case 'overcast clouds':
-            path = cloudySVG;
-            break;
-         case 'shower rain':
-            path = rainy6SVG;
-            break;
-         case 'rain':
-            path = rainy5SVG;
-            break;
-         case 'light rain':
-            path = rainy4SVG;
-            break;
-         case 'thunderstorm':
-            path = thunderstormSVG;
-            break;
-         case 'light snow':
-            path = snowy4SVG;
-            break;
-         case 'snow':
-            path = snowy6SVG;
-            break;
-         case 'mist':
-            path = cloudySVG;
-            break;
-         default:
-            // console.log('No such value for icon!');
-            break;
-      }
+   if (time > 5 && time < 21) {
+      return getWeatherIconForDay(weather);
    }
-   return `${path}`;
+   return getWeatherIconForNight(weather);
 };
 
 /**
@@ -260,14 +307,14 @@ const weatherSerialize = (weatherData, units) => {
    const { list } = weatherData;
    const now = new Date();
    const weatherArr = [];
-   for (let i = 0; i < list.length; i += 1) {
-      const item = list[i];
+   list.forEach((e) => {
+      const item = e;
       const weatherItem = {
          id: item.dt,
          temp: Math.round(item.main.temp),
          feelsLike: Math.round(item.main.feels_like),
          humidity: item.main.humidity,
-         weatherIcon: item.weather[0].main,
+         weatherIconId: item.weather[item.weather.length - 1].id,
          wind: Math.round(item.wind.speed),
          date: item.dt_txt,
          weather: item.weather[item.weather.length - 1].main,
@@ -275,7 +322,7 @@ const weatherSerialize = (weatherData, units) => {
          units
       };
       weatherArr.push(weatherItem);
-   }
+   });
    return {
       city: weatherData.city.name,
       country: weatherData.city.country,
@@ -289,24 +336,20 @@ const weatherSerialize = (weatherData, units) => {
  * @returns {Boolean}
  */
 const areObjectsEqual = (obj1, obj2) => {
+   let result = true;
+
    const keysObj1 = Object.keys(obj1);
    const keysObj2 = Object.keys(obj2);
 
    if (keysObj1.length !== keysObj2.length) {
-      return false;
+      result = false;
    }
-
-   for (let key of keysObj1) {
-      if (obj1[key] !== obj2[key]) {
-         console.log(obj1[key]);
-         return false;
+   keysObj1.forEach((e) => {
+      if (obj1[e] !== obj2[e]) {
+         result = false;
       }
-   }
-   return true;
-};
-
-const getCountryByISO = (iso) => {
-   return countries.find((e) => e.alpha === iso).country;
+   });
+   return result;
 };
 
 const createLocationInfoObj = (city, country, coordinates, units) => {
@@ -323,6 +366,5 @@ export {
    getIconByWeather,
    weatherSerialize,
    areObjectsEqual,
-   getCountryByISO,
    createLocationInfoObj
 };
