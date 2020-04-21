@@ -5,7 +5,7 @@
 const saveCurrentWeatherToCache = (weather, location) => {
    const { lat, lng } = location.coordinates;
    localStorage.setItem(
-      `currentWeather(lat:${lat.toFixed(4)}, long:${lng.toFixed(4)})`,
+      `currentWeather(lat:${Number(lat).toFixed(4)}, long:${Number(lng).toFixed(4)})`,
       JSON.stringify(weather)
    );
 };
@@ -16,13 +16,13 @@ const saveCurrentWeatherToCache = (weather, location) => {
  * @returns  {Object}
  */
 const getCurrentWeatherFromCache = (location) => {
-   const { lat, long } = location.coordinates;
-   return JSON.parse(localStorage.getItem(`currentWeather(lat:${lat}, long:${long})`));
+   const { lat, lng } = location.coordinates;
+   return JSON.parse(localStorage.getItem(`currentWeather(lat:${lat}, long:${lng})`));
 };
 
 const removeCurrentWeatherFromCache = (location) => {
-   const { lat, long } = location.coordinates;
-   localStorage.removeItem(`currentWeather(lat:${lat}, long:${long})`);
+   const { lat, lng } = location.coordinates;
+   localStorage.removeItem(`currentWeather(lat:${lat}, long:${lng})`);
 };
 
 /**
@@ -48,7 +48,12 @@ const getCurrentUserSettings = () => {
  * @param  {string} units
  */
 const saveCurrentUserLocation = (location) => {
-   localStorage.setItem('currentUserLocation', JSON.stringify({ location }));
+   const { city, country, coordinates } = location;
+   const { lat, lng } = coordinates;
+   localStorage.setItem(
+      'currentUserLocation',
+      JSON.stringify({ city, country, coordinates: { lat: lat.toFixed(4), lng: lng.toFixed(4) } })
+   );
 };
 
 /**
@@ -89,11 +94,12 @@ const getWeatherFromCache = (location, units) => {
 };
 
 const saveHomeLocationToCache = (location) => {
-   localStorage.setItem('HOME_LOCATION', JSON.stringify(location));
+   const { city, country, coordinates } = location;
+   localStorage.setItem('HOME_LOCATION', JSON.stringify({ city, country, coordinates }));
 };
 
 const getHomeLocationFromCache = () => {
-   return localStorage.getItem('HOME_LOCATION');
+   return JSON.parse(localStorage.getItem('HOME_LOCATION'));
 };
 
 export {

@@ -1,26 +1,22 @@
-import { getForecast } from '../api/weatherAPI';
-import { updateTodayWeather, updateNextDaysWeather, updateAll, swapOptions } from './updateData';
+import getForecast from '../api/weatherAPI';
+import { updateAll } from './updateData';
 import {
    getCurrentUserSettings,
    saveCurrentUserSettings,
    getHomeLocationFromCache,
    getCurrentUserLocation
 } from './cache';
-import {
-   getWeatherForNow,
-   getWeatherForNextDays,
-   createLocationInfoObj,
-   areObjectsEqual
-} from './functions';
-import { createAndSetOptions, createAndSetOptionsWithHandler } from '../js/template';
+import { areObjectsEqual, swapOptions } from './functions';
+import { createLocationInfoObj } from './weather';
+import { createAndSetOptionsWithHandler } from '../js/template';
 import { getMyLocationByCoordinates } from '../api/geocodingAPI';
 import MapApi from '../api/mapAPI';
 
 const unitsHandler = (event) => {
    const { target } = event;
    const locationInfo = getCurrentUserLocation();
+   const { coordinates } = locationInfo;
    const { units, lang } = getCurrentUserSettings();
-   const { location } = locationInfo;
    if (String(target.className).includes('switcher__item_inactive')) {
       const { parentNode } = target;
       let newUnits = '';
@@ -38,48 +34,33 @@ const unitsHandler = (event) => {
       } else {
          newUnits = 'C';
       }
-      locationInfo.units = newUnits;
-      getForecast(location.coordinates, newUnits).then((weatherList) => {
-         updateTodayWeather(getWeatherForNow(weatherList.list, location));
-         updateNextDaysWeather(getWeatherForNextDays(weatherList.list));
+      getForecast(coordinates, newUnits).then((weatherObj) => {
+         updateAll(locationInfo, weatherObj.list, lang);
       });
-      saveCurrentUserSettings(units, lang);
+      saveCurrentUserSettings(newUnits, lang);
    }
 };
 
 const homeHandler = () => {
-   const { location, units } = JSON.parse(getHomeLocationFromCache());
-   const { coordinates } = location;
-   const currentLocation = getCurrentUserLocation().location;
+   const { coordinates } = getHomeLocationFromCache();
+   const { lang, units } = getCurrentUserSettings();
+   const currentLocation = getCurrentUserLocation();
    if (!areObjectsEqual(currentLocation.coordinates, coordinates)) {
       const map = MapApi.getInstance();
       map.setCenter([coordinates.lng, coordinates.lat]);
-      getMyLocationByCoordinates(coordinates, 'ru')
+      getMyLocationByCoordinates(coordinates, lang)
          .then((data) => data.results)
          .then((result) => {
             const cityCountryName = String(result[0].plus_code.compound_code).split(',');
             const [cityCode, country] = cityCountryName;
             const city = cityCode.split(' ')[1];
-            const locationInfo = createLocationInfoObj(city, country, coordinates, units);
+            const locationInfo = createLocationInfoObj(city, country, coordinates);
 
-            getForecast(coordinates, units).then((weatherObj) => {
-               updateAll(locationInfo, weatherObj.list);
+            getForecast(coordinates, units, lang).then((weatherObj) => {
+               updateAll(locationInfo, weatherObj.list, lang);
             });
          });
    }
-};
-
-const changeLangState = (val) => {
-   const userSettings = getCurrentUserSettings();
-   const dropdownBlock = document.getElementById('dropdown-list');
-   const options = [];
-   dropdownBlock.childNodes.forEach((e) => {
-      options.push(e.textContent);
-   });
-   dropdownBlock.innerHTML = '';
-   const newList = swapOptions(val, options);
-   createAndSetOptionsWithHandler(dropdownBlock, newList, toggleDropdown);
-   saveCurrentUserSettings(userSettings.units, val);
 };
 
 const toggleDropdown = (event) => {
@@ -89,6 +70,24 @@ const toggleDropdown = (event) => {
    if (dropdownBlock.childNodes[0].textContent !== value) {
       changeLangState(value);
    }
+};
+
+const changeLangState = (newLang) => {
+   const { units } = getCurrentUserSettings();
+   const locationInfo = getCurrentUserLocation();
+   const { coordinates } = locationInfo;
+   const dropdownBlock = document.getElementById('dropdown-list');
+   const options = [];
+   dropdownBlock.childNodes.forEach((e) => {
+      options.push(e.textContent);
+   });
+   dropdownBlock.innerHTML = '';
+   const newList = swapOptions(newLang, options);
+   createAndSetOptionsWithHandler(dropdownBlock, newList, toggleDropdown);
+   saveCurrentUserSettings(units, newLang);
+   getForecast(coordinates, units, newLang).then((weatherObj) => {
+      updateAll(locationInfo, weatherObj.list, newLang);
+   });
 };
 
 const clearField = (event) => {

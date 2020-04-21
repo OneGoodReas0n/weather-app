@@ -1,23 +1,20 @@
-import {
-   getFormattedDateForDateBlock,
-   getIconByWeather,
-   getWeatherForNow,
-   getWeatherForNextDays,
-   areObjectsEqual
-} from './functions';
+import { areObjectsEqual } from './functions';
+import { getIconByWeather, getWeatherForNow, getWeatherForNextDays } from './weather';
+import { getFormattedDateForDateBlock, newDay } from './date';
 
 import {
-   getWeatherFromCache,
    getCurrentWeatherFromCache,
-   saveCurrentUserSettings,
    getCurrentUserSettings,
-   saveCurrentUserLocation
+   saveCurrentUserLocation,
+   getCurrentUserLocation,
+   removeCurrentWeatherFromCache
 } from './cache';
+
+import { getMyLocationByPlace } from '../api/geocodingAPI';
 
 import ruPhrases from '../localization/ru';
 import enPhrases from '../localization/en';
-import { createCustomDropdown } from '../js/template';
-import { toggleDropdown } from './handlers';
+import dePhrases from '../localization/de';
 
 const createVocabular = (lang) => {
    switch (lang) {
@@ -25,9 +22,22 @@ const createVocabular = (lang) => {
          return ruPhrases;
       case 'EN':
          return enPhrases;
+      case 'DE':
+         return dePhrases;
       default:
          return null;
    }
+};
+
+const updateInputPlaceholders = (vocabular) => {
+   const searchInput = document.getElementById('search_input');
+   searchInput.setAttribute('placeholder', `${vocabular.hearder.searchInput.placeholder}`);
+
+   const homeBtn = document.getElementById('home');
+   homeBtn.setAttribute('title', `${vocabular.hearder.searchInput.home}`);
+
+   const voiceBtn = document.getElementById('voice');
+   voiceBtn.setAttribute('title', `${vocabular.hearder.searchInput.voiceSearch}`);
 };
 
 /**
@@ -56,20 +66,29 @@ const getElemFromListByClassName = (list, name) => {
    return result;
 };
 
-const updateLocation = (location, vocabular) => {
-   const { city, country, coordinates } = location;
+const updateLocation = (vocabular) => {
+   const userLocation = getCurrentUserLocation();
+   const { lang } = getCurrentUserSettings();
+
    const locationDiv = document.getElementById('location');
    const coordinatesDiv = document.getElementById('coordinates');
    const locationSpan = getElemFromListByClassName(locationDiv.childNodes, 'location-date__text');
    const latitudeSpan = getElemFromListByClassName(coordinatesDiv.childNodes, 'map__latitude');
    const longitudeSpan = getElemFromListByClassName(coordinatesDiv.childNodes, 'map__longitude');
-   locationSpan.textContent = `${city}, ${country}`;
-   latitudeSpan.textContent = `${vocabular.location.latitude}: ${Number(coordinates.lat).toFixed(
-      4
-   )}`;
-   longitudeSpan.textContent = `${vocabular.location.longitude}: ${Number(coordinates.lng).toFixed(
-      4
-   )}`;
+
+   getMyLocationByPlace(userLocation, lang)
+      .then((data) => data.results)
+      .then((result) => {
+         const { lat, lng } = result[0].geometry.location;
+         const [currentCity, currentCountry] = result[0].address_components.filter(
+            (e) => e.types.includes('locality') || e.types.includes('country')
+         );
+         const city = currentCity.long_name;
+         const country = currentCountry.long_name;
+         locationSpan.textContent = `${city}, ${country}`;
+         latitudeSpan.textContent = `${vocabular.location.latitude}: ${Number(lat).toFixed(4)}`;
+         longitudeSpan.textContent = `${vocabular.location.longitude}: ${Number(lng).toFixed(4)}`;
+      });
 };
 
 /**
@@ -161,11 +180,6 @@ const checkUpdatesInWeather = (weatherArray, location, units) => {
    const weatherNow = getWeatherForNow(weatherArray, location);
    if (!areObjectsEqual(weatherNow, previousWeather)) {
       updateTodayWeather(weatherNow);
-      console.log(
-         `${new Date()
-            .toString()
-            .slice(0, new Date().toString().indexOf('GMT'))} - Weather has been changed! `
-      );
    }
 
    if (new Date(weatherNow.date).getHours() === 0) {
@@ -174,42 +188,17 @@ const checkUpdatesInWeather = (weatherArray, location, units) => {
 };
 
 const updateAll = (locationInfo, weatherList, lang) => {
+   const prevLocation = getCurrentUserLocation();
+   removeCurrentWeatherFromCache(prevLocation);
+   saveCurrentUserLocation(locationInfo);
    updateTime();
    const vocabular = createVocabular(lang);
-   const { location } = locationInfo;
-   updateLocation(location, vocabular);
-   const weatherNow = getWeatherForNow(weatherList, location);
+   updateInputPlaceholders(vocabular);
+   updateLocation(vocabular);
+   const weatherNow = getWeatherForNow(weatherList, locationInfo);
    updateTodayWeather(weatherNow, vocabular);
    const weatherForNextDays = getWeatherForNextDays(weatherList);
    updateNextDaysWeather(weatherForNextDays, vocabular);
-   saveCurrentUserLocation(locationInfo);
-};
-
-const swapOptions = (val, options) => {
-   const arr = options;
-   const position = arr.indexOf(val);
-   if (arr[0] !== val) {
-      const temp = arr[0];
-      arr[0] = val;
-      for (let i = position; i > 1; i -= 1) {
-         arr[i] = arr[i - 1];
-      }
-      arr[1] = temp;
-   }
-   return arr;
-};
-
-const initLangSwitcher = () => {
-   const dropdown = document.getElementById('dropdown');
-   const languages = ['EN', 'RU', 'DE'];
-   const currentSettings = getCurrentUserSettings();
-   const { lang } = currentSettings;
-   const langArray = swapOptions(lang, languages);
-   const langDropdown = createCustomDropdown(langArray, '#dropdown-list', 'dropdown__list');
-   langDropdown.childNodes.forEach((e) => {
-      e.addEventListener('click', toggleDropdown);
-   });
-   dropdown.appendChild(langDropdown);
 };
 
 export {
@@ -218,7 +207,5 @@ export {
    updateNextDaysWeather,
    checkUpdatesInWeather,
    updateAll,
-   initLangSwitcher,
-   swapOptions,
    createVocabular
 };
