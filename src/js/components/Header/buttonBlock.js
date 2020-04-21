@@ -1,6 +1,9 @@
-import { createDiv, createImg, createSpan } from '../../template';
+import { createDiv, createImg, createSpan, createCustomDropdown } from '../../template';
+import languages from '../../../localization/languages';
+import { swapOptions, getUserLangOrDefault } from '../../../utils/functions';
 import updateIconSVG from '../../../../assets/update_icon.svg';
 import { getCurrentUserSettings } from '../../../utils/cache';
+import { toggleDropdown } from '../../../utils/handlers';
 
 const makeButtonUpdate = () => {
    const buttonUpdate = createDiv('button');
@@ -11,6 +14,17 @@ const makeButtonUpdate = () => {
 
 const makeLangSwitcher = () => {
    const div = createDiv('#dropdown', 'dropdown');
+   const currentSettings = getCurrentUserSettings();
+   let lang = getUserLangOrDefault();
+   if (currentSettings !== null && currentSettings !== undefined) {
+      lang = currentSettings.lang;
+   }
+   const langArray = swapOptions(lang, languages);
+   const langDropdown = createCustomDropdown(langArray, '#dropdown-list', 'dropdown__list');
+   langDropdown.childNodes.forEach((e) => {
+      e.addEventListener('click', toggleDropdown);
+   });
+   div.appendChild(langDropdown);
    return div;
 };
 

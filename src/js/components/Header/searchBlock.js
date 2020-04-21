@@ -3,9 +3,14 @@ import voiceSVG from '../../../../assets/voice_svg.svg';
 import homeSVG from '../../../../assets/home_icon_small.svg';
 import { getCurrentUserSettings } from '../../../utils/cache';
 import { createVocabular } from '../../../utils/updateData';
+import { getUserLangOrDefault } from '../../../utils/functions';
 
 const makeSearchBar = () => {
-   const { lang } = getCurrentUserSettings();
+   const currentSettings = getCurrentUserSettings();
+   let lang = getUserLangOrDefault();
+   if (currentSettings !== null && currentSettings !== undefined) {
+      lang = currentSettings.lang;
+   }
    const vocabular = createVocabular(lang);
    const searchBar = createDiv('search__body');
    const input = createInput(
