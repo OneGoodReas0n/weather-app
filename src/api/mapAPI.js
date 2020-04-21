@@ -4,7 +4,6 @@ import tockens from '../keys/tockens';
 const MapApi = (() => {
    let map;
    const createMap = () => {
-      console.log('Create map is called!');
       map = new Map({
          style: 'mapbox://styles/mapbox/streets-v11',
          attributionControl: false,

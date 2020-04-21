@@ -1,5 +1,5 @@
 import tockens from '../keys/tockens';
-import { weatherSerialize } from '../utils/functions';
+import { weatherSerialize } from '../utils/weather';
 
 const getForecast = async (coordinates, units, lang) => {
    const { lat, lng } = coordinates;
@@ -13,4 +13,4 @@ const getForecast = async (coordinates, units, lang) => {
    return serializedArr;
 };
 
-export { getForecast };
+export default getForecast;

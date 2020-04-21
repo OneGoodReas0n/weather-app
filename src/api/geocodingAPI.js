@@ -1,9 +1,9 @@
 import tokens from '../keys/tockens';
 
 const getMyLocationByPlace = async (location, lang) => {
-   const { city, region } = location;
+   const { city, country } = location;
    const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${city},${region}&key=${tokens.GEOCODING_TOKEN}&language=${lang}`
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${city},${country}&key=${tokens.GEOCODING_TOKEN}&language=${lang}`
    );
 
    const data = await response.json();
