@@ -1,4 +1,4 @@
-const en = {
+const vocabular = {
    hearder: {
       searchInput: {
          placeholder: 'Введите город или ZIP',
@@ -43,4 +43,4 @@ const en = {
    }
 };
 
-export default en;
+export default vocabular;
