@@ -1,5 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
    entry: './src/js/index.js',
@@ -30,7 +32,7 @@ module.exports = {
 
          {
             test: /\.(sa|sc|c)ss$/,
-            use: ['style-loader', 'css-loader', 'sass-loader']
+            use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
          },
 
          {
@@ -60,7 +62,16 @@ module.exports = {
       ]
    },
 
-   plugins: [new CleanWebpackPlugin()],
+   plugins: [
+      new CleanWebpackPlugin(),
+      new MiniCssExtractPlugin({
+         filename: 'style.css'
+      }),
+      new HtmlWebpackPlugin({
+         template: 'index.html',
+         title: 'weather app'
+      })
+   ],
 
    mode: 'development'
 };
