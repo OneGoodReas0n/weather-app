@@ -1,6 +1,6 @@
 import { areObjectsEqual } from './functions';
 import { getIconByWeather, getWeatherForNow, getWeatherForNextDays } from './weather';
-import { getFormattedDateForDateBlock, newDay } from './date';
+import { getFormattedDateForDateBlock } from './date';
 
 import {
    getCurrentWeatherFromCache,

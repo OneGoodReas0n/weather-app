@@ -69,6 +69,7 @@ geoAPI().then((locationData) => {
    const searchInput = document.getElementById('search_input');
    const options = { types: ['(regions)'] };
 
+   /*eslint-disable*/
    const autocomplete = new google.maps.places.Autocomplete(searchInput, options);
    autocomplete.setFields(['geometry', 'address_components']);
 

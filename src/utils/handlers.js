@@ -63,6 +63,7 @@ const homeHandler = () => {
    }
 };
 
+/*eslint-disable*/
 const toggleDropdown = (event) => {
    const { target } = event;
    const value = target.textContent;
