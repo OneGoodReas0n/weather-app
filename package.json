@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "fast-async": "^6.3.8",
-    "mapbox-gl": "^1.8.1"
+    "mapbox-gl": "^1.8.1",
+    "node-fetch": "^2.6.0",
+    "unsplash-js": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",

@@ -7,10 +7,15 @@ import {
    getCurrentUserLocation,
    saveCurrentUserLocation
 } from '../utils/cache';
-import { createLocationInfoObj } from '../utils/weather';
+import { createLocationInfoObj, getWeatherForNow } from '../utils/weather';
 import { getUserLangOrDefault } from '../utils/functions';
-import { updateTime, checkUpdatesInWeather, updateAll } from '../utils/updateData';
-import { setHandlers } from '../utils/handlers';
+import {
+   updateTime,
+   checkUpdatesInWeather,
+   updateAll,
+   updateBackground
+} from '../utils/updateData';
+import { setHandlers, handleLoading } from '../utils/handlers';
 import geoAPI from '../api/geoAPI';
 import getForecast from '../api/weatherAPI';
 import MapApi from '../api/mapAPI';
@@ -21,12 +26,15 @@ import { getMyLocationByPlace } from '../api/geocodingAPI';
 import { newDay } from '../utils/date';
 
 const { body } = document;
+const background = createDiv('#background', 'background');
 const container = createDiv('container');
 
 container.appendChild(Header());
 container.appendChild(Content());
-body.appendChild(container);
+background.appendChild(container);
+body.appendChild(background);
 setHandlers();
+handleLoading();
 const map = MapApi.getInstance();
 
 geoAPI().then((locationData) => {
@@ -62,6 +70,7 @@ geoAPI().then((locationData) => {
          saveCurrentUserSettings(units, lang);
          saveCurrentUserLocation(locationInfo);
          getForecast(coordinates, units, lang).then((weatherObj) => {
+            updateBackground(getWeatherForNow(weatherObj.list, locationInfo));
             updateAll(locationInfo, weatherObj.list, lang);
          });
       });
@@ -78,6 +87,7 @@ geoAPI().then((locationData) => {
          autocomplete.getPlace().geometry !== null &&
          autocomplete.getPlace().geometry !== undefined
       ) {
+         handleLoading();
          const place = autocomplete.getPlace();
          const { geometry } = place;
          const adressComponents = place.address_components;
@@ -94,8 +104,9 @@ geoAPI().then((locationData) => {
             newCoordinates,
             units
          );
-         getForecast(newCoordinates, currentUnits, lang).then((weather) => {
-            updateAll(locationInfo, weather.list, lang);
+         getForecast(newCoordinates, currentUnits, lang).then((weatherObj) => {
+            updateBackground(getWeatherForNow(weatherObj.list, locationInfo));
+            updateAll(locationInfo, weatherObj.list, lang);
             map.setCenter([placeLong, placeLat]);
          });
       }
