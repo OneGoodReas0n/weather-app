@@ -1,5 +1,5 @@
 import getForecast from '../api/weatherAPI';
-import { updateAll } from './updateData';
+import { updateAll, updateBackground } from './updateData';
 import {
    getCurrentUserSettings,
    saveCurrentUserSettings,
@@ -8,9 +8,36 @@ import {
 } from './cache';
 import { areObjectsEqual, swapOptions } from './functions';
 import { createLocationInfoObj } from './weather';
-import { createAndSetOptionsWithHandler } from '../js/template';
+import { createAndSetOptionsWithHandler, createDiv, createImg, createSpan } from '../js/template';
 import { getMyLocationByCoordinates } from '../api/geocodingAPI';
 import MapApi from '../api/mapAPI';
+import sunSVG from '../../assets/sun_icon.svg';
+import cloudSVG from '../../assets/cloud_icon.svg';
+import getVocabular from './vocabular';
+
+const loadingScreen = () => {
+   const { lang } = getCurrentUserSettings();
+   const vocabular = getVocabular(lang);
+   const loadingDiv = createDiv('loading');
+   const loadingBody = createDiv('loading__body');
+   const animationDiv = createDiv('loading__animation');
+   const sunImg = createImg(sunSVG, 'animation__item', 'animation__sun');
+   const cloudImg = createImg(cloudSVG, 'animation__item', 'animation__cloud');
+   animationDiv.appendChild(sunImg);
+   animationDiv.appendChild(cloudImg);
+   const textDiv = createDiv('loading__text');
+   const span = createSpan(`${vocabular.loading}`, 'text__item');
+   textDiv.appendChild(span);
+   loadingBody.appendChild(animationDiv);
+   loadingBody.appendChild(textDiv);
+   loadingDiv.appendChild(loadingBody);
+   return loadingDiv;
+};
+
+const handleLoading = () => {
+   const { body } = document;
+   body.appendChild(loadingScreen());
+};
 
 const unitsHandler = (event) => {
    const { target } = event;
@@ -46,6 +73,7 @@ const homeHandler = () => {
    const { lang, units } = getCurrentUserSettings();
    const currentLocation = getCurrentUserLocation();
    if (!areObjectsEqual(currentLocation.coordinates, coordinates)) {
+      handleLoading();
       const map = MapApi.getInstance();
       map.setCenter([coordinates.lng, coordinates.lat]);
       getMyLocationByCoordinates(coordinates, lang)
@@ -57,6 +85,7 @@ const homeHandler = () => {
             const locationInfo = createLocationInfoObj(city, country, coordinates);
 
             getForecast(coordinates, units, lang).then((weatherObj) => {
+               updateBackground(weatherObj);
                updateAll(locationInfo, weatherObj.list, lang);
             });
          });
@@ -118,4 +147,4 @@ const setHandlers = () => {
    });
 };
 
-export { setHandlers, toggleDropdown };
+export { setHandlers, toggleDropdown, handleLoading };

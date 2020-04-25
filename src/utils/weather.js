@@ -222,38 +222,6 @@ const getWeatherForNextDays = (weatherList) => {
    return preparedList;
 };
 
-/**
- * * Function for serializing data
- * @param  {Object} weatherData
- * @param  {String} units
- * @returns {Object}
- */
-const weatherSerialize = (weatherData, units) => {
-   const { list } = weatherData;
-   const weatherArr = [];
-   list.forEach((e) => {
-      const item = e;
-      const weatherItem = {
-         id: item.dt,
-         temp: Math.round(item.main.temp),
-         feelsLike: Math.round(item.main.feels_like),
-         humidity: item.main.humidity,
-         weatherIconId: item.weather[item.weather.length - 1].id,
-         wind: Math.round(item.wind.speed),
-         date: item.dt_txt,
-         weather: item.weather[item.weather.length - 1].main,
-         description: item.weather[item.weather.length - 1].description,
-         units
-      };
-      weatherArr.push(weatherItem);
-   });
-   return {
-      city: weatherData.city.name,
-      country: weatherData.city.country,
-      list: weatherArr
-   };
-};
-
 const createLocationInfoObj = (city, country, coordinates) => {
    const result = { city, country, coordinates };
    return result;
@@ -264,6 +232,5 @@ export {
    getWeatherForNextDays,
    getWeatherForNow,
    getIconByWeather,
-   weatherSerialize,
    createLocationInfoObj
 };

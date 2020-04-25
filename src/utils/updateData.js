@@ -1,6 +1,8 @@
-import { areObjectsEqual } from './functions';
+import { areObjectsEqual, sortArrayAscByProp } from './functions';
 import { getIconByWeather, getWeatherForNow, getWeatherForNextDays } from './weather';
 import { getFormattedDateForDateBlock } from './date';
+import getVocabular from './vocabular';
+import getPhotosByKeyword from '../api/imageAPI';
 
 import {
    getCurrentWeatherFromCache,
@@ -11,23 +13,8 @@ import {
 } from './cache';
 
 import { getMyLocationByPlace } from '../api/geocodingAPI';
-
-import ruPhrases from '../localization/ru';
-import enPhrases from '../localization/en';
-import dePhrases from '../localization/de';
-
-const createVocabular = (lang) => {
-   switch (lang) {
-      case 'RU':
-         return ruPhrases;
-      case 'EN':
-         return enPhrases;
-      case 'DE':
-         return dePhrases;
-      default:
-         return null;
-   }
-};
+import { createImg } from '../js/template';
+import { handleLoading } from './handlers';
 
 const updateInputPlaceholders = (vocabular) => {
    const searchInput = document.getElementById('search_input');
@@ -47,7 +34,7 @@ const updateTime = () => {
    const { lang } = getCurrentUserSettings();
    const dateBlock = document.getElementById('date');
    const span = dateBlock.childNodes.item(0);
-   span.textContent = getFormattedDateForDateBlock(createVocabular(lang));
+   span.textContent = getFormattedDateForDateBlock(getVocabular(lang));
 };
 
 /**
@@ -89,6 +76,41 @@ const updateLocation = (vocabular) => {
          latitudeSpan.textContent = `${vocabular.location.latitude}: ${Number(lat).toFixed(4)}`;
          longitudeSpan.textContent = `${vocabular.location.longitude}: ${Number(lng).toFixed(4)}`;
       });
+};
+
+const updateBackground = (weatherObject) => {
+   const { weather } = weatherObject;
+   const { body } = document;
+   const background = document.getElementById('background');
+   const cachePhotos = JSON.parse(localStorage.getItem('cachePhotos'));
+   if (cachePhotos) {
+      const photos = sortArrayAscByProp('likes', cachePhotos);
+      const randomNum = Math.floor(Math.random() * photos.length);
+      const backImg = createImg(photos[randomNum].urls.raw, 'background__image');
+      backImg.onload = () => {
+         body.childNodes.forEach((e) => {
+            if (e.className === 'loading') {
+               body.removeChild(e);
+            }
+         });
+      };
+      background.appendChild(backImg);
+   } else {
+      getPhotosByKeyword(`weather ${weather}`).then((results) => {
+         localStorage.setItem('cachePhotos', JSON.stringify(results));
+         const photos = sortArrayAscByProp('likes', results);
+         const randomNum = Math.floor(Math.random() * photos.length);
+         const backImg = createImg(photos[randomNum].urls.raw, 'background__image');
+         backImg.onload = () => {
+            body.childNodes.forEach((e) => {
+               if (e.className === 'loading') {
+                  body.removeChild(e);
+               }
+            });
+         };
+         background.appendChild(backImg);
+      });
+   }
 };
 
 /**
@@ -175,11 +197,17 @@ const updateNextDaysWeather = (list, vocabular) => {
  * @param  {Object} location
  * @param  {String} units
  */
-const checkUpdatesInWeather = (weatherArray, location, units) => {
-   const previousWeather = getCurrentWeatherFromCache(location, units);
+const checkUpdatesInWeather = (weatherArray, location) => {
+   const { lang } = getCurrentUserSettings();
+   const vocabular = getVocabular(lang);
+   const previousWeather = getCurrentWeatherFromCache(location);
    const weatherNow = getWeatherForNow(weatherArray, location);
    if (!areObjectsEqual(weatherNow, previousWeather)) {
-      updateTodayWeather(weatherNow);
+      if (weatherNow.weather !== previousWeather.weather) {
+         handleLoading();
+         updateBackground(weatherNow);
+      }
+      updateTodayWeather(weatherNow, vocabular);
    }
 
    if (new Date(weatherNow.date).getHours() === 0) {
@@ -192,7 +220,7 @@ const updateAll = (locationInfo, weatherList, lang) => {
    removeCurrentWeatherFromCache(prevLocation);
    saveCurrentUserLocation(locationInfo);
    updateTime();
-   const vocabular = createVocabular(lang);
+   const vocabular = getVocabular(lang);
    updateInputPlaceholders(vocabular);
    updateLocation(vocabular);
    const weatherNow = getWeatherForNow(weatherList, locationInfo);
@@ -207,5 +235,5 @@ export {
    updateNextDaysWeather,
    checkUpdatesInWeather,
    updateAll,
-   createVocabular
+   updateBackground
 };

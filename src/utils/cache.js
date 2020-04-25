@@ -52,7 +52,11 @@ const saveCurrentUserLocation = (location) => {
    const { lat, lng } = coordinates;
    localStorage.setItem(
       'currentUserLocation',
-      JSON.stringify({ city, country, coordinates: { lat: lat.toFixed(4), lng: lng.toFixed(4) } })
+      JSON.stringify({
+         city,
+         country,
+         coordinates: { lat: Number(lat).toFixed(4), lng: Number(lng).toFixed(4) }
+      })
    );
 };
 
