@@ -40,7 +40,9 @@ const vocabular = {
       october: 'Окт',
       november: 'Ноя',
       december: 'Дек'
-   }
+   },
+
+   loading: 'Загрузка...'
 };
 
 export default vocabular;
