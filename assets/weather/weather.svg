@@ -4,9 +4,9 @@
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="64"
-    height="64"
-    viewbox="0 0 64 64">
+    width="50"
+    height="34"
+    viewbox="0 0 50 34">
     <defs>
         <style type="text/css"><![CDATA[
 /*
@@ -688,7 +688,7 @@
         </g>
     </g>
     <g id="cloudy-day-1">
-        <g transform="translate(20,10)">
+        <g transform="translate(15,0)">
             <g transform="translate(0,16)">
                 <g class="am-weather-sun">
                     <g>
