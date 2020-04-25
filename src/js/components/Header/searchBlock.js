@@ -1,8 +1,7 @@
 import { createDiv, createImg, createInput } from '../../template';
 import voiceSVG from '../../../../assets/voice_svg.svg';
-import homeSVG from '../../../../assets/home_icon_small.svg';
 import { getCurrentUserSettings } from '../../../utils/cache';
-import { createVocabular } from '../../../utils/updateData';
+import getVocabular from '../../../utils/vocabular';
 import { getUserLangOrDefault } from '../../../utils/functions';
 
 const makeSearchBar = () => {
@@ -11,7 +10,7 @@ const makeSearchBar = () => {
    if (currentSettings !== null && currentSettings !== undefined) {
       lang = currentSettings.lang;
    }
-   const vocabular = createVocabular(lang);
+   const vocabular = getVocabular(lang);
    const searchBar = createDiv('search__body');
    const input = createInput(
       `${vocabular.hearder.searchInput.placeholder}`,
@@ -21,13 +20,8 @@ const makeSearchBar = () => {
 
    const voiceImg = createImg(voiceSVG, '#voice', 'search__voice');
    voiceImg.setAttribute('title', `${vocabular.hearder.searchInput.voiceSearch}`);
-
-   const homeImg = createImg(homeSVG, '#home', 'search__home');
-   homeImg.setAttribute('title', `${vocabular.hearder.searchInput.home}`);
-
    searchBar.appendChild(input);
    searchBar.appendChild(voiceImg);
-   searchBar.appendChild(homeImg);
    return searchBar;
 };
 

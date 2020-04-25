@@ -1,14 +1,22 @@
 import { createDiv, createImg, createSpan, createCustomDropdown } from '../../template';
 import languages from '../../../localization/languages';
 import { swapOptions, getUserLangOrDefault } from '../../../utils/functions';
-import updateIconSVG from '../../../../assets/update_icon.svg';
+import homeIconSVG from '../../../../assets/home_icon_small_white.svg';
 import { getCurrentUserSettings } from '../../../utils/cache';
 import { toggleDropdown } from '../../../utils/handlers';
+import getVocabular from '../../../utils/vocabular';
 
-const makeButtonUpdate = () => {
+const makeButtonHome = () => {
+   const currentSettings = getCurrentUserSettings();
+   let lang = getUserLangOrDefault();
+   if (currentSettings !== null && currentSettings !== undefined) {
+      lang = currentSettings.lang;
+   }
+   const vocabular = getVocabular(lang);
    const buttonUpdate = createDiv('button');
-   const updateIcon = createImg(updateIconSVG, 'button__body', 'button__update');
-   buttonUpdate.appendChild(updateIcon);
+   const homeImg = createImg(homeIconSVG, '#home', 'button__body', 'button__home');
+   homeImg.setAttribute('title', `${vocabular.hearder.searchInput.home}`);
+   buttonUpdate.appendChild(homeImg);
    return buttonUpdate;
 };
 
@@ -53,7 +61,7 @@ const makeTempSwitcher = () => {
 
 const Actions = () => {
    const buttonBlock = createDiv('header__actions');
-   buttonBlock.appendChild(makeButtonUpdate());
+   buttonBlock.appendChild(makeButtonHome());
    buttonBlock.appendChild(makeLangSwitcher());
    buttonBlock.appendChild(makeTempSwitcher());
    return buttonBlock;
