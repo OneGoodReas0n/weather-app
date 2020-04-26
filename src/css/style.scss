@@ -25,14 +25,14 @@ body {
    top: 0;
    width: 100vw;
    height: 100vh;
-   background-color: #FFF;
+   background-color: $main-theme-color-dark;
    z-index: 2;
    
    .loading__body{
-
       .loading__animation{
          position: relative;
          display: flex;
+         right: 30px;
          z-index: 3;
          width: 200px;
          height: 200px;
@@ -82,16 +82,29 @@ body {
       }
       .loading__text{
          position: relative;
-         left: 30px;
+         
          bottom: 30px;
          text-align: center;
          .text__item{
             font-size: 24px;
-            color: $main-theme-color;
+            color: #fff;
          }
       }
    }
 
+}
+
+.hiding{
+   animation: hiding 1s ease;
+}
+
+@keyframes hiding {
+   from{
+      opacity: 1;
+   }
+   to{
+      opacity: 0;
+   }
 }
 
 .button {
@@ -476,6 +489,19 @@ body {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            
+            @include for-tablet {
+               margin-top: 30px;
+            }
+         
+            @include for-desktop {
+               margin-top: 30px;
+            }
+
+            @include for-large-screen {
+               margin-top: 30px;
+            }
+
             .left-wrapper {            
                @include for-tablet {
                   width: 58%;
@@ -497,6 +523,19 @@ body {
                .today-forecast {
                   display: flex;
                   justify-content: center;
+               
+                  @include for-desktop {
+                     margin-top: 10px;
+                  }
+               
+                  @include for-large-screen {
+                     margin-top: 20px;
+                  }
+
+                  @include for-large-screen(true) {
+                     margin-top: 30px;
+                  }
+                  
                   .today-forecast__temperature {
                      max-width: 62%;
                      position: relative;
@@ -525,25 +564,21 @@ body {
                         @include for-tablet {
                            top: calculateShift($md-screen-font-size);
                            font-size: 40px;
-                           line-height: #{$md-screen-font-size};
                         }
                      
                         @include for-desktop {
                            top: calculateShift($lg-screen-font-size);
                            font-size: 50px;
-                           line-height: #{$lg-screen-font-size};
                         }
                      
                         @include for-large-screen {
                            top: calculateShift($xl-screen-font-size);
-                           font-size: 80px;
-                           line-height: #{$xl-screen-font-size};
+                           font-size: 80px;  
                         }
 
                         @include for-large-screen(true) {
                            top: calculateShift($xl-screen-font-size,true);
                            font-size: 80px;
-                           line-height: calculateFontSize($xl-screen-font-size);
                         }
                      }
                   }
@@ -560,11 +595,11 @@ body {
                         }
                      
                         @include for-large-screen {
-                           width: 75%;
+                           width: 90%;
                         }
 
                         @include for-large-screen(true) {
-                           width: 80%;
+                           width: 90%;
                         }
                         
                      }
@@ -701,7 +736,7 @@ body {
                }
             
                @include for-desktop {
-                  width: 42%;
+                  width: 38%;
                }
             
                @include for-large-screen {
@@ -747,5 +782,4 @@ body {
       // WRAPPER
    }
 }
-
 

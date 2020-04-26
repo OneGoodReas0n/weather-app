@@ -82,7 +82,8 @@ const updateBackground = (weatherObject) => {
    const { weather } = weatherObject;
    const { body } = document;
    const background = document.getElementById('background');
-   getPhotosByKeyword(`weather ${weather}`).then((results) => {
+   const randomPage = Math.floor(Math.random() * 10);
+   getPhotosByKeyword(`weather ${weather}`, randomPage).then((results) => {
       localStorage.setItem('cachePhotos', JSON.stringify(results));
       const photos = sortArrayAscByProp('likes', results);
       const randomNum = Math.floor(Math.random() * photos.length);
@@ -90,7 +91,10 @@ const updateBackground = (weatherObject) => {
       backImg.onload = () => {
          body.childNodes.forEach((e) => {
             if (e.className === 'loading') {
-               body.removeChild(e);
+               e.classList.add('hiding');
+               setTimeout(() => {
+                  body.removeChild(e);
+               }, 1000);
             }
          });
       };

@@ -16,10 +16,9 @@ const getPhotosFromResponse = (results) => {
    return photos;
 };
 
-const getPhotosByKeyword = (keyword) => {
-   console.log('Photo APi called');
+const getPhotosByKeyword = (keyword, page) => {
    const photos = unsplash.search
-      .photos(keyword, 1, 20, { orientation: 'landscape' })
+      .photos(keyword, page, 20, { orientation: 'landscape' })
       .then(toJson)
       .then((data) => data.results)
       .then((results) => getPhotosFromResponse(results));

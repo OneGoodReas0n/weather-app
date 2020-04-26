@@ -4,9 +4,9 @@
 
 @function calculateShift($font-size, $big:false){
    @if($big){
-      @return -$font-size + 120px + 20px;
+      @return -$font-size /1.9;
    }
    @else{
-      @return -$font-size + 120px;
+      @return -$font-size /1.9;
    }
 }
