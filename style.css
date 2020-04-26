@@ -21,11 +21,12 @@ body {
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #FFF;
+  background-color: rgba(68, 85, 102, 0.98);
   z-index: 2; }
   .loading .loading__body .loading__animation {
     position: relative;
     display: flex;
+    right: 30px;
     z-index: 3;
     width: 200px;
     height: 200px; }
@@ -60,12 +61,20 @@ body {
     transform: translateX(0px); } }
   .loading .loading__body .loading__text {
     position: relative;
-    left: 30px;
     bottom: 30px;
     text-align: center; }
     .loading .loading__body .loading__text .text__item {
       font-size: 24px;
-      color: rgba(68, 85, 102, 0.8); }
+      color: #fff; }
+
+.hiding {
+  animation: hiding 1s ease; }
+
+@keyframes hiding {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
 
 .button {
   display: flex;
@@ -331,6 +340,15 @@ body {
       display: flex;
       justify-content: space-between;
       align-items: center; }
+      @media (max-width: 992px) {
+        .background .container .content .wrapper {
+          margin-top: 30px; } }
+      @media (min-width: 993px) and (max-width: 1200px) {
+        .background .container .content .wrapper {
+          margin-top: 30px; } }
+      @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+        .background .container .content .wrapper {
+          margin-top: 30px; } }
       .background .container .content .wrapper .left-wrapper {
         overflow: hidden; }
         @media (max-width: 992px) {
@@ -348,6 +366,15 @@ body {
         .background .container .content .wrapper .left-wrapper .today-forecast {
           display: flex;
           justify-content: center; }
+          @media (min-width: 993px) and (max-width: 1200px) {
+            .background .container .content .wrapper .left-wrapper .today-forecast {
+              margin-top: 10px; } }
+          @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+            .background .container .content .wrapper .left-wrapper .today-forecast {
+              margin-top: 20px; } }
+          @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
+            .background .container .content .wrapper .left-wrapper .today-forecast {
+              margin-top: 30px; } }
           .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature {
             max-width: 62%;
             position: relative; }
@@ -355,10 +382,10 @@ body {
               font-weight: 600; }
               @media (max-width: 992px) {
                 .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__value {
-                  font-size: 140px; } }
+                  font-size: 170px; } }
               @media (min-width: 993px) and (max-width: 1200px) {
                 .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__value {
-                  font-size: 170px; } }
+                  font-size: 200px; } }
               @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
                 .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__value {
                   font-size: 230px; } }
@@ -370,24 +397,20 @@ body {
               font-weight: 600; }
               @media (max-width: 992px) {
                 .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__degree {
-                  top: -50px;
-                  font-size: 40px;
-                  line-height: 170px; } }
+                  top: -105.26316px;
+                  font-size: 40px; } }
               @media (min-width: 993px) and (max-width: 1200px) {
                 .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__degree {
-                  top: -110px;
-                  font-size: 50px;
-                  line-height: 230px; } }
+                  top: -121.05263px;
+                  font-size: 50px; } }
               @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
                 .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__degree {
-                  top: -130px;
-                  font-size: 80px;
-                  line-height: 250px; } }
+                  top: -131.57895px;
+                  font-size: 80px; } }
               @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
                 .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__degree {
-                  top: -110px;
-                  font-size: 80px;
-                  line-height: 230px; } }
+                  top: -131.57895px;
+                  font-size: 80px; } }
           .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather {
             margin-left: 20px; }
             @media (max-width: 992px) {
@@ -398,10 +421,10 @@ body {
                 width: 75%; } }
             @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
               .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather .today-forecast__image {
-                width: 75%; } }
+                width: 90%; } }
             @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
               .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather .today-forecast__image {
-                width: 80%; } }
+                width: 90%; } }
             .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather .today-forecast__details .today-forecast__item {
               font-weight: 600;
               text-transform: uppercase;
@@ -493,7 +516,7 @@ body {
           width: 38%; } }
       @media (min-width: 993px) and (max-width: 1200px) {
         .background .container .content .wrapper .right-wrapper {
-          width: 42%; } }
+          width: 38%; } }
       @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
         .background .container .content .wrapper .right-wrapper {
           width: 35%; } }
