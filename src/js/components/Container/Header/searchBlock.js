@@ -1,15 +1,10 @@
 import { createDiv, createImg, createInput } from '../../../template';
 import voiceSVG from '../../../../../assets/voice_svg.svg';
-import { getCurrentUserSettings } from '../../../../utils/cache';
+import { getLangFromCahceOrDefault } from '../../../../utils/cache';
 import getVocabular from '../../../../utils/vocabular';
-import { getUserLangOrDefault } from '../../../../utils/functions';
 
 const makeSearchBar = () => {
-   const currentSettings = getCurrentUserSettings();
-   let lang = getUserLangOrDefault();
-   if (currentSettings !== null && currentSettings !== undefined) {
-      lang = currentSettings.lang;
-   }
+   const lang = getLangFromCahceOrDefault();
    const vocabular = getVocabular(lang);
    const searchBar = createDiv('search__body');
    const input = createInput(

@@ -6,15 +6,14 @@ import getPhotosByKeyword from '../api/imageAPI';
 
 import {
    getCurrentWeatherFromCache,
-   getCurrentUserSettings,
    saveCurrentUserLocation,
    getCurrentUserLocation,
-   removeCurrentWeatherFromCache
+   removeCurrentWeatherFromCache,
+   getLangFromCahceOrDefault
 } from './cache';
 
 import { getMyLocationByPlace } from '../api/geocodingAPI';
 import { createImg } from '../js/template';
-import { handleLoading } from './handlers';
 
 const updateInputPlaceholders = (vocabular) => {
    const searchInput = document.getElementById('search_input');
@@ -31,7 +30,7 @@ const updateInputPlaceholders = (vocabular) => {
  * * Function for updating time
  */
 const updateTime = () => {
-   const { lang } = getCurrentUserSettings();
+   const lang = getLangFromCahceOrDefault();
    const dateBlock = document.getElementById('date');
    const span = dateBlock.childNodes.item(0);
    span.textContent = getFormattedDateForDateBlock(getVocabular(lang));
@@ -55,8 +54,7 @@ const getElemFromListByClassName = (list, name) => {
 
 const updateLocation = (vocabular) => {
    const userLocation = getCurrentUserLocation();
-   const { lang } = getCurrentUserSettings();
-
+   const lang = getLangFromCahceOrDefault();
    const locationDiv = document.getElementById('location');
    const coordinatesDiv = document.getElementById('coordinates');
    const locationSpan = getElemFromListByClassName(locationDiv.childNodes, 'location-date__text');
@@ -186,14 +184,14 @@ const updateNextDaysWeather = (list, vocabular) => {
  * @param  {Object} location
  * @param  {String} units
  */
-const checkUpdatesInWeather = (weatherArray, location) => {
-   const { lang } = getCurrentUserSettings();
+const checkUpdatesInWeather = (weatherArray, location, loadingHandler) => {
+   const lang = getLangFromCahceOrDefault();
    const vocabular = getVocabular(lang);
    const previousWeather = getCurrentWeatherFromCache(location);
    const weatherNow = getWeatherForNow(weatherArray, location);
    if (!areObjectsEqual(weatherNow, previousWeather)) {
       if (weatherNow.weather !== previousWeather.weather) {
-         handleLoading();
+         loadingHandler();
          updateBackground(weatherNow);
       }
       updateTodayWeather(weatherNow, vocabular);

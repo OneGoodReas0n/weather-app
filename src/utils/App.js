@@ -1,14 +1,14 @@
 import { getMyLocationByPlace } from '../api/geocodingAPI';
 import { createLocationInfoObj, getWeatherForNow } from './weather';
-import { getUserLangOrDefault } from './functions';
 import { updateBackground, updateAll } from './updateData';
 import { handleLoading, setHandlers } from './handlers';
 import {
-   getCurrentUserSettings,
    removeCurrentWeatherFromCache,
    saveCurrentUserLocation,
    saveCurrentUserSettings,
-   saveHomeLocationToCache
+   saveHomeLocationToCache,
+   getLangFromCahceOrDefault,
+   getUnitsFromCacheOrDefault
 } from './cache';
 import geoAPI from '../api/geoAPI';
 import getForecast from '../api/weatherAPI';
@@ -25,7 +25,6 @@ const makeTemplate = () => {
 
 const initializeAutocomplete = (map) => {
    const searchInput = document.getElementById('search_input');
-   const userSettings = getCurrentUserSettings();
    const options = { types: ['(regions)'] };
    setTimeout(() => {
       const autocomplete = new google.maps.places.Autocomplete(searchInput, options);
@@ -46,7 +45,8 @@ const initializeAutocomplete = (map) => {
                (e) => e.types.includes('locality') || e.types.includes('country')
             );
             const newCoordinates = { lat: placeLat, lng: placeLong };
-            const { units, lang } = userSettings;
+            const lang = getLangFromCahceOrDefault();
+            const units = getUnitsFromCacheOrDefault();
             const locationInfo = createLocationInfoObj(
                curCity.long_name,
                curCountry.long_name,
@@ -76,17 +76,8 @@ const init = () => {
    const map = getMap();
    geoAPI().then((locationData) => {
       const { city, country } = locationData;
-      let units = 'C';
-      let lang = getUserLangOrDefault();
-      const userSettings = getCurrentUserSettings();
-      if (userSettings !== undefined && userSettings !== null) {
-         if (userSettings.units !== undefined) {
-            units = userSettings.units;
-         }
-         if (userSettings.lang !== undefined) {
-            lang = userSettings.lang;
-         }
-      }
+      const lang = getLangFromCahceOrDefault();
+      const units = getUnitsFromCacheOrDefault();
 
       getMyLocationByPlace({ city, country }, lang)
          .then((data) => data.results)

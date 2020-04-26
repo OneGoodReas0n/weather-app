@@ -1,3 +1,5 @@
+import { getUserLangOrDefault } from './functions';
+
 /**
  * * Function for saving previous weather (check for updates in weather)
  * @param  {Object} weather
@@ -40,6 +42,24 @@ const saveCurrentUserSettings = (units, lang) => {
  */
 const getCurrentUserSettings = () => {
    return JSON.parse(localStorage.getItem('currentUserSettings'));
+};
+
+const getLangFromCahceOrDefault = () => {
+   const currentSettings = getCurrentUserSettings();
+   let lang = getUserLangOrDefault();
+   if (currentSettings !== null && currentSettings !== undefined) {
+      lang = currentSettings.lang;
+   }
+   return lang;
+};
+
+const getUnitsFromCacheOrDefault = () => {
+   const units = 'C';
+   const userSettings = getCurrentUserSettings();
+   if (userSettings && userSettings.units !== null) {
+      return userSettings.units;
+   }
+   return units;
 };
 
 /**
@@ -107,7 +127,6 @@ const getHomeLocationFromCache = () => {
 };
 
 export {
-   getCurrentUserSettings,
    getWeatherFromCache,
    saveCurrentUserSettings,
    saveWeatherToCache,
@@ -117,5 +136,7 @@ export {
    saveHomeLocationToCache,
    getHomeLocationFromCache,
    saveCurrentUserLocation,
-   getCurrentUserLocation
+   getCurrentUserLocation,
+   getLangFromCahceOrDefault,
+   getUnitsFromCacheOrDefault
 };

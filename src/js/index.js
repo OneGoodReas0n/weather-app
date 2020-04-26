@@ -1,8 +1,13 @@
 import '../css/style.scss';
-import { getCurrentUserSettings, getCurrentUserLocation } from '../utils/cache';
+import {
+   getCurrentUserLocation,
+   getUnitsFromCacheOrDefault,
+   getLangFromCahceOrDefault
+} from '../utils/cache';
 import { updateTime, checkUpdatesInWeather, updateAll } from '../utils/updateData';
 import getForecast from '../api/weatherAPI';
 import { newDay } from '../utils/date';
+import { handleLoading } from '../utils/handlers';
 import App from '../utils/App';
 
 App();
@@ -10,7 +15,8 @@ App();
 setInterval(() => {
    updateTime();
    if (newDay()) {
-      const { units, lang } = getCurrentUserSettings();
+      const units = getUnitsFromCacheOrDefault();
+      const lang = getLangFromCahceOrDefault();
       const location = getCurrentUserLocation();
       getForecast(location.coordinates, units, lang).then((weatherObj) => {
          updateAll(location, weatherObj.list, lang);
@@ -19,9 +25,10 @@ setInterval(() => {
 }, 1000 * 1);
 
 setInterval(() => {
-   const { units, lang } = getCurrentUserSettings();
+   const lang = getLangFromCahceOrDefault();
+   const units = getUnitsFromCacheOrDefault();
    const location = getCurrentUserLocation();
    getForecast(location.coordinates, units, lang).then((weatherObj) => {
-      checkUpdatesInWeather(weatherObj.list, location, units);
+      checkUpdatesInWeather(weatherObj.list, location, units, handleLoading);
    });
 }, 1000 * 120);

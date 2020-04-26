@@ -1,10 +1,11 @@
 import getForecast from '../api/weatherAPI';
 import { updateAll, updateBackground } from './updateData';
 import {
-   getCurrentUserSettings,
    saveCurrentUserSettings,
    getHomeLocationFromCache,
-   getCurrentUserLocation
+   getCurrentUserLocation,
+   getLangFromCahceOrDefault,
+   getUnitsFromCacheOrDefault
 } from './cache';
 import { areObjectsEqual, swapOptions } from './functions';
 import { createLocationInfoObj } from './weather';
@@ -16,7 +17,7 @@ import cloudSVG from '../../assets/cloud_icon.svg';
 import getVocabular from './vocabular';
 
 const loadingScreen = () => {
-   const { lang } = getCurrentUserSettings();
+   const lang = getLangFromCahceOrDefault();
    const vocabular = getVocabular(lang);
    const loadingDiv = createDiv('loading');
    const loadingBody = createDiv('loading__body');
@@ -43,7 +44,8 @@ const unitsHandler = (event) => {
    const { target } = event;
    const locationInfo = getCurrentUserLocation();
    const { coordinates } = locationInfo;
-   const { units, lang } = getCurrentUserSettings();
+   const lang = getLangFromCahceOrDefault();
+   const units = getUnitsFromCacheOrDefault();
    if (String(target.className).includes('switcher__item_inactive')) {
       const { parentNode } = target;
       let newUnits = '';
@@ -70,7 +72,8 @@ const unitsHandler = (event) => {
 
 const homeHandler = () => {
    const { coordinates } = getHomeLocationFromCache();
-   const { lang, units } = getCurrentUserSettings();
+   const lang = getLangFromCahceOrDefault();
+   const units = getUnitsFromCacheOrDefault();
    const currentLocation = getCurrentUserLocation();
    if (!areObjectsEqual(currentLocation.coordinates, coordinates)) {
       handleLoading();
@@ -103,7 +106,7 @@ const toggleDropdown = (event) => {
 };
 
 const changeLangState = (newLang) => {
-   const { units } = getCurrentUserSettings();
+   const units = getUnitsFromCacheOrDefault();
    const locationInfo = getCurrentUserLocation();
    const { coordinates } = locationInfo;
    const dropdownBlock = document.getElementById('dropdown-list');
