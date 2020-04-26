@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/fdcdd5396c03b90f427b72b7f95cf0b9.svg\");\n\n//# sourceURL=webpack:///./assets/cloud_icon.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/fdcdd5396c03b90f427b72b7f95cf0b9.svg\");\n\n//# sourceURL=webpack:///./assets/cloud_icon.svg?");
 
 /***/ }),
 
@@ -106,7 +106,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/9ea2c0f0c98eb61d50463581c539df96.svg\");\n\n//# sourceURL=webpack:///./assets/home_icon_small_white.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/9ea2c0f0c98eb61d50463581c539df96.svg\");\n\n//# sourceURL=webpack:///./assets/home_icon_small_white.svg?");
 
 /***/ }),
 
@@ -118,7 +118,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/39b1d7bad1e6e3afd584c7b9d5e97a3f.svg\");\n\n//# sourceURL=webpack:///./assets/sun_icon.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/39b1d7bad1e6e3afd584c7b9d5e97a3f.svg\");\n\n//# sourceURL=webpack:///./assets/sun_icon.svg?");
 
 /***/ }),
 
@@ -130,7 +130,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/24ca5b6aeadede9a3ad9f6bcbbbcce29.svg\");\n\n//# sourceURL=webpack:///./assets/voice_svg.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/24ca5b6aeadede9a3ad9f6bcbbbcce29.svg\");\n\n//# sourceURL=webpack:///./assets/voice_svg.svg?");
 
 /***/ }),
 
@@ -142,7 +142,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/81e7efcf55826615545baf69cafb6c3f.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy-day-1.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/81e7efcf55826615545baf69cafb6c3f.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy-day-1.svg?");
 
 /***/ }),
 
@@ -154,7 +154,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/0b22bafcb70f3b4ac2e9b9c53893ef2a.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy-day-2.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/0b22bafcb70f3b4ac2e9b9c53893ef2a.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy-day-2.svg?");
 
 /***/ }),
 
@@ -166,7 +166,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/d80c1230db8e5e8fed280b3cfba0d795.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy-day-3.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/d80c1230db8e5e8fed280b3cfba0d795.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy-day-3.svg?");
 
 /***/ }),
 
@@ -178,7 +178,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/6fccb643999cfcc9951c51518f060b47.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy-night-1.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/6fccb643999cfcc9951c51518f060b47.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy-night-1.svg?");
 
 /***/ }),
 
@@ -190,7 +190,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/4997f4a068a9a8c6fef5ffd29e00c795.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy-night-2.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/4997f4a068a9a8c6fef5ffd29e00c795.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy-night-2.svg?");
 
 /***/ }),
 
@@ -202,7 +202,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/e01f241105416aa724a244a88dc64e4f.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy-night-3.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/e01f241105416aa724a244a88dc64e4f.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy-night-3.svg?");
 
 /***/ }),
 
@@ -214,7 +214,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/15085cfa9adcb75308238523464af6bd.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/15085cfa9adcb75308238523464af6bd.svg\");\n\n//# sourceURL=webpack:///./assets/weather/cloudy.svg?");
 
 /***/ }),
 
@@ -226,7 +226,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/aad52d38d5ccf858a7d2a52b89d50417.svg\");\n\n//# sourceURL=webpack:///./assets/weather/day.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/aad52d38d5ccf858a7d2a52b89d50417.svg\");\n\n//# sourceURL=webpack:///./assets/weather/day.svg?");
 
 /***/ }),
 
@@ -238,7 +238,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/857e7e52c1a502b217612f4c2a2d6e27.svg\");\n\n//# sourceURL=webpack:///./assets/weather/mist.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/857e7e52c1a502b217612f4c2a2d6e27.svg\");\n\n//# sourceURL=webpack:///./assets/weather/mist.svg?");
 
 /***/ }),
 
@@ -250,7 +250,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/ad93c80a72207de72e25254f47d5961b.svg\");\n\n//# sourceURL=webpack:///./assets/weather/night.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/ad93c80a72207de72e25254f47d5961b.svg\");\n\n//# sourceURL=webpack:///./assets/weather/night.svg?");
 
 /***/ }),
 
@@ -262,7 +262,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/12f25c2eeeff63b486abaa9720ee7fdc.svg\");\n\n//# sourceURL=webpack:///./assets/weather/rainy-1.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/12f25c2eeeff63b486abaa9720ee7fdc.svg\");\n\n//# sourceURL=webpack:///./assets/weather/rainy-1.svg?");
 
 /***/ }),
 
@@ -274,7 +274,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/c1be3f28ef8fbd74ef26b03c0ae7e7e8.svg\");\n\n//# sourceURL=webpack:///./assets/weather/rainy-2.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/c1be3f28ef8fbd74ef26b03c0ae7e7e8.svg\");\n\n//# sourceURL=webpack:///./assets/weather/rainy-2.svg?");
 
 /***/ }),
 
@@ -286,7 +286,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/fc5d383a5b426c22a36b9c13dd8a5735.svg\");\n\n//# sourceURL=webpack:///./assets/weather/rainy-3.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/fc5d383a5b426c22a36b9c13dd8a5735.svg\");\n\n//# sourceURL=webpack:///./assets/weather/rainy-3.svg?");
 
 /***/ }),
 
@@ -298,7 +298,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/8bc12c55ea9b0f3423aba4411cb74a76.svg\");\n\n//# sourceURL=webpack:///./assets/weather/rainy-4.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/8bc12c55ea9b0f3423aba4411cb74a76.svg\");\n\n//# sourceURL=webpack:///./assets/weather/rainy-4.svg?");
 
 /***/ }),
 
@@ -310,7 +310,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/99c619a42191a332e8fd29dbbbbcfe7a.svg\");\n\n//# sourceURL=webpack:///./assets/weather/rainy-5.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/99c619a42191a332e8fd29dbbbbcfe7a.svg\");\n\n//# sourceURL=webpack:///./assets/weather/rainy-5.svg?");
 
 /***/ }),
 
@@ -322,7 +322,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/b82749dbe57398e15efc1dca97c4316d.svg\");\n\n//# sourceURL=webpack:///./assets/weather/rainy-6.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/b82749dbe57398e15efc1dca97c4316d.svg\");\n\n//# sourceURL=webpack:///./assets/weather/rainy-6.svg?");
 
 /***/ }),
 
@@ -334,7 +334,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/c2631c37961a859323b15612b2c85e12.svg\");\n\n//# sourceURL=webpack:///./assets/weather/snowy-1.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/c2631c37961a859323b15612b2c85e12.svg\");\n\n//# sourceURL=webpack:///./assets/weather/snowy-1.svg?");
 
 /***/ }),
 
@@ -346,7 +346,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/4ab144aabc265d9cb6b7e8cbbb65bf86.svg\");\n\n//# sourceURL=webpack:///./assets/weather/snowy-2.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/4ab144aabc265d9cb6b7e8cbbb65bf86.svg\");\n\n//# sourceURL=webpack:///./assets/weather/snowy-2.svg?");
 
 /***/ }),
 
@@ -358,7 +358,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/0797cc84804b3e3e2373613fb365aee6.svg\");\n\n//# sourceURL=webpack:///./assets/weather/snowy-3.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/0797cc84804b3e3e2373613fb365aee6.svg\");\n\n//# sourceURL=webpack:///./assets/weather/snowy-3.svg?");
 
 /***/ }),
 
@@ -370,7 +370,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/c2b0c0875c71626e6646f2f3d8b0587b.svg\");\n\n//# sourceURL=webpack:///./assets/weather/snowy-4.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/c2b0c0875c71626e6646f2f3d8b0587b.svg\");\n\n//# sourceURL=webpack:///./assets/weather/snowy-4.svg?");
 
 /***/ }),
 
@@ -382,7 +382,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/52ada979154c8e23e955b9cf7c1952a2.svg\");\n\n//# sourceURL=webpack:///./assets/weather/snowy-5.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/52ada979154c8e23e955b9cf7c1952a2.svg\");\n\n//# sourceURL=webpack:///./assets/weather/snowy-5.svg?");
 
 /***/ }),
 
@@ -394,7 +394,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/01713485f38360de4d142403eeffda7b.svg\");\n\n//# sourceURL=webpack:///./assets/weather/snowy-6.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/01713485f38360de4d142403eeffda7b.svg\");\n\n//# sourceURL=webpack:///./assets/weather/snowy-6.svg?");
 
 /***/ }),
 
@@ -406,7 +406,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/3b60ce61d2eb79e96dbac8833332721b.svg\");\n\n//# sourceURL=webpack:///./assets/weather/thunder.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/3b60ce61d2eb79e96dbac8833332721b.svg\");\n\n//# sourceURL=webpack:///./assets/weather/thunder.svg?");
 
 /***/ }),
 
@@ -418,7 +418,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"/assets/6db3c0c931bc0fd71adc3880ccc4fd8c.svg\");\n\n//# sourceURL=webpack:///./assets/weather/tornado.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"./assets/6db3c0c931bc0fd71adc3880ccc4fd8c.svg\");\n\n//# sourceURL=webpack:///./assets/weather/tornado.svg?");
 
 /***/ }),
 
