@@ -1,4 +1,4 @@
-import { createDiv } from '../../template';
+import { createDiv } from '../../../template';
 import LocationDate from './locationDateBlock';
 import Wrapper from './Wrapper';
 

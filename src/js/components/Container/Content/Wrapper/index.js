@@ -1,4 +1,4 @@
-import { createDiv } from '../../../template';
+import { createDiv } from '../../../../template';
 import LeftWrapper from './LeftWrapper';
 import RightWrapper from './RightWrapper';
 

@@ -1,10 +1,10 @@
-import { createDiv, createImg, createSpan, createCustomDropdown } from '../../template';
-import languages from '../../../localization/languages';
-import { swapOptions, getUserLangOrDefault } from '../../../utils/functions';
-import homeIconSVG from '../../../../assets/home_icon_small_white.svg';
-import { getCurrentUserSettings } from '../../../utils/cache';
-import { toggleDropdown } from '../../../utils/handlers';
-import getVocabular from '../../../utils/vocabular';
+import { createDiv, createImg, createSpan, createCustomDropdown } from '../../../template';
+import languages from '../../../../localization/languages';
+import { swapOptions, getUserLangOrDefault } from '../../../../utils/functions';
+import homeIconSVG from '../../../../../assets/home_icon_small_white.svg';
+import { getCurrentUserSettings } from '../../../../utils/cache';
+import { toggleDropdown } from '../../../../utils/handlers';
+import getVocabular from '../../../../utils/vocabular';
 
 const makeButtonHome = () => {
    const currentSettings = getCurrentUserSettings();

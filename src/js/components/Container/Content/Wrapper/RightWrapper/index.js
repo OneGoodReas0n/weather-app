@@ -1,4 +1,4 @@
-import { createDiv } from '../../../../template';
+import { createDiv } from '../../../../../template';
 import Map from './map';
 
 const RightWrapper = () => {

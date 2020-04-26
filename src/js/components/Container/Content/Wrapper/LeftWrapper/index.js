@@ -1,4 +1,4 @@
-import { createDiv } from '../../../../template';
+import { createDiv } from '../../../../../template';
 import TodayBlock from './todayForecast';
 import PreviewBlock from './nextForecast';
 

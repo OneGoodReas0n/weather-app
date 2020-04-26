@@ -1,8 +1,8 @@
-import { createDiv, createImg, createInput } from '../../template';
-import voiceSVG from '../../../../assets/voice_svg.svg';
-import { getCurrentUserSettings } from '../../../utils/cache';
-import getVocabular from '../../../utils/vocabular';
-import { getUserLangOrDefault } from '../../../utils/functions';
+import { createDiv, createImg, createInput } from '../../../template';
+import voiceSVG from '../../../../../assets/voice_svg.svg';
+import { getCurrentUserSettings } from '../../../../utils/cache';
+import getVocabular from '../../../../utils/vocabular';
+import { getUserLangOrDefault } from '../../../../utils/functions';
 
 const makeSearchBar = () => {
    const currentSettings = getCurrentUserSettings();

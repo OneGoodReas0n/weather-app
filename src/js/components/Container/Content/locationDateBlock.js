@@ -1,4 +1,4 @@
-import { createDiv, createSpan } from '../../template';
+import { createDiv, createSpan } from '../../../template';
 
 const makeLocationBlock = () => {
    const locationBlock = createDiv('#location', 'location-date__item');

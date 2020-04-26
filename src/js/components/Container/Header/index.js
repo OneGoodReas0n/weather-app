@@ -1,4 +1,4 @@
-import { createDiv } from '../../template';
+import { createDiv } from '../../../template';
 import ButtonBlock from './buttonBlock';
 import SearchBlock from './searchBlock';
 

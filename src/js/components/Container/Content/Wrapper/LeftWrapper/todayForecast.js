@@ -1,4 +1,4 @@
-import { createDiv, createImg, createSpan, createP } from '../../../../template';
+import { createDiv, createImg, createSpan, createP } from '../../../../../template';
 
 const makeTemperatureBar = () => {
    const temperatureBar = createDiv('today-forecast__temperature');

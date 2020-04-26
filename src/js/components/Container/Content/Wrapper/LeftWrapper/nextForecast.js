@@ -1,4 +1,4 @@
-import { createDiv, createImg, createSpan } from '../../../../template';
+import { createDiv, createImg, createSpan } from '../../../../../template';
 
 const makeDayForecast = () => {
    const forecastBody = createDiv('next-forecast__body');

@@ -1,4 +1,4 @@
-import { createDiv, createP } from '../../../../template';
+import { createDiv, createP } from '../../../../../template';
 
 const makeMapDetails = () => {
    const mapDetails = createDiv('#coordinates', 'map__details');
