@@ -125,6 +125,51 @@ const clearField = (event) => {
    target.value = '';
 };
 
+const speechRecognition = () => {
+   if (!('webkitSpeechRecognition' in window)) {
+      upgrade();
+   } else {
+      const searchInput = document.getElementById('search_input');
+      const recognition = new webkitSpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.onresult = (event) => {
+         var interim_transcript = '';
+         var final_transcript = '';
+
+         for (var i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+               final_transcript += event.results[i][0].transcript;
+            } else {
+               interim_transcript += event.results[i][0].transcript;
+            }
+         }
+         searchInput.value = capitalize(final_transcript);
+      };
+
+      recognition.onspeechend = () => {
+         setTimeout(() => {
+            searchInput.focus();
+         }, 100);
+      };
+
+      const startRecognition = () => {
+         searchInput.value = '';
+         recognition.start();
+         setTimeout(() => {
+            recognition.stop();
+         }, 2500);
+      };
+
+      const capitalize = (text) => {
+         return String(text).slice(0, 1).toUpperCase() + String(text).slice(1);
+      };
+
+      const button = document.getElementById('voice');
+      button.addEventListener('click', startRecognition);
+   }
+};
+
 const setHandlers = () => {
    const unitsBlock = document.getElementById('temp-switcher');
    unitsBlock.childNodes.forEach((e) => {
@@ -145,6 +190,8 @@ const setHandlers = () => {
    dropdown.childNodes.forEach((e) => {
       e.addEventListener('click', toggleDropdown);
    });
+
+   speechRecognition();
 };
 
 export { setHandlers, toggleDropdown, handleLoading };

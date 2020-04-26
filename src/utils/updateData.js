@@ -82,9 +82,9 @@ const updateBackground = (weatherObject) => {
    const { weather } = weatherObject;
    const { body } = document;
    const background = document.getElementById('background');
-   const cachePhotos = JSON.parse(localStorage.getItem('cachePhotos'));
-   if (cachePhotos) {
-      const photos = sortArrayAscByProp('likes', cachePhotos);
+   getPhotosByKeyword(`weather ${weather}`).then((results) => {
+      localStorage.setItem('cachePhotos', JSON.stringify(results));
+      const photos = sortArrayAscByProp('likes', results);
       const randomNum = Math.floor(Math.random() * photos.length);
       const backImg = createImg(photos[randomNum].urls.raw, 'background__image');
       backImg.onload = () => {
@@ -95,22 +95,7 @@ const updateBackground = (weatherObject) => {
          });
       };
       background.appendChild(backImg);
-   } else {
-      getPhotosByKeyword(`weather ${weather}`).then((results) => {
-         localStorage.setItem('cachePhotos', JSON.stringify(results));
-         const photos = sortArrayAscByProp('likes', results);
-         const randomNum = Math.floor(Math.random() * photos.length);
-         const backImg = createImg(photos[randomNum].urls.raw, 'background__image');
-         backImg.onload = () => {
-            body.childNodes.forEach((e) => {
-               if (e.className === 'loading') {
-                  body.removeChild(e);
-               }
-            });
-         };
-         background.appendChild(backImg);
-      });
-   }
+   });
 };
 
 /**
