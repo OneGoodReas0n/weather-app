@@ -1,0 +1,539 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+
+body {
+  background-color: rgba(68, 85, 102, 0.8);
+  font-family: 'Montserrat';
+  font-size: 16px;
+  color: #fff;
+  user-select: none;
+  min-width: 600px; }
+
+.loading {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(68, 85, 102, 0.98);
+  z-index: 2; }
+  .loading .loading__body .loading__animation {
+    position: relative;
+    display: flex;
+    right: 30px;
+    z-index: 3;
+    width: 200px;
+    height: 200px; }
+    .loading .loading__body .loading__animation .animation__item {
+      position: relative;
+      width: 100%; }
+    .loading .loading__body .loading__animation .animation__sun {
+      left: 50px;
+      bottom: 20px;
+      z-index: 3;
+      animation: sun-rotation 3s linear infinite; }
+    .loading .loading__body .loading__animation .animation__cloud {
+      z-index: 4;
+      animation: cloud-moving 3s linear infinite; }
+
+@keyframes sun-rotation {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+@keyframes cloud-moving {
+  0% {
+    transform: translateX(0px); }
+  25% {
+    transform: translateX(20px); }
+  50% {
+    transform: translateX(0px); }
+  75% {
+    transform: translateX(-20px); }
+  100% {
+    transform: translateX(0px); } }
+  .loading .loading__body .loading__text {
+    position: relative;
+    bottom: 30px;
+    text-align: center; }
+    .loading .loading__body .loading__text .text__item {
+      font-size: 24px;
+      color: #fff; }
+
+.hiding {
+  animation: hiding 1s ease; }
+
+@keyframes hiding {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
+.button {
+  display: flex;
+  align-items: center;
+  background-color: rgba(174, 181, 185, 0.5);
+  color: #fff;
+  cursor: pointer; }
+  @media (max-width: 992px) {
+    .button {
+      padding: 10px 12.5px; } }
+  @media (min-width: 993px) and (max-width: 1200px) {
+    .button {
+      padding: 10px 12.5px; } }
+  @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+    .button {
+      padding: 14px 16.5px; } }
+  @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
+    .button {
+      padding: 14px 16.5px; } }
+
+.background {
+  width: 100%;
+  height: 100%; }
+  .background .background__image {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover; }
+  .background .container {
+    position: relative;
+    z-index: 2;
+    margin: 0 auto; }
+    @media (max-width: 992px) {
+      .background .container {
+        max-width: 992px;
+        padding: 10px 10px 0 10px; } }
+    @media (min-width: 993px) and (max-width: 1200px) {
+      .background .container {
+        max-width: 1200px;
+        padding: 15px 20px 0 20px; } }
+    @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+      .background .container {
+        max-width: 1920px;
+        padding: 20px 30px 0 30px; } }
+    .background .container .header {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-size: 14px;
+      font-weight: 600; }
+      .background .container .header .header__actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; }
+        @media (max-width: 992px) {
+          .background .container .header .header__actions {
+            max-width: 40%; } }
+        @media (min-width: 993px) and (max-width: 1200px) {
+          .background .container .header .header__actions {
+            max-width: 30%; } }
+        @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+          .background .container .header .header__actions {
+            max-width: 25%; } }
+        .background .container .header .header__actions .button {
+          margin-right: 15px;
+          border-radius: 5px; }
+        .background .container .header .header__actions .dropdown {
+          position: relative; }
+          @media (max-width: 992px) {
+            .background .container .header .header__actions .dropdown {
+              max-height: 38px; } }
+          @media (min-width: 993px) and (max-width: 1200px) {
+            .background .container .header .header__actions .dropdown {
+              max-height: 38px; } }
+          @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+            .background .container .header .header__actions .dropdown {
+              max-height: 46px; } }
+          .background .container .header .header__actions .dropdown:after {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 42%;
+            right: 32%;
+            width: 10px;
+            height: 6px;
+            background: url("/assets/arrow-down_icon.svg");
+            pointer-events: none;
+            transition: all 300ms 0s ease-in-out; }
+          .background .container .header .header__actions .dropdown:hover:after {
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg); }
+          .background .container .header .header__actions .dropdown .dropdown__list {
+            overflow: hidden;
+            margin-right: 15px;
+            border-radius: 5px;
+            background-color: rgba(174, 181, 185, 0.5); }
+            @media (max-width: 992px) {
+              .background .container .header .header__actions .dropdown .dropdown__list {
+                max-height: 38px; } }
+            @media (min-width: 993px) and (max-width: 1200px) {
+              .background .container .header .header__actions .dropdown .dropdown__list {
+                max-height: 38px; } }
+            @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+              .background .container .header .header__actions .dropdown .dropdown__list {
+                max-height: 46px; } }
+            .background .container .header .header__actions .dropdown .dropdown__list:hover {
+              background-color: rgba(174, 181, 185, 0.9);
+              max-height: fit-content;
+              animation: dropdown 0.5s ease; }
+            .background .container .header .header__actions .dropdown .dropdown__list .dropdown__item {
+              z-index: 1;
+              padding: 14px 25px 14px 12px;
+              border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+              background-color: rgba(174, 181, 185, 0.5);
+              cursor: pointer; }
+              @media (max-width: 992px) {
+                .background .container .header .header__actions .dropdown .dropdown__list .dropdown__item {
+                  padding: 11px 25px 11px 12px; } }
+              @media (min-width: 993px) and (max-width: 1200px) {
+                .background .container .header .header__actions .dropdown .dropdown__list .dropdown__item {
+                  padding: 11px 25px 11px 12px; } }
+              @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+                .background .container .header .header__actions .dropdown .dropdown__list .dropdown__item {
+                  padding: 14px 25px 14px 12px; } }
+
+@keyframes dropdown {
+  @media (max-width: 992px) {
+    from {
+      height: 38px; }
+    to {
+      height: 124px; } }
+  @media (min-width: 993px) and (max-width: 1200px) {
+    from {
+      height: 38px; }
+    to {
+      height: 124px; } }
+  @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+    from {
+      height: 46px; }
+    to {
+      height: 138px; } } }
+        .background .container .header .header__actions .switcher {
+          display: flex; }
+          .background .container .header .header__actions .switcher .button {
+            margin-right: 0; }
+          .background .container .header .header__actions .switcher .switcher__item .switcher__title {
+            pointer-events: none; }
+          .background .container .header .header__actions .switcher .switcher__item_left {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0; }
+          .background .container .header .header__actions .switcher .switcher__item_right {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0; }
+          .background .container .header .header__actions .switcher .switcher__item_active {
+            background-color: rgba(174, 181, 185, 0.5); }
+          .background .container .header .header__actions .switcher .switcher__item_inactive {
+            background-color: rgba(76, 82, 85, 0.4); }
+      .background .container .header .search {
+        display: flex;
+        align-items: center;
+        max-width: 40%; }
+        .background .container .header .search .search__body {
+          position: relative;
+          display: flex; }
+          .background .container .header .search .search__body .search__input {
+            background-color: rgba(76, 82, 85, 0.4);
+            color: #fff;
+            border: none; }
+            @media (max-width: 992px) {
+              .background .container .header .search .search__body .search__input {
+                width: 180px;
+                padding: 11.5px 35px 11.5px 10px; } }
+            @media (min-width: 993px) and (max-width: 1200px) {
+              .background .container .header .search .search__body .search__input {
+                width: 240px;
+                padding: 12px 35px 12px 13px; } }
+            @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+              .background .container .header .search .search__body .search__input {
+                width: 280px;
+                padding: 15.5px 35px 15.5px 15px; } }
+            .background .container .header .search .search__body .search__input::placeholder {
+              font-family: 'Montserrat';
+              color: #fff; }
+              @media (max-width: 992px) {
+                .background .container .header .search .search__body .search__input::placeholder {
+                  font-size: 13px; } }
+              @media (min-width: 993px) and (max-width: 1200px) {
+                .background .container .header .search .search__body .search__input::placeholder {
+                  font-size: 14px; } }
+              @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+                .background .container .header .search .search__body .search__input::placeholder {
+                  font-size: 15px; } }
+            .background .container .header .search .search__body .search__input:focus {
+              outline: none;
+              color: #fff; }
+          .background .container .header .search .search__body .search__voice {
+            position: absolute;
+            right: 13px;
+            cursor: pointer; }
+            @media (max-width: 992px) {
+              .background .container .header .search .search__body .search__voice {
+                top: 11px; } }
+            @media (min-width: 993px) and (max-width: 1200px) {
+              .background .container .header .search .search__body .search__voice {
+                top: 11px; } }
+            @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+              .background .container .header .search .search__body .search__voice {
+                top: 15px; } }
+          .background .container .header .search .search__body .search__home {
+            position: absolute;
+            right: 35px;
+            cursor: pointer; }
+            @media (max-width: 992px) {
+              .background .container .header .search .search__body .search__home {
+                top: 11px; } }
+            @media (min-width: 993px) and (max-width: 1200px) {
+              .background .container .header .search .search__body .search__home {
+                top: 11px; } }
+            @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+              .background .container .header .search .search__body .search__home {
+                top: 15px; } }
+    @media (max-width: 992px) {
+      .background .container .content .location-date {
+        margin-top: 10px; } }
+    @media (min-width: 993px) and (max-width: 1200px) {
+      .background .container .content .location-date {
+        margin-top: 15px; } }
+    @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+      .background .container .content .location-date {
+        margin-top: 10px; } }
+    .background .container .content .location-date .location-date__item .location-date__text {
+      font-weight: 800; }
+      @media (max-width: 992px) {
+        .background .container .content .location-date .location-date__item .location-date__text {
+          font-size: 24px; } }
+      @media (min-width: 993px) and (max-width: 1200px) {
+        .background .container .content .location-date .location-date__item .location-date__text {
+          font-size: 28px; } }
+      @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+        .background .container .content .location-date .location-date__item .location-date__text {
+          font-size: 44px; } }
+    .background .container .content .location-date .location-date__item .location-date__subtext {
+      font-weight: 500;
+      letter-spacing: 0.5px; }
+      @media (max-width: 992px) {
+        .background .container .content .location-date .location-date__item .location-date__subtext {
+          font-size: 16px; } }
+      @media (min-width: 993px) and (max-width: 1200px) {
+        .background .container .content .location-date .location-date__item .location-date__subtext {
+          font-size: 20px; } }
+      @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+        .background .container .content .location-date .location-date__item .location-date__subtext {
+          font-size: 24px; } }
+    .background .container .content .wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      @media (max-width: 992px) {
+        .background .container .content .wrapper {
+          margin-top: 30px; } }
+      @media (min-width: 993px) and (max-width: 1200px) {
+        .background .container .content .wrapper {
+          margin-top: 30px; } }
+      .background .container .content .wrapper .left-wrapper {
+        overflow: hidden; }
+        @media (max-width: 992px) {
+          .background .container .content .wrapper .left-wrapper {
+            width: 58%; } }
+        @media (min-width: 993px) and (max-width: 1200px) {
+          .background .container .content .wrapper .left-wrapper {
+            width: 55%; } }
+        @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
+          .background .container .content .wrapper .left-wrapper {
+            width: 50%; } }
+        @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+          .background .container .content .wrapper .left-wrapper {
+            width: 50%; } }
+        .background .container .content .wrapper .left-wrapper .today-forecast {
+          display: flex;
+          justify-content: center; }
+          @media (min-width: 993px) and (max-width: 1200px) {
+            .background .container .content .wrapper .left-wrapper .today-forecast {
+              margin-top: 10px; } }
+          @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+            .background .container .content .wrapper .left-wrapper .today-forecast {
+              margin-top: 20px; } }
+          @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
+            .background .container .content .wrapper .left-wrapper .today-forecast {
+              margin-top: 30px; } }
+          .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature {
+            max-width: 62%;
+            position: relative; }
+            .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__value {
+              font-weight: 600; }
+              @media (max-width: 992px) {
+                .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__value {
+                  font-size: 170px; } }
+              @media (min-width: 993px) and (max-width: 1200px) {
+                .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__value {
+                  font-size: 200px; } }
+              @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+                .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__value {
+                  font-size: 230px; } }
+              @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
+                .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__value {
+                  font-size: 250px; } }
+            .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__degree {
+              position: relative;
+              font-weight: 600; }
+              @media (max-width: 992px) {
+                .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__degree {
+                  top: -105.26316px;
+                  font-size: 40px; } }
+              @media (min-width: 993px) and (max-width: 1200px) {
+                .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__degree {
+                  top: -121.05263px;
+                  font-size: 50px; } }
+              @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+                .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__degree {
+                  top: -131.57895px;
+                  font-size: 80px; } }
+              @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
+                .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__temperature .today-forecast__degree {
+                  top: -131.57895px;
+                  font-size: 80px; } }
+          .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather {
+            margin-left: 20px; }
+            @media (max-width: 992px) {
+              .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather .today-forecast__image {
+                width: 75%; } }
+            @media (min-width: 993px) and (max-width: 1200px) {
+              .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather .today-forecast__image {
+                width: 75%; } }
+            @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+              .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather .today-forecast__image {
+                width: 90%; } }
+            @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
+              .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather .today-forecast__image {
+                width: 90%; } }
+            .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather .today-forecast__details .today-forecast__item {
+              font-weight: 600;
+              text-transform: uppercase;
+              letter-spacing: 0.5px; }
+              @media (max-width: 992px) {
+                .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather .today-forecast__details .today-forecast__item {
+                  font-size: 14px; } }
+              @media (min-width: 993px) and (max-width: 1200px) {
+                .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather .today-forecast__details .today-forecast__item {
+                  font-size: 18px; } }
+              @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+                .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather .today-forecast__details .today-forecast__item {
+                  font-size: 20px; } }
+              @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
+                .background .container .content .wrapper .left-wrapper .today-forecast .today-forecast__weather .today-forecast__details .today-forecast__item {
+                  font-size: 20px; } }
+        @media (max-width: 992px) {
+          .background .container .content .wrapper .left-wrapper .next-forecast {
+            margin-top: 10px; } }
+        @media (min-width: 993px) and (max-width: 1200px) {
+          .background .container .content .wrapper .left-wrapper .next-forecast {
+            margin-top: 15px; } }
+        @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+          .background .container .content .wrapper .left-wrapper .next-forecast {
+            margin-top: 20px; } }
+        @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
+          .background .container .content .wrapper .left-wrapper .next-forecast {
+            margin-top: 30px; } }
+        .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list {
+          display: flex;
+          justify-content: space-between; }
+          .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item {
+            width: 32%; }
+            .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__title {
+              font-weight: 600;
+              text-transform: uppercase;
+              letter-spacing: 1px; }
+              @media (max-width: 992px) {
+                .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__title {
+                  font-size: 12px; } }
+              @media (min-width: 993px) and (max-width: 1200px) {
+                .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__title {
+                  font-size: 18px; } }
+              @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+                .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__title {
+                  font-size: 20px; } }
+              @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
+                .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__title {
+                  font-size: 20px; } }
+            .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__body {
+              display: flex;
+              align-items: center; }
+              .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__body .next-forecast__bar {
+                display: flex; }
+                .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__body .next-forecast__bar .next-forecast__value {
+                  font-weight: 600; }
+                  @media (max-width: 992px) {
+                    .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__body .next-forecast__bar .next-forecast__value {
+                      font-size: 32px; } }
+                  @media (min-width: 993px) and (max-width: 1200px) {
+                    .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__body .next-forecast__bar .next-forecast__value {
+                      font-size: 48px; } }
+                  @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+                    .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__body .next-forecast__bar .next-forecast__value {
+                      font-size: 60px; } }
+                  @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 762px) {
+                    .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__body .next-forecast__bar .next-forecast__value {
+                      font-size: 70px; } }
+                .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__body .next-forecast__bar .next-forecast__units {
+                  position: relative;
+                  left: 5px; }
+                  @media (max-width: 992px) {
+                    .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__body .next-forecast__bar .next-forecast__units {
+                      top: 5px;
+                      font-size: 20px; } }
+                  @media (min-width: 993px) and (max-width: 1200px) {
+                    .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__body .next-forecast__bar .next-forecast__units {
+                      top: 8px;
+                      font-size: 18px; } }
+                  @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+                    .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__body .next-forecast__bar .next-forecast__units {
+                      top: 10px;
+                      font-size: 24px; } }
+              .background .container .content .wrapper .left-wrapper .next-forecast .next-forecast__list .next-forecast__item .next-forecast__body .next-forecast__icon {
+                width: 45%;
+                margin-left: 10px; }
+      @media (max-width: 992px) {
+        .background .container .content .wrapper .right-wrapper {
+          width: 38%; } }
+      @media (min-width: 993px) and (max-width: 1200px) {
+        .background .container .content .wrapper .right-wrapper {
+          width: 38%; } }
+      @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+        .background .container .content .wrapper .right-wrapper {
+          width: 35%; } }
+      .background .container .content .wrapper .right-wrapper .map #map-canvas {
+        height: 0;
+        margin-left: auto;
+        padding-bottom: 90%;
+        border-radius: 10px; }
+        .background .container .content .wrapper .right-wrapper .map #map-canvas .mapboxgl-canvas {
+          left: 0; }
+      .background .container .content .wrapper .right-wrapper .map .map__details {
+        width: 100%; }
+        .background .container .content .wrapper .right-wrapper .map .map__details .map__item {
+          width: fit-content;
+          margin-left: auto;
+          font-weight: 500; }
+          @media (max-width: 992px) {
+            .background .container .content .wrapper .right-wrapper .map .map__details .map__item {
+              font-size: 16px; } }
+          @media (min-width: 993px) and (max-width: 1200px) {
+            .background .container .content .wrapper .right-wrapper .map .map__details .map__item {
+              font-size: 18px; } }
+          @media (min-width: 1201px) and (max-width: 1920px) and (min-height: 662px) {
+            .background .container .content .wrapper .right-wrapper .map .map__details .map__item {
+              font-size: 20px; } }
+
