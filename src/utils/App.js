@@ -58,8 +58,6 @@ const initializeAutocomplete = (map) => {
                updateAll(locationInfo, weatherObj.list, lang);
                map.setCenter([placeLong, placeLat]);
             });
-         } else {
-            alert('Not found');
          }
       });
    }, 0);
