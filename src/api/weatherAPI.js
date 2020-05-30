@@ -1,4 +1,4 @@
-import tockens from '../keys/tockens';
+import tokens from '../keys/tokens';
 
 /**
  * * Function for serializing data
@@ -36,7 +36,7 @@ const getForecast = async (coordinates, units, lang) => {
    const { lat, lng } = coordinates;
    const path = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&units=${
       units === 'C' ? 'metric' : 'imperial'
-   }&appid=${tockens.WEATHER_TOCKEN}&lang=${lang}`;
+   }&appid=${tokens.WEATHER_TOKEN}&lang=${lang}`;
 
    const response = await fetch(path);
    const weather = await response.json();

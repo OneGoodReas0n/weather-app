@@ -1,11 +1,11 @@
-import tockens from '../keys/tockens';
+import tokens from '../keys/tokens';
 
 const getLocation = async () => {
    const response = await fetch('https://ipinfo.io', {
       headers: {
          'Content-type': 'application/json',
          Accept: 'application/json',
-         Authorization: `Bearer ${tockens.IPINFO_TOKEN}`
+         Authorization: `Bearer ${tokens.IPINFO_TOKEN}`
       }
    });
    const data = await response.json();

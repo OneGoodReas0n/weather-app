@@ -1,4 +1,4 @@
-import tokens from '../keys/tockens';
+import tokens from '../keys/tokens';
 
 const getMyLocationByPlace = async (location, lang) => {
    const { city, country } = location;

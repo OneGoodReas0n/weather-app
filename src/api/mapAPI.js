@@ -1,5 +1,5 @@
 import { Map } from 'mapbox-gl';
-import tockens from '../keys/tockens';
+import tockens from '../keys/tokens';
 
 const MapApi = (() => {
    let map;

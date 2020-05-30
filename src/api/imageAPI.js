@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import Unsplash, { toJson } from 'unsplash-js';
-import tockens from '../keys/tockens';
+import tockens from '../keys/tokens';
 
 global.fetch = fetch;
 
