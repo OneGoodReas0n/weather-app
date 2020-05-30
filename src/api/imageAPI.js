@@ -1,10 +1,10 @@
 import fetch from 'node-fetch';
 import Unsplash, { toJson } from 'unsplash-js';
-import tockens from '../keys/tokens';
+import tokens from '../keys/tokens';
 
 global.fetch = fetch;
 
-const unsplash = new Unsplash({ accessKey: tockens.UNSPLASH_ACCESS_TOKEN });
+const unsplash = new Unsplash({ accessKey: tokens.UNSPLASH_ACCESS_TOKEN });
 
 const getPhotosFromResponse = (results) => {
    const photos = [];
