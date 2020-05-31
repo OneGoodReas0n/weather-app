@@ -1,0 +1,12 @@
+@function calculateFontSize($font-size){
+   @return $font-size - 20px;
+}
+
+@function calculateShift($font-size, $big:false){
+   @if($big){
+      @return -$font-size /1.9;
+   }
+   @else{
+      @return -$font-size /1.9;
+   }
+}

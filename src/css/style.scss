@@ -1,0 +1,768 @@
+@import './colors.scss', './mixins.scss', './font-sizes.scss', './functions.scss';
+
+html,
+body {
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+}
+
+body {
+   background-color: $main-theme-color;
+   font-family: 'Montserrat';
+   font-size: 16px;
+   color: $button-title-color;
+   user-select: none;
+   min-width: 600px;
+}
+
+.loading {
+   position: absolute;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   top: 0;
+   width: 100vw;
+   height: 100vh;
+   background-color: $main-theme-color-dark;
+   z-index: 2;
+
+   .loading__body {
+      .loading__animation {
+         position: relative;
+         display: flex;
+         right: 30px;
+         z-index: 3;
+         width: 200px;
+         height: 200px;
+
+         .animation__item {
+            position: relative;
+            width: 100%;
+         }
+
+         .animation__sun {
+            left: 50px;
+            bottom: 20px;
+            z-index: 3;
+            animation: sun-rotation 3s linear infinite;
+         }
+         .animation__cloud {
+            z-index: 4;
+            animation: cloud-moving 3s linear infinite;
+         }
+
+         @keyframes sun-rotation {
+            from {
+               transform: rotate(0deg);
+            }
+            to {
+               transform: rotate(360deg);
+            }
+         }
+
+         @keyframes cloud-moving {
+            0% {
+               transform: translateX(0px);
+            }
+            25% {
+               transform: translateX(20px);
+            }
+            50% {
+               transform: translateX(0px);
+            }
+            75% {
+               transform: translateX(-20px);
+            }
+            100% {
+               transform: translateX(0px);
+            }
+         }
+      }
+      .loading__text {
+         position: relative;
+
+         bottom: 30px;
+         text-align: center;
+         .text__item {
+            font-size: 24px;
+            color: #fff;
+         }
+      }
+   }
+}
+
+.hiding {
+   animation: hiding 1s ease;
+}
+
+@keyframes hiding {
+   from {
+      opacity: 1;
+   }
+   to {
+      opacity: 0;
+   }
+}
+
+.button {
+   display: flex;
+   align-items: center;
+   background-color: $button-color-active;
+   color: $button-title-color;
+   cursor: pointer;
+
+   @include for-tablet {
+      padding: 10px 12.5px;
+   }
+
+   @include for-desktop {
+      padding: 10px 12.5px;
+   }
+
+   @include for-large-screen {
+      padding: 14px 16.5px;
+   }
+
+   @include for-large-screen(true) {
+      padding: 14px 16.5px;
+   }
+}
+
+.background {
+   width: 100%;
+   height: 100%;
+
+   .background__image {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+   }
+
+   .container {
+      position: relative;
+      z-index: 2;
+      margin: 0 auto;
+
+      @include for-tablet {
+         max-width: map-get($width-breakpoints, md);
+         padding: 10px 10px 0 10px;
+      }
+
+      @include for-desktop {
+         max-width: map-get($width-breakpoints, lg);
+         padding: 15px 20px 0 20px;
+      }
+
+      @include for-large-screen {
+         max-width: map-get($width-breakpoints, xl);
+         padding: 20px 30px 0 30px;
+      }
+
+      // Header
+
+      .header {
+         display: flex;
+         justify-content: space-between;
+         width: 100%;
+         font-size: 14px;
+         font-weight: 600;
+         .header__actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            @include for-tablet {
+               max-width: 40%;
+            }
+
+            @include for-desktop {
+               max-width: 30%;
+            }
+
+            @include for-large-screen {
+               max-width: 25%;
+            }
+
+            .button {
+               margin-right: 15px;
+               border-radius: 5px;
+            }
+
+            .dropdown {
+               position: relative;
+               @include for-tablet {
+                  max-height: 38px;
+               }
+
+               @include for-desktop {
+                  max-height: 38px;
+               }
+
+               @include for-large-screen {
+                  max-height: 46px;
+               }
+
+               &:after {
+                  content: '';
+                  display: inline-block;
+                  position: absolute;
+                  top: 42%;
+                  right: 32%;
+                  width: 10px;
+                  height: 6px;
+                  background: url('/assets/arrow-down_icon.svg');
+
+                  pointer-events: none;
+                  transition: all 300ms 0s ease-in-out;
+               }
+
+               &:hover:after {
+                  -webkit-transform: rotate(180deg);
+                  transform: rotate(180deg);
+               }
+
+               .dropdown__list {
+                  overflow: hidden;
+                  margin-right: 15px;
+                  border-radius: 5px;
+                  background-color: $button-color-active;
+                  @include for-tablet {
+                     max-height: 38px;
+                  }
+
+                  @include for-desktop {
+                     max-height: 38px;
+                  }
+
+                  @include for-large-screen {
+                     max-height: 46px;
+                  }
+
+                  &:hover {
+                     background-color: $dropdown-list-color;
+                     max-height: fit-content;
+                     animation: dropdown 0.5s ease;
+                  }
+
+                  .dropdown__item {
+                     z-index: 1;
+                     padding: 14px 25px 14px 12px;
+                     border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
+                     background-color: $button-color-active;
+                     cursor: pointer;
+
+                     @include for-tablet {
+                        padding: 11px 25px 11px 12px;
+                     }
+
+                     @include for-desktop {
+                        padding: 11px 25px 11px 12px;
+                     }
+
+                     @include for-large-screen {
+                        padding: 14px 25px 14px 12px;
+                     }
+                  }
+
+                  @keyframes dropdown {
+                     @include for-tablet {
+                        from {
+                           height: 38px;
+                        }
+                        to {
+                           height: 124px;
+                        }
+                     }
+
+                     @include for-desktop {
+                        from {
+                           height: 38px;
+                        }
+                        to {
+                           height: 124px;
+                        }
+                     }
+
+                     @include for-large-screen {
+                        from {
+                           height: 46px;
+                        }
+                        to {
+                           height: 138px;
+                        }
+                     }
+                  }
+               }
+            }
+
+            .switcher {
+               display: flex;
+               .button {
+                  margin-right: 0;
+               }
+
+               .switcher__item {
+                  .switcher__title {
+                     pointer-events: none;
+                  }
+               }
+
+               .switcher__item_left {
+                  border-top-left-radius: 5px;
+                  border-bottom-left-radius: 5px;
+                  border-top-right-radius: 0;
+                  border-bottom-right-radius: 0;
+               }
+               .switcher__item_right {
+                  border-top-right-radius: 5px;
+                  border-bottom-right-radius: 5px;
+                  border-top-left-radius: 0;
+                  border-bottom-left-radius: 0;
+               }
+
+               .switcher__item_active {
+                  background-color: $button-color-active;
+               }
+
+               .switcher__item_inactive {
+                  background-color: $button-color-inactive;
+               }
+            }
+         }
+
+         .search {
+            display: flex;
+            align-items: center;
+            max-width: 40%;
+            .search__body {
+               position: relative;
+               display: flex;
+               .search__input {
+                  background-color: $input-background-color;
+                  color: $button-title-color;
+                  border: none;
+
+                  @include for-tablet {
+                     width: 180px;
+                     padding: 11.5px 35px 11.5px 10px;
+                  }
+
+                  @include for-desktop {
+                     width: 240px;
+                     padding: 12px 35px 12px 13px;
+                  }
+
+                  @include for-large-screen {
+                     width: 280px;
+                     padding: 15.5px 35px 15.5px 15px;
+                  }
+
+                  &::placeholder {
+                     font-family: 'Montserrat';
+                     color: $button-title-color;
+
+                     @include for-tablet {
+                        font-size: 13px;
+                     }
+
+                     @include for-desktop {
+                        font-size: 14px;
+                     }
+
+                     @include for-large-screen {
+                        font-size: 15px;
+                     }
+                  }
+
+                  &:focus {
+                     outline: none;
+                     color: $button-title-color;
+                  }
+               }
+               .search__voice {
+                  position: absolute;
+                  right: 13px;
+                  cursor: pointer;
+
+                  @include for-tablet {
+                     top: 11px;
+                  }
+
+                  @include for-desktop {
+                     top: 11px;
+                  }
+
+                  @include for-large-screen {
+                     top: 15px;
+                  }
+               }
+
+               .search__home {
+                  position: absolute;
+                  right: 35px;
+                  cursor: pointer;
+
+                  @include for-tablet {
+                     top: 11px;
+                  }
+
+                  @include for-desktop {
+                     top: 11px;
+                  }
+
+                  @include for-large-screen {
+                     top: 15px;
+                  }
+               }
+            }
+         }
+      }
+
+      // END Header
+
+      // CONTENT
+
+      .content {
+         .location-date {
+            @include for-tablet {
+               margin-top: 10px;
+            }
+
+            @include for-desktop {
+               margin-top: 15px;
+            }
+
+            @include for-large-screen {
+               margin-top: 10px;
+            }
+
+            @include for-large-screen(true) {
+            }
+            .location-date__item {
+               .location-date__text {
+                  @include for-tablet {
+                     font-size: 24px;
+                  }
+
+                  @include for-desktop {
+                     font-size: 28px;
+                  }
+
+                  @include for-large-screen {
+                     font-size: 44px;
+                  }
+                  font-weight: 800;
+               }
+
+               .location-date__subtext {
+                  @include for-tablet {
+                     font-size: 16px;
+                  }
+
+                  @include for-desktop {
+                     font-size: 20px;
+                  }
+
+                  @include for-large-screen {
+                     font-size: 24px;
+                  }
+
+                  font-weight: 500;
+                  letter-spacing: 0.5px;
+               }
+            }
+         }
+
+         .wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            @include for-tablet {
+               margin-top: 30px;
+            }
+
+            @include for-desktop {
+               margin-top: 30px;
+            }
+
+            @include for-large-screen {
+            }
+
+            .left-wrapper {
+               @include for-tablet {
+                  width: 58%;
+               }
+
+               @include for-desktop {
+                  width: 55%;
+               }
+
+               @include for-large-screen(true) {
+                  width: 50%;
+               }
+
+               @include for-large-screen {
+                  width: 50%;
+               }
+
+               overflow: hidden;
+               .today-forecast {
+                  display: flex;
+                  justify-content: center;
+
+                  @include for-desktop {
+                     margin-top: 10px;
+                  }
+
+                  @include for-large-screen {
+                     margin-top: 20px;
+                  }
+
+                  @include for-large-screen(true) {
+                     margin-top: 30px;
+                  }
+
+                  .today-forecast__temperature {
+                     max-width: 62%;
+                     position: relative;
+                     .today-forecast__value {
+                        @include for-tablet {
+                           font-size: $sm-screen-font-size;
+                        }
+
+                        @include for-desktop {
+                           font-size: $md-screen-font-size;
+                        }
+
+                        @include for-large-screen {
+                           font-size: calculateFontSize($xl-screen-font-size);
+                        }
+
+                        @include for-large-screen(true) {
+                           font-size: $xl-screen-font-size;
+                        }
+                        font-weight: 600;
+                     }
+                     .today-forecast__degree {
+                        position: relative;
+                        font-weight: 600;
+
+                        @include for-tablet {
+                           top: calculateShift($md-screen-font-size);
+                           font-size: 40px;
+                        }
+
+                        @include for-desktop {
+                           top: calculateShift($lg-screen-font-size);
+                           font-size: 50px;
+                        }
+
+                        @include for-large-screen {
+                           top: calculateShift($xl-screen-font-size);
+                           font-size: 80px;
+                        }
+
+                        @include for-large-screen(true) {
+                           top: calculateShift($xl-screen-font-size, true);
+                           font-size: 80px;
+                        }
+                     }
+                  }
+                  .today-forecast__weather {
+                     margin-left: 20px;
+                     .today-forecast__image {
+                        @include for-tablet {
+                           width: 75%;
+                        }
+
+                        @include for-desktop {
+                           width: 75%;
+                        }
+
+                        @include for-large-screen {
+                           width: 90%;
+                        }
+
+                        @include for-large-screen(true) {
+                           width: 90%;
+                        }
+                     }
+                     .today-forecast__details {
+                        .today-forecast__item {
+                           @include for-tablet {
+                              font-size: 14px;
+                           }
+
+                           @include for-desktop {
+                              font-size: 18px;
+                           }
+
+                           @include for-large-screen {
+                              font-size: 20px;
+                           }
+
+                           @include for-large-screen(true) {
+                              font-size: 20px;
+                           }
+
+                           font-weight: 600;
+                           text-transform: uppercase;
+                           letter-spacing: 0.5px;
+                        }
+                     }
+                  }
+               }
+               .next-forecast {
+                  @include for-tablet {
+                     margin-top: 10px;
+                  }
+
+                  @include for-desktop {
+                     margin-top: 15px;
+                  }
+
+                  @include for-large-screen {
+                     margin-top: 20px;
+                  }
+
+                  @include for-large-screen(true) {
+                     margin-top: 30px;
+                  }
+                  .next-forecast__list {
+                     display: flex;
+                     justify-content: space-between;
+                     .next-forecast__item {
+                        width: 32%;
+                        .next-forecast__title {
+                           @include for-tablet {
+                              font-size: 12px;
+                           }
+
+                           @include for-desktop {
+                              font-size: 18px;
+                           }
+
+                           @include for-large-screen {
+                              font-size: 20px;
+                           }
+
+                           @include for-large-screen(true) {
+                              font-size: 20px;
+                           }
+
+                           font-weight: 600;
+                           text-transform: uppercase;
+                           letter-spacing: 1px;
+                        }
+                        .next-forecast__body {
+                           display: flex;
+                           align-items: center;
+                           .next-forecast__bar {
+                              display: flex;
+                              .next-forecast__value {
+                                 @include for-tablet {
+                                    font-size: 32px;
+                                 }
+
+                                 @include for-desktop {
+                                    font-size: 48px;
+                                 }
+
+                                 @include for-large-screen {
+                                    font-size: 60px;
+                                 }
+
+                                 @include for-large-screen(true) {
+                                    font-size: 70px;
+                                 }
+
+                                 font-weight: 600;
+                              }
+                              .next-forecast__units {
+                                 position: relative;
+                                 left: 5px;
+
+                                 @include for-tablet {
+                                    top: 5px;
+                                    font-size: 20px;
+                                 }
+
+                                 @include for-desktop {
+                                    top: 8px;
+                                    font-size: 18px;
+                                 }
+
+                                 @include for-large-screen {
+                                    top: 10px;
+                                    font-size: 24px;
+                                 }
+                              }
+                           }
+
+                           .next-forecast__icon {
+                              width: 45%;
+                              margin-left: 10px;
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+
+            .right-wrapper {
+               @include for-tablet {
+                  width: 38%;
+               }
+
+               @include for-desktop {
+                  width: 38%;
+               }
+
+               @include for-large-screen {
+                  width: 35%;
+               }
+               .map {
+                  #map-canvas {
+                     height: 0;
+                     margin-left: auto;
+                     padding-bottom: 90%;
+                     border-radius: 10px;
+
+                     .mapboxgl-canvas {
+                        left: 0;
+                     }
+                  }
+
+                  .map__details {
+                     width: 100%;
+                     .map__item {
+                        width: fit-content;
+                        margin-left: auto;
+                        font-weight: 500;
+
+                        @include for-tablet {
+                           font-size: 16px;
+                        }
+
+                        @include for-desktop {
+                           font-size: 18px;
+                        }
+
+                        @include for-large-screen {
+                           font-size: 20px;
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+
+      // WRAPPER
+   }
+}
