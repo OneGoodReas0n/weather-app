@@ -1,5 +1,5 @@
 import { Map } from 'mapbox-gl';
-import tockens from '../keys/tokens';
+import tokens from '../keys/tokens';
 
 const MapApi = (() => {
    let map;
@@ -8,7 +8,7 @@ const MapApi = (() => {
          style: 'mapbox://styles/mapbox/streets-v11',
          attributionControl: false,
          zoom: 14,
-         accessToken: tockens.MAPBOX_TOKEN,
+         accessToken: tokens.MAPBOX_TOKEN,
          container: document.getElementById('map-canvas')
       });
       return map;
